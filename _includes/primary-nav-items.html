@@ -1,0 +1,14 @@
+<ul>
+  <li class="{% if page.overview %}pure-menu-selected{% endif %}">
+    <a href="{{ site.url }}/">Overview</a>
+  </li>
+  <li class="{% if page.url contains '/docs/' %}pure-menu-selected{% endif %}">
+    <a href="{{ site.url }}/docs/home/">Documentation</a>
+  </li>
+  <li>
+    <a href="http://api.cxengage.com">API Documentation</a>
+  </li>
+  <li>
+    <a href="http://support.cxengage.com">Support</a>
+  </li>
+</ul>

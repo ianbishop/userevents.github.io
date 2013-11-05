@@ -1,0 +1,118 @@
+/*****************************************************************************/
+/*
+/* Common
+/*
+/*****************************************************************************/
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body { height: 100%; }
+
+body {
+  background-color: #FFF;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: #1b98f8;
+}
+
+.feature {
+  padding: 2em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 1.75em;
+}
+
+h2 {
+  font-size: 1.25em;
+}
+
+header {
+  border-bottom: 1px solid #888;
+}
+
+footer {
+  background: #eee;
+}
+
+footer p {
+  padding: 2em;
+}
+
+header, footer {
+  text-align: center;
+}
+
+article {
+  padding: 2em 2em;
+}
+
+#docs-nav {
+  background: #fff;
+  text-align: center;
+  padding: 2em 0;
+}
+
+#docs-nav .pure-menu {
+  background: transparent;
+  border: none;
+  text-align: left;
+}
+
+#docs-nav .pure-menu li a {
+  cursor: pointer;
+}
+
+#docs-nav .pure-menu a:hover,
+#docs-nav .pure-menu a:focus {
+  background: #f9f9f9;
+}
+
+#docs-nav .pure-menu li.active a,
+#docs-nav .pure-menu li.active a:hover,
+#docs-nav .pure-menu li.active a:focus {
+  background: #1f8dd6;
+  color: #fff;
+}
+
+#docs-nav .pure-menu a {
+  color: #333;
+  margin-left: 0.5em;
+}
+
+#docs-nav .pure-menu li a:hover {
+  text-decoration: none;
+}
+
+#docs-nav .pure-menu-heading {
+  border-bottom: none;
+  font-size: 110%;
+  color: #111;
+  font-weight: 700;
+  background: #eee;
+  margin-top: 0em;
+  text-transform: none;
+}
+
+.pure-paginator {
+  text-align: center;
+}
+
+.pure-paginator li .next,
+.pure-paginator li .prev {
+  color: #333;
+  text-shadow: none;
+}
