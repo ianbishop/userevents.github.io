@@ -34,8 +34,21 @@ curl -iX POST https://events.cxengage.net/1.0/tenants/TENANT-NAME/event \
 ### Result
 
 {% highlight javascript %}
-
+{
+  "event": {
+    "type": "bar",
+      "key": "1"
+  },
+  "key-attr": "1",
+  "id": "EV11-30168",
+  "contributing?": true
+}
 {% endhighlight %}
+
+* `event` represents the original event
+* `key-attr` is the value of the key attribute from this event
+* `id` is a unique identifier for this event
+* `contributing?` represents if the event contributed to a pattern match
 
 ### Timeouts
 

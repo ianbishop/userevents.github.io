@@ -2,7 +2,6 @@
 layout: docs
 title: Thens
 prev_section: when
-next_section: using-templates
 permalink: /docs/then/
 ---
 
