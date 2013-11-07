@@ -3,7 +3,7 @@ layout: docs
 title: Using Endpoints
 prev_section: integrations
 next_section: using-listeners
-permalink: /docs/using-endpoints
+permalink: /docs/using-endpoints/
 ---
 
 **Endpoints** allow you to send notifications through using the CxEngage DSL. Each
