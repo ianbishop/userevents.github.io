@@ -16,8 +16,7 @@ notification but was not available at the time the event was sent to CxEngage.
 
 The purpose of an **engine augment** is to augment an event before it is
 received by the pattern matching engine. In most cases, this means applying
-additional data to an event that is necessary for a pattern match but was not
-included when the event was sent to CxEngage.
+additional data to an event or modifying existing attributes that is necessary for a pattern match but was not included when the event was sent to CxEngage.
 
 For example, if you had a customer id and wanted the customer's segment as part
 of a pattern match, you could augment the customer's segment using an **engine
