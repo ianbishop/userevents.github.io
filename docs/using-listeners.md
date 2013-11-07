@@ -22,7 +22,7 @@ the case of DataSift, for example, you must provide the **Stream Hash**. This
 let's CxEngage know exactly which stream it should be listening for events from.
 
 For more information on listener parameters, visit the [Knowledge
-Base](http://support.cxengage.com).
+Base](https://cxengage.zendesk.com/hc/en-us/sections/200181877-Listeners).
 
 ## Mapping Attributes
 
