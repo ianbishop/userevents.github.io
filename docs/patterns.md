@@ -10,7 +10,7 @@ A *pattern* describes a series of events that make up a customer's journey as
 they interact with your company across channels. As a user of CxEngage, you
 write patterns that match journeys which are important to your organization.
 
-A pattern is comprised of two parts, *when* and *then*.
+A pattern is comprised of two parts: *when* and *then*.
 
 ## When
 
@@ -22,7 +22,7 @@ this in the *when*.
 
 ## Then
 
-Thens describe how to take action once a *when* has been matched.
+Thens describe what action to take once a *when* has been matched.
 
 If you wanted to trigger a phone call using Twilio, open an opportunity in
 Salesforce or send a test notification using the test endpoint, you would
