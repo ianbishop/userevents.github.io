@@ -23,7 +23,7 @@ configuration page.
 
 In our example, we will be setting our key attribute to be `id`.
 
-![Set your key attribute](http://docs.cxengage.com/img/quickstart/KeyAttribute.png "Set your key attribute")
+![Set your key attribute]({{ site.url }}/img/quickstart/KeyAttribute.png )
 
 ## Creating your First Pattern
 
@@ -65,7 +65,7 @@ Be sure to check the "Enabled?" checkbox. By default, all new patterns are disab
 
 Once you're done, hit the "Save" button.
 
-![Setting up your pattern using Echo](http://docs.cxengage.com/img/quickstart/EchoTest.png "Setting up your pattern using Echo")
+![Setting up your pattern using Echo]({{ site.url }}/img/quickstart/EchoTest.png)
 
 ## Submitting an Event
 
@@ -91,7 +91,7 @@ For our pattern to match, we need to submit an event that meets two conditions: 
 }
 {% endhighlight %}
 
-![Using the event generator](http://docs.cxengage.com/img/quickstart/Generator.png "Using the event generator")
+![Using the event generator]({{ site.url }}/img/quickstart/Generator.png)
 
 ### Sending the Event
 
@@ -109,7 +109,7 @@ Since we only sent a test notification, there won't be any phones ringing or ema
 
 Try searching for the key attribute "1234" from above. You should see your event, its notification and all the information to go along with it in the results.
 
-![Search for your event](http://docs.cxengage.com/img/quickstart/Search.png "Search for your event")
+![Search for your event]({{ site.url }}/img/quickstart/Search.png)
 
 ## What's Next
 
