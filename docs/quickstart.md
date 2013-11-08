@@ -51,10 +51,6 @@ We want our pattern to match any time that `type` is equal to "test", so we put 
 (event (= type "test"))
 {% endhighlight %}
 
-```clojure
-(event (= type "test"))
-```
-
 ### Then
 
 We want our reaction to create a notification to the test endpoint, Echo.
