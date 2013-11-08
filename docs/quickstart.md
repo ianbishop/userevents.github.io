@@ -23,7 +23,7 @@ configuration page.
 
 In our example, we will be setting our key attribute to be `id`.
 
-![Set your key attribute](http://docs.cxengage.com/img/quickstart/EchoTest.png "Some other text")
+![Set your key attribute](http://docs.cxengage.com/img/quickstart/KeyAttribute.png "Set your key attribute")
 
 ## Creating your First Pattern
 
