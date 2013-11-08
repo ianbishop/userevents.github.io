@@ -45,11 +45,15 @@ work.
 
 ### When
 
-We want our pattern to match any time that `type` is equal to "test".
+We want our pattern to match any time that `type` is equal to "test", so we put this in the "when" part of the pattern:
 
 {% highlight clojure %}
 (event (= type "test"))
 {% endhighlight %}
+
+```clojure
+(event (= type "test"))
+```
 
 ### Then
 
