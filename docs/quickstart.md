@@ -53,7 +53,7 @@ We want our pattern to match any time that `type` is equal to "test", so we put 
 
 ### Then
 
-We want our reaction to create a notification to the test endpoint, Echo.
+We want our reaction to create a notification to the test endpoint, Echo:
 
 {% highlight clojure %}
 (send echo message {:message "Hello World!"})
@@ -61,10 +61,11 @@ We want our reaction to create a notification to the test endpoint, Echo.
 
 ## Enabling
 
-Be sure to check the "Enabled?" checkbox. By default, all new patterns are
-disabled -- meaning they won't be actively searching for pattern matches.
+Be sure to check the "Enabled?" checkbox. By default, all new patterns are disabled, meaning they won't be actively searching for pattern matches.
 
 Once you're done, hit the "Save" button.
+
+![Setting up your pattern using Echo](http://docs.cxengage.com/img/quickstart/EchoTest.png "Setting up your pattern using Echo")
 
 ## Submitting an Event
 
@@ -72,32 +73,16 @@ Once you're done, hit the "Save" button.
 
 CxEngage uses OAuth 2.0 to ensure that you can securely send events to our APIs.
 
-In order to be able to submit an event, you must first get your `client id` and
-`client secret`. You can find these by clicking on your Gravatar (the image on
-the left navigation menu). There you will also find your `tenant`, which is
-required to send events to the right place.
+In order to be able to submit an event, you must first get your `client id` and `client secret`. You can find these by clicking on your Gravatar (the image on the left navigation menu). There you will also find your `tenant`, which is required to send events to the right place.
 
 ### Using the Demo Event Submitter
 
 There are number of ways to send events to CxEngage. To make things easier,
-we've made a [simple event submitter](https://demo.cxengage.net).
-
-Enter your information from the instructions above.
+we've made a [simple event generator](https://demo.cxengage.net) you can use - simply enter your information from the instructions above.
 
 ### Matching Our Pattern
 
-For our pattern to match, we need to submit an event that meets two conditions.
-
-First, it must have our key attribute -- `id`.
-
-{% highlight javascript %}
-{
-  "id": "1234"
-}
-{% endhighlight %}
-
-Next, we need it to match the "when" of our pattern. We checked to see that
-`type` was equal to "test", so let's send an event that has that.
+For our pattern to match, we need to submit an event that meets two conditions: 1) it must have our key attribute -- `id`, and 2) we need it to match the "when" of our pattern. In the pattern we created, we checked to see that the event `type` was equal to "test", so let's send an event that has that by putting the following as the Event JSON in the event generator:
 
 {% highlight javascript %}
 {
@@ -106,25 +91,25 @@ Next, we need it to match the "when" of our pattern. We checked to see that
 }
 {% endhighlight %}
 
+![Using the event generator](http://docs.cxengage.com/img/quickstart/Generator.png "Using the event generator")
+
 ### Sending the Event
 
-Hit the "Send Event" button! You should see that your event was successfully
-received.
+Hit the "Send Event" button! You should see that your event was successfully received.
 
 If you don't get a success message, one of the following may be the cause:
 
 * The key attribute value sent does not match the one you setup
 * The message was incorrectly formatted (i.e. you submitted invalid JSON)
-* Your credentials were incorrect (make sure you got them in the right order)
+* Your credentials were incorrect (make sure you have them in the right order)
 
 ## Confirming Pattern Match
 
-Since we only sent a test notification, there won't be any phones ringing or
-emails being received. To make sure that your pattern matched, log into the CxEngage web application and head over to the "Search" tab.
+Since we only sent a test notification, there won't be any phones ringing or emails being received to let you know it worked. Instead, log into the CxEngage web application and head over to the "Search" tab.
 
-Try checking for patterns matched in the last 5 minutes and searching. You
-should see your event, its notification and all the information to go along with
-it in the results.
+Try searching for the key attribute "1234" from above. You should see your event, its notification and all the information to go along with it in the results.
+
+![Search for your event](http://docs.cxengage.com/img/quickstart/Search.png "Search for your event")
 
 ## What's Next
 
