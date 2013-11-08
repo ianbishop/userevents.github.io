@@ -18,10 +18,12 @@ First, we must setup our key attribute. The key attribute is the main attribute
 we will use to segment events in the system. For instance, your key attribute
 may be something like a unique customer id.
 
-You can set your key attribute through our web application by visting the Tenant
+You can set your key attribute through our web application by visiting the Tenant
 configuration page.
 
 In our example, we will be setting our key attribute to be `id`.
+
+![Set your key attribute](http://docs.cxengage.com/img/quickstart/EchoTest.png "Some other text")
 
 ## Creating your First Pattern
 
