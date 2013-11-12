@@ -31,7 +31,7 @@ Patterns are the building blocks of your CxEngage system. With them, you describ
 
 Patterns are described using the CxEngage DSL, which is comprised of two parts: a "when", which describes what pattern you're looking for, and a "then", which describes what to do when you find it.
 
-For this example, we will be matching an event where the value of `type`is equal to `test`. Then we will be sending a notification using the Echo
+For this example, we will be matching an event where the value of `type` is equal to `test`. Then we will be sending a notification using the Echo
 endpoint, which is a test endpoint provided with CxEngage.
 
 Head over to the Patterns tab, click New and begin creating your new pattern.
