@@ -25,7 +25,7 @@ For more information on listener parameters, visit the [Knowledge
 Base](https://cxengage.zendesk.com/hc/en-us/sections/200181877-Listeners).
 
 
-## Listener Conenction Status
+## Listener Connection Status
 
 If you would like to get the status of your listener connection, you can use the following call
 
