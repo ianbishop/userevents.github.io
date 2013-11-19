@@ -49,7 +49,7 @@ curl -iX POST https://events.cxengage.net/1.0/tenants/TENANT-NAME/event \
 * `id` is a unique identifier for this event
 * `contributing?` represents if the event contributed to a pattern match
 
-### Event History
+## Event History
 
 You can retrieve the last 10 events that was sent to the REST receiver. 
 
