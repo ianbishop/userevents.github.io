@@ -54,7 +54,7 @@ curl -iX POST https://events.cxengage.net/1.0/tenants/TENANT-NAME/event \
 You can retrieve the last 10 events that was sent to the REST receiver. 
 
 {% highlight bash %}
-curl -XGET https://events.cxengage.net/1.0/tenants/userevents/event/history \     
+curl -XGET https://events.cxengage.net/1.0/tenants/TENANT-NAME/event/history \     
      -H 'Authorization: Bearer TOKEN'
 {% endhighlight %}
 
