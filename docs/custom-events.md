@@ -55,7 +55,7 @@ You can retrieve the last 10 events that was sent to the REST receiver.
 
 {% highlight bash %}
 curl -XGET https://events.cxengage.net/1.0/tenants/userevents/event/history \     
-     -H 'Authorization: Bearer Mc6NLc7ukAE3AR59XDqRbOxvVW1RTaoYHeLQm9P2WhlX'
+     -H 'Authorization: Bearer {{token}}'
 {% endhighlight %}
 
 ### Result
