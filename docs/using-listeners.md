@@ -52,7 +52,7 @@ becomes
 
 ### Example
 
-If you were sending in exisiting events which looked like this:
+If you were sending in existing events which looked like this:
 
 {% highlight javascript %}
 {
