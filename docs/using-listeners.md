@@ -27,7 +27,7 @@ Base](https://cxengage.zendesk.com/hc/en-us/sections/200181877-Listeners).
 
 ## Listener Conenction Status
 
-If you would like to get the status of your listener connections status, you can use the following call
+If you would like to get the status of your listener connection, you can use the following call
 
 {% highlight bash %}
 curl -XGET https://api.cxengage.net/1.0/tenants/userevents/listeners/LI1/status \
