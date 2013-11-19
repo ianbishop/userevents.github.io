@@ -30,7 +30,7 @@ Base](https://cxengage.zendesk.com/hc/en-us/sections/200181877-Listeners).
 If you would like to get the status of your listener connection, you can use the following call
 
 {% highlight bash %}
-curl -XGET https://api.cxengage.net/1.0/tenants/userevents/listeners/LI1/status \
+curl -XGET https://api.cxengage.net/1.0/tenants/TENANT-NAME/listeners/LI1/status \
      -H 'Authorization: Bearer TOKEN'
 {% endhighlight %}
 
