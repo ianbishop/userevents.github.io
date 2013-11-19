@@ -24,8 +24,8 @@ Once you have your `client_id` and `client_secret`, you must make a Basic Auth
 request where username=`client_id` and password=`client_secret`.
 
 {% highlight http %}
-POST /token HTTP/1.1
-Host: auth.cxengage.com
+POST /1.0/token HTTP/1.1
+Host: auth.cxengage.net
 Authorization: Basic VGlaSHFnWk9sdktZeVBSNytQamZlVzY2R..
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
@@ -60,7 +60,7 @@ HTTP header `Authorization: Bearer ACCESS_TOKEN`.
 For instance,
 
 {% highlight http %}
-GET /tenants/test/event HTTP/1.1
+GET /1.0/tenants/test/event HTTP/1.1
 Host: events.cxengage.net
 Content-Type: application/json
 Authorization: Bearer 9Kz0asLXPYn7R7Ubfean1fMDkGrWluUZBWOHiGMimCem
