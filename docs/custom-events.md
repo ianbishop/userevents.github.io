@@ -62,15 +62,18 @@ curl -XGET https://events.cxengage.net/1.0/tenants/TENANT-NAME/event/history \
 
 {% highlight javascript %}
 {
-  "history":
-  {"event": {
-      "network":"twitter",
-      "followers":558,
-      "sentiment":0,"user":"suhaim_a"},
-      "key-attr":"suhaim_a",
-      "id":"EV11-65343",
-      "return-address":"SV11.",
-      "contributing":true}
+  "history": {
+     "event": {
+     "network":"twitter",
+     "followers":558,
+     "sentiment":0,
+     "user":"suhaim_a"
+  },
+  "key-attr":"suhaim_a",
+  "id":"EV11-65343",
+  "return-address":"SV11.",
+  "contributing":true
+}
 {% endhighlight %}
 
 
