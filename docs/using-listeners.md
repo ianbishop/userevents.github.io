@@ -90,3 +90,8 @@ mapping might look something like:
   "interaction.author.username": "username"
 }
 {% endhighlight %}
+
+In the UI, it would look like this 
+
+![Set up your listener mappings]({{ site.url }}/img/listeners/listener_mappings.png )
+
