@@ -16,7 +16,8 @@ notification but was not available at the time the event was sent to CxEngage.
 
 The purpose of an **engine augment** is to augment an event before it is
 received by the pattern matching engine. In most cases, this means applying
-additional data to an event or modifying existing attributes that is necessary for a pattern match but was not included when the event was sent to CxEngage.
+additional data to an event or modifying existing attributes that is necessary
+for a pattern match but was not included when the event was sent to CxEngage.
 
 For example, if you had a customer id and wanted the customer's segment as part
 of a pattern match, you could augment the customer's segment using an **engine
@@ -29,8 +30,9 @@ merger of all events for a given reaction) once the pattern has been matched. In
 most cases, this means applying additional data that is necessary for the
 reaction to take place but was not necessary for the pattern match.
 
-For example, if you had a customer id and wanted to send a phone call, you could augment the
-users phone number using a **notification augment** before it is to be sent.
+For example, if you had a customer id and wanted to send a phone call, you could
+augment the users phone number using a **notification augment** before it is to
+be sent.
 
 ## Augment Methods
 
@@ -97,6 +99,44 @@ Would be augmented as follows:
 }
 {% endhighlight %}
 
-### API
+### CxEngage Augment API Service
 
-#### Attributes
+In addition to the **file augment** type, we provide an **API Augment**
+mechanism to reach out to 3rd party REST services for augmenting data.
+
+#### API Augment Behaviour
+
+The Augment service will POST a JSON object that contains the following
+elements: `key-attr` and `attributes`.
+
+* The POST will be of `Content-Type`: `application/json`
+* The `key-attr` is the value of the event's key attribute.
+* The `attributes` is the values of the event's attributes represented as a map.
+* The resulting augmented values will be cached for a configurable amount of time by key
+  attribute.
+
+Here is an example of an event with a key attribute: "1234" and an event
+attribute `name` with the value of "John Smith".
+
+{% highlight javascript %}
+{
+  "key-attr" : "1234",
+  "attributes" : {"id":"1234",
+                  "name":"John Smith"}
+}
+{% endhighlight %}
+
+The 3rd party Augment REST API may modify any existing attribute -- if modified,
+that attribute will override it's previous value. The API may also augment
+additional attributes onto the event. These new attribute will be merged into
+the event.
+
+#### Implementation
+
+A 3rd party augment provider must implement the following:
+
+* The URL endpoint MUST accept: `application\json`
+* Upon successfully augmenting the event, the augment provider MUST return
+  `status code`: 200, with `Content-Type`: `application\json`
+* The response body MUST be a JSON object in the same format as described in
+  `API Augment Behaviour`
