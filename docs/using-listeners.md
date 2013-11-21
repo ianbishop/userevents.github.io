@@ -91,7 +91,7 @@ mapping might look something like:
 }
 {% endhighlight %}
 
-In the UI, it would look like this 
+In the UI, it would look like this
 
 ![Set up your listener mappings]({{ site.url }}/img/using-listeners/listener_mappings.png)
                                         
