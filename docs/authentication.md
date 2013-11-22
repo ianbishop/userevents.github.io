@@ -49,7 +49,7 @@ This token will be used to make your authenticated requests.
 
 #### Expires In
 
-Each token will last one hour. Until that token has expired, any requests for
+Each token will last 30 days. Until that token has expired, any requests for
 new tokens will return this token.
 
 ## Making an Authenticated Request
