@@ -58,8 +58,6 @@ curl -XGET https://events.cxengage.net/1.0/tenants/TENANT-NAME/event/history \
      -H 'Authorization: Bearer TOKEN'
 {% endhighlight %}
 
-Please note that the event ids are non contiguous. 
-
 ### Result
 
 {% highlight javascript %}
@@ -77,6 +75,8 @@ Please note that the event ids are non contiguous.
   "contributing":true
 }
 {% endhighlight %}
+
+Please note that the event ids are non contiguous. 
 
 
 ### Timeouts
