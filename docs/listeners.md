@@ -4,6 +4,7 @@ title: Listeners
 prev_section: listeners
 next_section: endpoints
 permalink: /docs/listeners/
+categories: ['docs']
 ---
 
 A *listener* allows you to integrate with a third-party service to

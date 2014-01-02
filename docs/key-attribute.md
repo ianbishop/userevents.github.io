@@ -3,6 +3,7 @@ layout: docs
 title: Key Attribute
 next_section: patterns
 permalink: /docs/key-attribute/
+categories: ['docs']
 ---
 
 The *key attribute* is the unique identifier for your events that identifies a specific individual. Often, it will be something like a unique customer identifier such as a customer number or a username.

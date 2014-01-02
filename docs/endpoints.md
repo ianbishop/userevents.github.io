@@ -4,6 +4,7 @@ title: Endpoints
 prev_section: listeners
 next_section: receivers
 permalink: /docs/endpoints/
+categories: ['docs']
 ---
 
 An *endpoint* is a CxEngage service that allows you to reach out to third-party

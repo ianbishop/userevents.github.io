@@ -3,6 +3,7 @@ layout: docs
 title: Introduction
 next_section: when
 permalink: /docs/dsl/
+categories: ['docs']
 ---
 
 CxEngage's customer Domain-Specific Language (DSL) offers incredible

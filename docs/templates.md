@@ -4,6 +4,7 @@ title: Templates
 prev_section: patterns
 next_section: listeners
 permalink: /docs/templates/
+categories: ['docs']
 ---
 
 A *template* is used for creating messages that will be used in a notification.

@@ -3,6 +3,7 @@ layout: docs
 title: Welcome
 next_section: quickstart
 permalink: /docs/home/
+categories: ['docs']
 ---
 
 CxEngage accepts events from various systems, allowing you to stitch them together to understand and respond to your customers' journeys as they happen.

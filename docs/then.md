@@ -3,6 +3,7 @@ layout: docs
 title: Thens
 prev_section: when
 permalink: /docs/then/
+categories: ['docs']
 ---
 
 ## Keywords

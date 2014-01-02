@@ -4,6 +4,7 @@ title: Whens
 prev_section: key-attribute
 next_section: then
 permalink: /docs/when/
+categories: ['docs']
 ---
 
 ## Keywords

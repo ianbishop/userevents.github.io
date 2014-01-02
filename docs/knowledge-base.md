@@ -3,6 +3,7 @@ layout: docs
 title: Knowledge Base
 prev_section: rest-api
 permalink: /docs/knowledge-base/
+categories: ['docs']
 ---
 
 The Knowledge Base explores different HowTo's to help you nail down your use

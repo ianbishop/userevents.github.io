@@ -4,6 +4,7 @@ title: Integrations
 prev_section: using-augments
 next_section: using-endpoints
 permalink: /docs/integrations/
+categories: ['docs']
 ---
 
 **Integrations** are a convenient place to manage all of your third-party

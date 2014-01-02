@@ -3,6 +3,7 @@ layout: docs
 title: REST API Documentation
 next_section: knowledge-base
 permalink: /docs/rest-api/
+categories: ['docs']
 ---
 
 The CxEngage REST API enables you to manage your user and its tenants. If you

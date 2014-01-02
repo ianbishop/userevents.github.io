@@ -4,6 +4,7 @@ title: Patterns
 prev_section: key-attribute
 next_section: templates
 permalink: /docs/patterns/
+categories: ['docs']
 ---
 
 A *pattern* describes a series of events that make up a customer's journey as

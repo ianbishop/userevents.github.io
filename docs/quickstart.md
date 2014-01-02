@@ -3,6 +3,7 @@ layout: docs
 title: Quickstart
 prev_section: home
 permalink: /docs/quickstart/
+categories: ['docs']
 ---
 
 In this quickstart guide, we're going to go through a "Hello World" of the

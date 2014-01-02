@@ -4,6 +4,7 @@ title: Using Augments
 prev_section: custom-events
 next_section: integrations
 permalink: /docs/using-augments/
+categories: ['docs']
 ---
 
 The purpose of **augments** are to allow you to add additional data to events

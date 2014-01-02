@@ -4,6 +4,7 @@ title: Submitting Custom Events
 prev_section: authentication
 next_section: using-augments
 permalink: /docs/custom-events/
+categories: ['docs']
 ---
 
 Custom events allow you to use CxEngage to react based upon your own data.

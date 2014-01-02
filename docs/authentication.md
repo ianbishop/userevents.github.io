@@ -4,6 +4,7 @@ title: Authentication
 prev_section: integrate
 next_section: custom-events
 permalink: /docs/authentication/
+categories: ['docs']
 ---
 
 CxEngage uses standard OAuth 2.0 to authenticate requests. In order to
