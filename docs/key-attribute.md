@@ -5,21 +5,18 @@ next_section: patterns
 permalink: /docs/key-attribute/
 ---
 
-The *key attribute* is the unique identifier for your events. It's used to
-segment events against a given pattern. Often, it will be something like a unique
-customer identifier such as a customer number or a username.
+The *key attribute* is the unique identifier for your events that identifies a specific individual. Often, it will be something like a unique customer identifier such as a customer number or a username.
 
-What's important to note is that there is only one key attribute and it's the only attribute required in an event. All other attributes are mapped upon it, either by being submitted
-in the event or later augmented by the Augment service.
+What's important to note is that there is only one key attribute. All other attributes are mapped upon it, either by being submitted in the event or later augmented by the Augment service. This builds a profile of all the possible identifiers for that one individual.
 
-For instance, if a key attribute could be "1234". If an event later comes in
+For instance, a key attribute could be "1234". If an event later comes in
 with that key attribute and the user's email address, that email address will be
-mapped to "1234" and can later be used in notifying the user.
+mapped to "1234" and both will identify the same person.
 
 ## Example
 
 Let's say we had a pattern that would match when a call gets abandoned from an
-IVR and an agent calls the customer back, using our integration with Twilio.
+IVR, and as a result, we trigger an outbound call using our integration with Twilio.
 
 ### When
 {% highlight clojure %}

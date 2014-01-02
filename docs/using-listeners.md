@@ -24,6 +24,24 @@ let's CxEngage know exactly which stream it should be listening for events from.
 For more information on listener parameters, visit the [Knowledge
 Base](https://cxengage.zendesk.com/hc/en-us/sections/200181877-Listeners).
 
+
+## Listener Connection Status
+
+If you would like to get the status of your listener connection, you can use the following call
+
+{% highlight bash %}
+curl -XGET https://api.cxengage.net/1.0/tenants/TENANT-NAME/listeners/LI1/status \
+     -H 'Authorization: Bearer TOKEN'
+{% endhighlight %}
+
+{% highlight javascript %}
+
+{"id":"status",
+"status":"started",
+"message":"Connected to stream: hash-id"}
+
+{% endhighlight %}
+
 ## Mapping Attributes
 
 In order to make third-party events be understood by CxEngage, you must first
@@ -52,7 +70,7 @@ becomes
 
 ### Example
 
-If you were sending in exisiting events which looked like this:
+If you were sending in existing events which looked like this:
 
 {% highlight javascript %}
 {
@@ -72,3 +90,8 @@ mapping might look something like:
   "interaction.author.username": "username"
 }
 {% endhighlight %}
+
+In the UI, it would look like this
+
+![Set up your listener mappings]({{ site.url }}/img/using-listeners/listener_mappings.png)
+                                        

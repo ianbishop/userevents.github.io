@@ -185,18 +185,6 @@ The `send` command is used to send notifications to specific endpoints. The endp
 * `:from-phone-number` as a constant
 * `:message` from a user variable
 
-### event
-
-{% highlight clojure %}
-(event {<params>} <options>)
-{% endhighlight %}
-
-The `event` command will create and send a new event into the rest receiver. This functionality is useful for creating chains of events. Events support message templates and the control flow operators: `success` and `failure`.
-
-#### Send a new event with the same key attribute (id) and the type "b"
-{% highlight clojure %}
-(event {:id *id* :type "b"})
-{% endhighlight %}
 
 ### delay
 

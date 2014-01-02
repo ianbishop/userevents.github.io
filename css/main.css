@@ -112,3 +112,8 @@ article {
   color: #333;
   text-shadow: none;
 }
+
+.pure-g-r img {
+    border: 1px solid #EEEEEE;
+    max-width: 100%;
+}

@@ -49,6 +49,36 @@ curl -iX POST https://events.cxengage.net/1.0/tenants/TENANT-NAME/event \
 * `id` is a unique identifier for this event
 * `contributing?` represents if the event contributed to a pattern match
 
+## Event History
+
+You can retrieve the last 10 events that was sent to the REST receiver. 
+
+{% highlight bash %}
+curl -XGET https://events.cxengage.net/1.0/tenants/TENANT-NAME/event/history \     
+     -H 'Authorization: Bearer TOKEN'
+{% endhighlight %}
+
+### Result
+
+{% highlight javascript %}
+{
+  "history": {
+     "event": {
+     "network":"twitter",
+     "followers":558,
+     "sentiment":0,
+     "user":"suhaim_a"
+  },
+  "key-attr":"suhaim_a",
+  "id":"EV11-65343",
+  "return-address":"SV11.",
+  "contributing":true
+}
+{% endhighlight %}
+
+Please note that the event ids are non contiguous. 
+
+
 ### Timeouts
 
 In the event that the system is under heavy-load or something bad has happened, it is possible that you may receive a response of `403` and the following error:
