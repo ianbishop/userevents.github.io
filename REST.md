@@ -39,17 +39,6 @@ The selected tenant or item does not exist
 
 Retrieve the details of a tenant.
 
-**Arguments**
-
-Argument | Description
---- | ---
-**id** | The tenant ID
-
-**Returns**
-
-Returns a tenant object if a valid tenant is provided, returns [an error]()
-otherwise.
-
 > Request
 
 ```http
@@ -71,6 +60,18 @@ curl -X GET https://api.cxengage.net/1.0/tenants/tenant1 \
     "name": "Tenant One"
 }
 ```
+
+**Arguments**
+
+Argument | Description
+--- | ---
+**id** | The tenant ID
+
+**Returns**
+
+Returns a tenant object if a valid tenant is provided, returns [an error]()
+otherwise.
+
 
 ## Key Attribute
 
