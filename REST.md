@@ -37,36 +37,39 @@ The selected tenant or item does not exist
 
 ### Retrieving a Tenant
 
-#### Arguments
+Retrieve the details of a tenant.
+
+**Arguments**
 
 Argument | Description
 --- | ---
-*id* | The tenant ID
+**id** | The tenant ID
 
+**Returns**
 
-**Request**
+Returns a tenant object if a valid tenant is provided, returns [an error]()
+otherwise.
+
+> Request
 
 ```http
-GET /1.0/tenants/{{tenant-name}} HTTP/1.1
-Host: api.cxengage.net
-Authorization: Bearer {{token}}
-```
-**Response**
-
-```json
-
-{
-    "id": "tenant1",
-    "name": "Tenant Number One"
-}
-
+GET https://api.cxengage.net/1.0/tenants/{{id}}
 ```
 
-**curl Example**
+> Example Request
 
 ```bash
-curl -X GET https://api.cxengage.net/1.0/tenants/{{tenant-name}} \
-     -H 'Authorization: Bearer {{token}}'
+curl -X GET https://api.cxengage.net/1.0/tenants/tenant1 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+> Example Response
+
+```json
+{
+    "id": "tenant1",
+    "name": "Tenant One"
+}
 ```
 
 ## Key Attribute

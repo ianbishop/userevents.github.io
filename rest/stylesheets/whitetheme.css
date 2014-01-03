@@ -338,9 +338,6 @@ body:not(.big-h3) .content h3 {
   padding-top: 30px;
   padding-bottom: 10px;
 }
-.content h4 {
-  font-style: italic;
-}
 
 body:not(.big-h3) .content h3 {
   /*font-size: 0.9em;*/
@@ -536,6 +533,7 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
     clear: both;
   }
   body:not(.no-literate) .content > p,
+  body:not(.no-literate) .content > table,
   body:not(.no-literate) .content > ul,
   body:not(.no-literate) .content > ol,
   body:not(.no-literate) .content > h4,
@@ -546,6 +544,7 @@ body.no-literate .content pre > code:hover::-webkit-scrollbar-thumb {
   }
   body:not(.no-literate) .content > h4,
   body:not(.no-literate) .content > h5,
+  body:not(.no-literate) .content > table,
   body:not(.no-literate) .content > .small-heading,
   body:not(.big-h3) body:not(.no-literate) .content > h3 {
     margin-left: 40px;
