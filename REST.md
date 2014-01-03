@@ -146,6 +146,36 @@ Returns a JSON object containing the key attribute if update succeeded. Returns
 
 ## Patterns
 
+A pattern describes a series of events that make up a customer's journey as they interact with your company across channels. As a user of CxEngage, you write patterns that match journeys which are important to your organization.
+
+For more information about [patterns]() and [using the CxEngage DSL](), please visit the [general documentation]().
+
+### Pattern Object
+
+#### Attributes
+
+Name | Type | Description
+--- | --- | ---
+**id** | **string** | Unique identifier
+**name** | **string** | Human-friendly of the pattern
+**description** | **string** | A people friendly description of what this
+pattern should do
+**status** | **boolean** | Whether or not this pattern is being matched against
+**when** | **string** | CxEngage DSL of what pattern to look for
+**then** | **string** | CxEngage DSL of how to react when matched
+
+> Example Object
+
+```json
+{
+  "name": "Sample Pattern",
+  "description": "Sample",
+  "status":true,
+  "when": "(when (event (= id \"1234\")))",
+  "then": "(seq (send echo message {:message \"Hello world\"}))"
+}
+```
+
 ### Create a Pattern
 
 Creates a pattern object for specified tenant.
@@ -165,19 +195,6 @@ description | Description of the pattern
 status |  Boolean for enabled/disabled state
 when | CxEngage DSL of what pattern to look for
 then | CxEngage DSL of how to react when matched
-
-
-> Example Object
-
-```json
-{
-  "name": "Sample Pattern",
-  "description": "Sample",
-  "status":true,
-  "when": "(when (event (= id \"1234\")))",
-  "then": "(seq (send echo message {:message \"Hello world\"}))"
-}
-```
 
 > Example Request
 
