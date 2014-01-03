@@ -158,8 +158,7 @@ Name | Type | Description
 --- | --- | ---
 **id** | **string** | Unique identifier
 **name** | **string** | Human-friendly of the pattern
-**description** | **string** | A people friendly description of what this
-pattern should do
+**description** | **string** | A people friendly description of what this pattern should do
 **status** | **boolean** | Whether or not this pattern is being matched against
 **when** | **string** | CxEngage DSL of what pattern to look for
 **then** | **string** | CxEngage DSL of how to react when matched
