@@ -47,7 +47,6 @@ GET https://api.cxengage.net/1.0/tenants/{{id}}
 
 #### Arguments
 
-|
 --- | ---
 **id** | The tenant ID
 
