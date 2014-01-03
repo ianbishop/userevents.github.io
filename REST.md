@@ -45,12 +45,23 @@ Retrieve the details of a tenant.
 GET https://api.cxengage.net/1.0/tenants/{{id}}
 ```
 
+**Arguments**
+
+Argument | Description
+--- | ---
+**id** | The tenant ID
+
 > Example Request
 
 ```bash
 curl -X GET https://api.cxengage.net/1.0/tenants/tenant1 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
+
+**Returns**
+
+Returns a tenant object if a valid tenant is provided, returns [an error]()
+otherwise.
 
 > Example Response
 
@@ -60,18 +71,6 @@ curl -X GET https://api.cxengage.net/1.0/tenants/tenant1 \
     "name": "Tenant One"
 }
 ```
-
-**Arguments**
-
-Argument | Description
---- | ---
-**id** | The tenant ID
-
-**Returns**
-
-Returns a tenant object if a valid tenant is provided, returns [an error]()
-otherwise.
-
 
 ## Key Attribute
 
