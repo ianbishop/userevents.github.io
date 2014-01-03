@@ -63,6 +63,24 @@ Returns a tenant object if a valid tenant is provided, returns [an error]() othe
 
 ## Key Attribute
 
+The key attribute is an attribute of your events to segment on. Often, it will be something like a unique customer identifier such as a customer number or a username.
+
+[More About Key Attribute >](http://docs.cxengage.com/docs/key-attribute/)
+
+#### Arguments
+
+Name | Type | Description
+--- | --- | ---
+**key** | **string** | Key attribute
+
+> Example Object
+
+```json
+{
+  "key": "username"
+}
+```
+
 ### Retrieving the Key Attribute
 
 Retrieve the key attribute of the specified tenant. Your current authenticated user must have access to the specified tenant.
@@ -114,14 +132,6 @@ Name | Description
 --- | ---
 **key** | Key Attribute
 
-> Example Object
-
-```json
-{
-  "key": "username"
-}
-```
-
 > Example Request
 
 ```bash
@@ -148,7 +158,7 @@ Returns a JSON object containing the key attribute if update succeeded. Returns
 
 A pattern describes a series of events that make up a customer's journey as they interact with your company across channels. As a user of CxEngage, you write patterns that match journeys which are important to your organization.
 
-For more information about [patterns]() and [using the CxEngage DSL](), please visit the [general documentation]().
+[More About Patterns >]()
 
 ### Pattern Object
 
@@ -177,7 +187,7 @@ Name | Type | Description
 
 ### Create a Pattern
 
-Creates a pattern object for specified tenant.
+Creates a pattern object for specified tenant. Your current authenticated user must have access to the specified tenant.
 
 > Definition
 
@@ -207,10 +217,7 @@ curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/patterns \
 
 #### Returns
 
-Returns a pattern object if successful, returns [an error]() otherwise.
-
-If `status` is set to true, the `when` and `then` fields must be provided and must be valid
-CxEngage DSL. If not, [an error]() will occur.
+Returns a pattern object if successful, returns [an error]() otherwise. If `status` is set to true, the `when` and `then` fields must be provided and must be valid CxEngage DSL. If not, [an error]() will occur.
 
 > Example Response
 
@@ -225,49 +232,36 @@ CxEngage DSL. If not, [an error]() will occur.
 }
 ```
 
-## Retrieve All Patterns
 
-Request
+#### Retrieve a Pattern
 
-```http
-GET /1.0/tenants/{{tenant-name}}/patterns HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-```
+Retrieves the details of an existing pattern for a specified tenant. Your current authenticated user must have access to the specified tenant.
 
-Response
-
-```json
-
-  {
-   "id": "PT1",
-   "then": "(par (send echo message {:message \"We should probably call the customer\"})
-                 (send echo message {:message \"We should probably call the customer now \"}))",
-   "when": "(within 1 minutes (allOf (count 4 (event (and (= customerSegment \"Gold\")
-                                                          (= eventType \"flcheck\"))))
-                                              (event (and (= customerSegment \"Gold\")
-                                                          (= eventType \"cnclTicket\"))))))",
-   "description": "Loyalty Pattern for Gold customers",
-   "name": "Loyalty Pattern"
-  }
-
-```
-
-
-**Retrieves chosen pattern for the given tenant**
-
-Request
+> Definition
 
 ```http
-GET /1.0/tenants/{{tenant-name}}/patterns HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json
-Authorization: Bearer {{token}}
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/patterns/{{id}}
 ```
 
-Response
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Pattern ID
+
+> Example Request
+
+```bash
+curl -XGET https://api.cxengage.net/tenants/test123/patterns/PT2 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns a pattern object if specified tenant and pattern exist. Returns [an
+error]() otherwise.
+
+> Example Response
 
 ```json
 {
@@ -279,51 +273,97 @@ Response
   "name":"Sample Pattern"
 }
 ```
-curl Example
 
-```bash
-curl -XGET https://api.cxengage.net/tenants/{{tenant-name}}/patterns \
-     -H 'Authorization: Bearer {{token}}'
-```
+### Update a Pattern
 
-**Update chosen pattern**
+Updates an existing pattern of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
 
-Request
+> Definition
 
 ```http
-PUT /1.0/tenants/{{tenant-name}}/patterns/PT5 HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-
+PUT https://api.cxengage.net/1.0/tenants/{{tid}}/patterns/{{id}}
 ```
+
+#### Arguments
+
+Name | Description
+--- | ---
+name | Human-friendly name of the pattern
+description | Description of the pattern
+status |  Boolean for enabled/disabled state
+when | CxEngage DSL of what pattern to look for
+then | CxEngage DSL of how to react when matched
+
+> Example Request
+
+```bash
+curl -X PUT https://api.cxengage.net/1.0/tenants/test144/patterns/PT5 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"then" : "(send sendgrid email {:to *email*, :subject \"Welcome to a wonderful put experience\"})"}'
+```
+
+#### Returns
+
+Returns the pattern object if the update succeeded, returns [an error]() otherwise.
+
+> Example Response
 
 ```json
 {
-"then" : "(send sendgrid email {:to *email*, :subject \"Welcome to a wonderful put experience\"})"
+  "id":"PT5",
+  "then":"(send sendgrid email {:to *email*, :subject \"Welcome to a wonderful put experience\"})",
+  "when":"(event (or (= username \"cxengage\")))",
+  "status":true,
+  "name":"Updated Pattern"
 }
 ```
 
-Response
+## List All Patterns
+
+Returns a list of all patterns for a specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/patterns
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**tid** | Tenant ID
+
+
+> Example Request
+
+```bash
+curl -XGET https://api.cxengage.net/tenants/tenant1/patterns \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an array containing all patterns if the specified tenant exists. Returns [an
+error]() otherwise.
+
+> Example Response
 
 ```json
-
-{"id":"PT5",
-"then":"(send sendgrid email {:to *email*, :subject \"Welcome to a wonderful put experience\"})",
-"when":"(event (or (= username \"cxengage\")))",
-"status":true,
-"name":"Updated Pattern"
-}
-```
-
-curl Example
-```bash
-curl -X PUT https://api.cxengage.net/1.0/tenants/{{tenant-name}}/patterns/PT5 \
- -H 'Authorization: Bearer {{token}}' \
- -H 'Content-Type: application/json; charset=utf-8' \
- -d '{"then" : "(send sendgrid email {:to *email*, :subject \"Welcome to a wonderful put experience\"})"}'
-
+[
+  {
+   "id": "PT1",
+   "then": "(par (send echo message {:message \"We should probably call the customer\"})
+                 (send echo message {:message \"We should probably call the customer now \"}))",
+   "when": "(within 1 minutes (allOf (count 4 (event (and (= customerSegment \"Gold\")
+                                                          (= eventType \"flcheck\"))))
+                                              (event (and (= customerSegment \"Gold\")
+                                                          (= eventType \"cnclTicket\"))))))",
+   "description": "Loyalty Pattern for Gold customers",
+   "name": "Loyalty Pattern"
+  }
+]
 ```
 
 ## Templates
