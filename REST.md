@@ -1,14 +1,12 @@
-# Using the CxEngage API
+# Using CxEngage REST API
 
-## Authentication 
+## Authentication
 
 How to authenticate with CxEngage API - [http://docs.cxengage.com/docs/authentication](http://docs.cxengage.com/docs/authentication/)
-
 
 ## Sending in Events
 
 To send in custom events - [http://docs.cxengage.com/docs/custom-events/](http://docs.cxengage.com/docs/custom-events/)
-
 
 ## CxEngage API 1.0
 url - https://api.cxengage.net/
@@ -30,15 +28,14 @@ Incorrect credentials
 ```
 User does not have access to selected tenant
 ```
-**HTTP 404** 
+**HTTP 404**
 ```
 The selected tenant or item does not exist
 ```
 
-
 ## Tenants
 
-Retrieve Tenant info
+### Retrieve a Tenant
 
 **Request**
 
@@ -64,7 +61,6 @@ Authorization: Bearer {{token}}
 curl -X GET https://api.cxengage.net/1.0/tenants/{{tenant-name}} \
      -H 'Authorization: Bearer {{token}}'
 ```
-
 
 ## Key Attribute
 
@@ -121,22 +117,21 @@ Response
     "key": "username"
 }
 ```
- 
+
 curl Example
 
 ```bash
 curl -X POST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/key-attribute \
  -H 'Authorization: Bearer {{token}}' \
  -H 'Content-Type: application/json; charset=utf-8' \
- -d '{"key" : "username"}' 
+ -d '{"key" : "username"}'
 ```
 
-   
 ## Patterns
 
 **Mandatory Parameters**
 
-name 
+name
 
 ```
 Name of Pattern
@@ -144,19 +139,19 @@ Name of Pattern
 
 **Optional Parameters**
 
-description 
+description
 ```
 Description of pattern
 ```
-status 
+status
 ```
 Boolean value. Set to true/false to enable/disable the pattern
 ```
-when 
+when
 ```
 When portion of pattern
 ```
-then 
+then
 ```
 Then portion of pattern
 ```
@@ -179,11 +174,11 @@ Response
 
   {
    "id": "PT1",
-   "then": "(par (send echo message {:message \"We should probably call the customer\"}) 
+   "then": "(par (send echo message {:message \"We should probably call the customer\"})
                  (send echo message {:message \"We should probably call the customer now \"}))",
-   "when": "(within 1 minutes (allOf (count 4 (event (and (= customerSegment \"Gold\") 
-                                                          (= eventType \"flcheck\")))) 
-                                              (event (and (= customerSegment \"Gold\") 
+   "when": "(within 1 minutes (allOf (count 4 (event (and (= customerSegment \"Gold\")
+                                                          (= eventType \"flcheck\"))))
+                                              (event (and (= customerSegment \"Gold\")
                                                           (= eventType \"cnclTicket\"))))))",
    "description": "Loyalty Pattern for Gold customers",
    "name": "Loyalty Pattern"
@@ -203,7 +198,7 @@ Authorization: Bearer {{token}}
 ```
 
 ```json
-{ 
+{
   "name": "Sample Pattern",
   "description": "Sample",
   "status":true,
@@ -215,7 +210,7 @@ Authorization: Bearer {{token}}
 Response
 
 ```json
-{ 
+{
   "id": "PT2",
   "name": "Sample Pattern",
   "description": "Sample",
@@ -234,7 +229,6 @@ curl -X POST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/patterns \
  -d '{"then":"(send echo message {:message \"Hello curl\"})",
       "when":"(event (= type \"curl\"))","status":true,"name":"curl Pattern"}'
 ```
-
 
 **Retrieves chosen pattern for the given tenant**
 
@@ -266,7 +260,6 @@ curl -XGET https://api.cxengage.net/tenants/{{tenant-name}}/patterns \
      -H 'Authorization: Bearer {{token}}'
 ```
 
-
 **Update chosen pattern**
 
 Request
@@ -295,7 +288,7 @@ Response
 "when":"(event (or (= username \"cxengage\")))",
 "status":true,
 "name":"Updated Pattern"
-}    
+}
 ```
 
 curl Example
@@ -306,14 +299,14 @@ curl -X PUT https://api.cxengage.net/1.0/tenants/{{tenant-name}}/patterns/PT5 \
  -d '{"then" : "(send sendgrid email {:to *email*, :subject \"Welcome to a wonderful put experience\"})"}'
 
 ```
-   
+
 ## Templates
 
 **Retrieves templates for the given tenant**
 
 **Mandatory Parameters**
 
-name 
+name
 
 ```
 Name of Template
@@ -332,7 +325,6 @@ description
 ```
 Description of template
 ```
-
 
 Request
 
@@ -452,7 +444,7 @@ Cache-Control: no-cache
 
 ```json
 {
-   
+
     "name": "Test Template"
 }
 ```
@@ -502,10 +494,8 @@ curl Example
 
 ```bash
 curl -IX DELETE https://api.cxengage.net/1.0/tenants/{{tenant-name}}/templates/TM1 \
- -H 'Authorization: Bearer {{token}}' \ 
+ -H 'Authorization: Bearer {{token}}' \
 ```
-
- 
 
 ## Listeners
 
@@ -541,7 +531,7 @@ Response
             "product": "Product__c"
         },
         "id": "LI2"
-     
+
     },
     {
         "id": "LI1",
@@ -560,7 +550,7 @@ Response
 
 curl Example
 ```bash
-curl -XGET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners \ 
+curl -XGET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners \
      -H 'Authorization: Bearer {{token}}'
 ```
 
@@ -598,7 +588,7 @@ Request
         "amount": "Amount",
         "daystoclose": "daysToClose__c",
         "product": "Product__c"
-    } 
+    }
 }
 ```
 Response
@@ -628,7 +618,7 @@ curl Example
 curl -XPOST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners \
      -H 'Authorization: Bearer {{token}}' \
 -H 'Content-Type: application/json; charset=utf-8' \
--d '{"name":"My Salesforce Listener","type":"salesforce","mapping":{"user":"user__c","type":"Type", 
+-d '{"name":"My Salesforce Listener","type":"salesforce","mapping":{"user":"user__c","type":"Type",
     "stage":"StageName","amount":"Amount","daystoclose":"daysToClose__c","product": "Product__c"},"status":true}'
 ```
 
@@ -724,7 +714,7 @@ Response
             "product": "Product__c"
         },
         "id": "LI4"
-     
+
 }
 ```
 
@@ -732,7 +722,7 @@ curl Example
 
 ```bash
 curl -XGET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners/LI4 \
-     -H 'Authorization: Bearer {{token}}'  
+     -H 'Authorization: Bearer {{token}}'
 ```
 
 **Update chosen listener**
@@ -750,7 +740,7 @@ Cache-Control: no-cache
 ```json
 
   {"name" : "Updated Name for listener"}
-    
+
 ```
 
 Response
@@ -827,15 +817,13 @@ curl Example
 
 ```bash
 curl -I -XDELETE https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners/LI54 \
-     -H 'Authorization: Bearer {{token}}'  
+     -H 'Authorization: Bearer {{token}}'
 ```
-
 
 ## Integrations
 
 **Retrieve integrations from tenant**
 
-  
 Request
 
 ```http
@@ -879,19 +867,19 @@ secret-token
 ```
 Salesforce secret token
 ```
-username 
+username
 ```
 Salesforce username
 ```
-password 
+password
 ```
 Salesforce password
 ```
-consumer-key 
+consumer-key
 ```
 Salesforce Consumer key/secret
 ```
-consumer-secret 
+consumer-secret
 ```
 Salesforce Consumer key/secret
 ```
@@ -939,14 +927,13 @@ curl Example
 curl -XPOST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/integrations/salesforce \
      -H 'Authorization: Bearer {{token}}' \
 -H 'Content-Type: application/json; charset=utf-8' \
--d '{"id": "salesforce", "type": "salesforce", "consumer-key": "consumerkey", 
+-d '{"id": "salesforce", "type": "salesforce", "consumer-key": "consumerkey",
      "consumer-secret":"consumersecret","username":"email@userevents.com"
      "secret-token":"secret-token","password":"password"}'
 
 ```
 
 __Twilio Example__
-
 
 Request
 
@@ -959,15 +946,14 @@ Authorization: Bearer {{token}}
 
 Twilio Parameters
 
-account  
+account
 ```
 Twilio SID
 ```
-password 
+password
 ```
 Twilio Token
 ```
-
 
 ```json
 {
@@ -1003,15 +989,14 @@ __Sendgrid Example__
 
 Sendgrid Parameters
 
-account 
+account
 ```
-SendGrid account 
+SendGrid account
 ```
-password 
+password
 ```
 Sendgrid password
 ```
-
 
 Request
 
@@ -1057,15 +1042,14 @@ __Urban Airship Example__
 
 Urban Airship Parameters
 
-App Key 
+App Key
 ```
-Urban Airship App Key 
+Urban Airship App Key
 ```
-App Master Key 
+App Master Key
 ```
 Urban Airship App Master Key
 ```
-
 
 Request
 
@@ -1111,11 +1095,11 @@ __Datasift Example__
 
 Datasift Parameters
 
-username 
+username
 ```
 DataSift username
 ```
-api-key 
+api-key
 
 ```
 DataSift api key
@@ -1161,19 +1145,17 @@ curl -XPOST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/integrations/da
 
 ```
 
-
 __Pusher Example__
 
 Pusher Parameters
-key 
+key
 ```
-Pusher key 
+Pusher key
 ```
-secret 
+secret
 ```
 Pusher secret
 ```
-
 
 Request
 
@@ -1294,7 +1276,7 @@ Authorization: Bearer {{token}}
     }
 ]
 ```
- 
+
 curl Example
 
 ```bash
@@ -1302,37 +1284,35 @@ curl -X GET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/augments \
      -H 'Authorization: Bearer {{token}}'
 ```
 
-
-
 **Create an Augment for a tenant**
 
 **Mandatory Parameters**
 
-name 
+name
 ```
 Name of Augment
 ```
 
-type 
+type
 ```
 file or api based augment
 ```
-service 
+service
 ```
 engine or notification
 ```
 
 **Optional Parameters**
 
-options 
+options
 ```
-Map of optional attributes shown below  
+Map of optional attributes shown below
 ```
-url 
+url
 ```
 url of the augment api
 ```
-attributes 
+attributes
 ```
 Attributes that would get augmented
 ```
@@ -1363,7 +1343,6 @@ Cache-Control: no-cache
 }
 ```
 
-
 Response
 
 ```json
@@ -1389,8 +1368,8 @@ curl Example
 curl -X POST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/augment \
  -H 'Authorization: Bearer {{token}}' \
  -H 'Content-Type: application/json; charset=utf-8' \
- -d '{"service": "engine", "id": "AU2", "name": "rest augment api", 
-      "description": "describe", "augment-service": "engine", "type": "api", 
+ -d '{"service": "engine", "id": "AU2", "name": "rest augment api",
+      "description": "describe", "augment-service": "engine", "type": "api",
       "options": { "url": "hostname", "attributes": ["customerSegment"]}}'
 ```
 
@@ -1421,7 +1400,6 @@ Cache-Control: no-cache
 }
 ```
 
-
 Response
 
 ```json
@@ -1441,16 +1419,14 @@ Response
 }
 ```
 
-
 curl Example
-
 
 ```bash
 curl -X POST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/augment \
  -H 'Authorization: Bearer {{token}}' \
  -H 'Content-Type: application/json; charset=utf-8' \
- -d '{"service": "engine","id": "AU2","name": "rest augment api", 
-      "description": "","augment-service": "engine","type": 
+ -d '{"service": "engine","id": "AU2","name": "rest augment api",
+      "description": "","augment-service": "engine","type":
       "file","options": {"attributes": ["customerSegment", "twitter"]}}'
 ```
 
@@ -1475,13 +1451,11 @@ Content-Type: text/csv
 
 curl Example
 
-
 ```bash
 curl -iX POST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/augments/AU14/file \
 -H 'Authorization: Bearer Mc6NLc7ukAE3AR59XDqRbOxvVW1RTaoYHeLQm9P2WhlX' \
 -F file=@1.csv
 ```
-
 
 **Retrieves augment for the given tenant**
 
@@ -1514,7 +1488,6 @@ Response
 ```
 
 curl Example
-
 
 ```bash
 curl -X GET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/augments/AU1 \
