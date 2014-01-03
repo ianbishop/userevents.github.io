@@ -1,4 +1,4 @@
-# Using CxEngage REST API
+# CxEngage REST API
 
 ## Authentication
 
@@ -47,7 +47,7 @@ GET https://api.cxengage.net/1.0/tenants/{{id}}
 
 #### Arguments
 
-Argument | Description
+|
 --- | ---
 **id** | The tenant ID
 
