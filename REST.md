@@ -45,7 +45,7 @@ Retrieve the details of a tenant.
 GET https://api.cxengage.net/1.0/tenants/{{id}}
 ```
 
-**Arguments**
+#### Arguments
 
 Argument | Description
 --- | ---
