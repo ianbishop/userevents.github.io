@@ -58,7 +58,7 @@ curl -X GET https://api.cxengage.net/1.0/tenants/tenant1 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
 
-**Returns**
+#### Returns
 
 Returns a tenant object if a valid tenant is provided, returns [an error]()
 otherwise.
