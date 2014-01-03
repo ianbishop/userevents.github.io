@@ -35,7 +35,14 @@ The selected tenant or item does not exist
 
 ## Tenants
 
-### Retrieve a Tenant
+### Retrieving a Tenant
+
+#### Arguments
+
+Argument | Description
+--- | ---
+*id* | The tenant ID
+
 
 **Request**
 
