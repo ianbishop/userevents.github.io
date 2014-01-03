@@ -14,42 +14,32 @@ version - 1.0
 
 ## Error Codes
 
-CxEngage API uses HTTP response codes for showing failure of API requests.
+CxEngage REST API uses standard HTTP response codes for errors.
 
-**HTTP 400**
-```
-Required fields are not present
-```
-**HTTP 401**
-```
-Incorrect credentials
-```
-**HTTP 403**
-```
-User does not have access to selected tenant
-```
-**HTTP 404**
-```
-The selected tenant or item does not exist
-```
+Code | Description
+-- | --
+**400** | Required fields are missing
+**401** | Incorrect credentials
+**403** | User does not have access to the provided tenant
+**404** | The provided tenant or item does not exist
 
 ## Tenants
 
 ### Retrieving a Tenant
 
-Retrieve the details of a tenant.
+Retrieve the details of a tenant which your authenticated user has access to.
 
-> Request
+> Definition
 
 ```http
-GET https://api.cxengage.net/1.0/tenants/{{id}}
+GET https://api.cxengage.net/1.0/tenants/{{tid}}
 ```
 
 #### Arguments
 
 Name | Description
 --- | ---
-**id** | The tenant ID
+**tid** | Tenant ID
 
 > Example Request
 
@@ -60,8 +50,7 @@ curl -X GET https://api.cxengage.net/1.0/tenants/tenant1 \
 
 #### Returns
 
-Returns a tenant object if a valid tenant is provided, returns [an error]()
-otherwise.
+Returns a tenant object if a valid tenant is provided, returns [an error]() otherwise.
 
 > Example Response
 
@@ -74,26 +63,34 @@ otherwise.
 
 ## Key Attribute
 
-**Parameters**
+### Retrieving the Key Attribute
 
-key
+Retrieve the key attribute of the specified tenant. Your current authenticated user must have access to the specified tenant.
 
-```
-Key attribute
-```
+> Definition
 
-**Retrieve key attribute for the given tenant**
-
-Request
 ```http
-GET /1.0/tenants/{{tenant-name}}/key-attribute HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/key-attribute
 ```
 
-Response
+#### Arguments
+
+Name | Description
+--- | ---
+**tid** | Tenant ID
+
+> Example Request
+```bash
+curl -X GET https://api.cxengage.net/1.0/tenants/tenant1/key-attribute \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns a JSON object containing the key attribute of provided tenant if valid
+tenant is provided. Returns [an error]() otherwise.
+
+> Example Response
 
 ```json
 {
@@ -101,26 +98,45 @@ Response
 }
 ```
 
-curl Example
+### Update the Key Attribute
 
-```bash
-curl -X GET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/key-attribute \
-     -H 'Authorization: Bearer {{token}}'
+Updates the key attribute of the specified tenant. Your current authenticated user must have access to the specified tenant.
 
-```
-
-**Update key attribute for the given tenant**
-
-Request
+> Definition
 
 ```http
-POST /1.0/tenants/{{tenant-name}}/key-attribute HTTP/1.1
-Host: {{cxenage-api}}
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/key-attribute
 ```
 
-Response
+#### Arguments
+
+Name | Description
+--- | ---
+**key** | Key Attribute
+
+> Example Object
+
+```json
+{
+  "key": "username"
+}
+```
+
+> Example Request
+
+```bash
+curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/key-attribute \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"key" : "username"}'
+```
+
+#### Returns
+
+Returns a JSON object containing the key attribute if update succeeded. Returns
+[an error]() if update parameters are invalid.
+
+> Example Response
 
 ```json
 {
@@ -128,45 +144,72 @@ Response
 }
 ```
 
-curl Example
-
-```bash
-curl -X POST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/key-attribute \
- -H 'Authorization: Bearer {{token}}' \
- -H 'Content-Type: application/json; charset=utf-8' \
- -d '{"key" : "username"}'
-```
-
 ## Patterns
 
-**Mandatory Parameters**
+### Create a Pattern
 
-name
+Creates a pattern object for specified tenant.
 
-```
-Name of Pattern
-```
+> Definition
 
-**Optional Parameters**
-
-description
-```
-Description of pattern
-```
-status
-```
-Boolean value. Set to true/false to enable/disable the pattern
-```
-when
-```
-When portion of pattern
-```
-then
-```
-Then portion of pattern
+```http
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/patterns
 ```
 
-**Retrieves all patterns from chosen tenant**
+#### Arguments
+
+Name | Description
+--- | ---
+**name** | Human-friendly name of the pattern
+description | Description of the pattern
+status |  Boolean for enabled/disabled state
+when | CxEngage DSL of what pattern to look for
+then | CxEngage DSL of how to react when matched
+
+
+> Example Object
+
+```json
+{
+  "name": "Sample Pattern",
+  "description": "Sample",
+  "status":true,
+  "when": "(when (event (= id \"1234\")))",
+  "then": "(seq (send echo message {:message \"Hello world\"}))"
+}
+```
+
+> Example Request
+
+```bash
+curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/patterns \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"then":"(send echo message {:message \"Hello curl\"})",
+          "when":"(event (= type \"curl\"))","status":true,"name":"curl Pattern"}'
+```
+
+#### Returns
+
+Returns a pattern object if successful, returns [an error]() otherwise.
+
+If `status` is set to true, the `when` and `then` fields must be provided and must be valid
+CxEngage DSL. If not, [an error]() will occur.
+
+> Example Response
+
+```json
+{
+  "id": "PT2",
+  "name": "Sample Pattern",
+  "description": "Sample",
+  "status":true,
+  "when": "(when (event (= \"id\" \"1234\")))",
+  "then": "(seq (send echo message {:message \"Hello world\"}))"
+}
+```
+
+## Retrieve All Patterns
 
 Request
 
@@ -196,49 +239,6 @@ Response
 
 ```
 
-**Create a pattern on the given tenant**
-
-Request
-
-```http
-POST /1.0/tenants/{{tenant-name}}/patterns HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-```
-
-```json
-{
-  "name": "Sample Pattern",
-  "description": "Sample",
-  "status":true,
-  "when": "(when (event (= id \"1234\")))",
-  "then": "(seq (send echo message {:message \"Hello world\"}))"
-}
-```
-
-Response
-
-```json
-{
-  "id": "PT2",
-  "name": "Sample Pattern",
-  "description": "Sample",
-  "status":true,
-  "when": "(when (event (= \"id\" \"1234\")))",
-  "then": "(seq (send echo message {:message \"Hello world\"}))"
-}
-```
-
-curl Example
-
-```bash
-curl -X POST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/patterns \
- -H 'Authorization: Bearer {{token}}' \
- -H 'Content-Type: application/json; charset=utf-8' \
- -d '{"then":"(send echo message {:message \"Hello curl\"})",
-      "when":"(event (= type \"curl\"))","status":true,"name":"curl Pattern"}'
-```
 
 **Retrieves chosen pattern for the given tenant**
 
