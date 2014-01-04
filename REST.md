@@ -1243,7 +1243,7 @@ Returns the integration object if the update succeeded, returns [an error]() oth
 
 [More on Pusher >](https://cxengage.zendesk.com/hc/en-us/articles/200678188-How-do-I-set-up-my-Pusher-integration-)
 
-#### Retrieve a Integration
+### Retrieve an Integration
 
 Retrieves the details of an existing integration for a specified tenant. Your current authenticated user must have access to the specified tenant.
 
