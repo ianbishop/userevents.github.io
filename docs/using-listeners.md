@@ -36,11 +36,11 @@ curl -XGET https://api.cxengage.net/1.0/tenants/TENANT-NAME/listeners/LI1/status
 {% endhighlight %}
 
 {% highlight javascript %}
-
-{"id":"status",
-"status":"started",
-"message":"Connected to stream: hash-id"}
-
+{
+  "id":"status",
+  "status":"started",
+  "message":"Connected to stream: hash-id"
+}
 {% endhighlight %}
 
 ## Mapping Attributes
