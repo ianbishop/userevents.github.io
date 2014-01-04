@@ -364,7 +364,7 @@ curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/patterns/PT1 \
 
 #### Returns
 
-Returns an **HTTP 201** if successful. Otherwise, returns [an error]().
+Returns an **HTTP 204** if successful. Otherwise, returns [an error]().
 
 ### List All Patterns
 
@@ -586,7 +586,7 @@ curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/templates/TM1 \
 
 #### Returns
 
-Returns an **HTTP 201** if successful. Otherwise, returns [an error]().
+Returns an **HTTP 204** if successful. Otherwise, returns [an error]().
 
 ### List All Templates
 
@@ -853,7 +853,7 @@ curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/listeners/LI1 \
 
 #### Returns
 
-Returns an **HTTP 201** if successful. Otherwise, returns [an error]().
+Returns an **HTTP 204** if successful. Otherwise, returns [an error]().
 
 ### List All Listeners
 
@@ -979,7 +979,7 @@ Name | Type | Description
 }
 ```
 
-[More About Integrations >](http://docs.cxengage.com/docs/integrations/)
+[More on Integrations >](http://docs.cxengage.com/docs/integrations/)
 
 ### Setup Salesforce
 
@@ -1329,265 +1329,332 @@ error]() otherwise.
 
 ## Augments
 
-**Retrieves augments for the given tenant**
+The purpose of augments are to allow you to add additional data to events that may be necessary in the context of matching a pattern or sending a notification but was not available at the time the event was sent to CxEngage.
 
-Request
+#### Attributes
+
+Name | Type | Description
+--- | --- | ---
+**id** | **string** | Unique identifier
+**type** | **enum** | Type of augment (`'file'` or `'api'`)
+**service** | **enum** | Service to augment before (`'engine'` or `'notification'`)
+
+> Example Object
+
+```json
+{
+  "id": "AU1",
+  "name": "Augment CSV",
+  "type": "file",
+  "service": "engine"
+}
+```
+
+[More on Augments >](http://docs.cxengage.com/docs/using-augments/)
+
+### Creating an API Augment
+
+Creates an API augment object for specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
 
 ```http
-GET /1.0/tenants/{{tenant-name}}/augments HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json
-Authorization: Bearer {{token}}
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/augments
 ```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**name** | Human-friendly name of the augment
+description | Description of the augment
+**type** | `'api'`
+**service** | Service to augment before (`'engine'` or `'notification'`)
+**options** | JSON Object with mandatory fields `'url'` and `'attributes'`
+**url** | The API URL
+**attributes** | An array of attributes to augment
+
+> Example Request
+
+```bash
+curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/augment \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"service": "engine", "name": "Augment API", "type": "api",
+          "description": "REST API", "augment-service": "engine",
+          "options": { "url": "hostname", "attributes": ["customerSegment"]}}'
+```
+
+#### Returns
+
+Returns an augment object if successful, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "AU1",
+  "service": "engine",
+  "name": "Augment API",
+  "description": "REST API",
+  "augment-service": "engine",
+  "type": "api",
+  "options": {
+    "url": "hostname",
+    "attributes": [
+      "customerSegment"
+    ]
+  }
+}
+```
+
+### Creating a File Augment
+
+Creates an File (CSV) augment object for specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/augments
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**name** | Human-friendly name of the augment
+description | Description of the augment
+**type** | `'file'`
+**service** | Service to augment before (`'engine'` or `'notification'`)
+
+> Example Request
+
+```bash
+curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/augment \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"service": "engine", "name": "File Augment",
+          "description": "CSV File", "type": "file"}'
+```
+
+#### Returns
+
+Returns an augment object if successful, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "AU2",
+  "name": "File Augment",
+  "description": "CSV File",
+  "type": "file",
+  "service": "engine"
+}
+```
+
+### Retrieve an Augment
+
+Retrieves the details of an existing augment for a specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/augments/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Augment ID
+
+> Example Request
+
+```bash
+curl -XGET https://api.cxengage.net/tenants/tenant1/augments/AU2 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns a augment object if specified tenant and augment exist. Returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "AU2",
+  "name": "File Augment",
+  "description": "CSV File",
+  "type": "file",
+  "service": "engine"
+}
+```
+
+### Update an Augment
+
+Updates an existing augment of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+PUT https://api.cxengage.net/1.0/tenants/{{tid}}/augments/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+name | Human-friendly name of the augment
+description | Description of the augment
+type | Type of Augment (`'file'` or `'api'`)
+service | Service to augment before (`'engine'` or `'notification'`)
+options | **API ONLY** JSON Object with mandatory fields `'url'` and `'attributes'`
+
+> Example Request
+
+```bash
+curl -X PUT https://api.cxengage.net/1.0/tenants/tenant1/augments/AU1 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"name": "My Augment"}'
+```
+
+#### Returns
+
+Returns the augment object if the update succeeded, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "AU1",
+  "service": "engine",
+  "name": "My Augment",
+  "description": "REST API",
+  "augment-service": "engine",
+  "type": "api",
+  "options": {
+    "url": "hostname",
+    "attributes": [
+      "customerSegment"
+    ]
+  }
+}
+```
+
+### Delete an Augment
+
+Permanantly deletes an augment. It cannot be undone. Immediately stops augmenting new events. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+DELETE /1.0/tenants/{{tid}}/augments/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Augment ID
+
+> Example Request
+
+```bash
+curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/augments/AU1 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an **HTTP 204** if successful. Otherwise, returns [an error]().
+
+### List All Augments
+
+Returns a list of all augments for a specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/augments
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**tid** | Tenant ID
+
+> Example Request
+
+```bash
+curl -XGET https://api.cxengage.net/tenants/tenant1/augments \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an array containing all augments if the specified tenant exists. Returns [an
+error]() otherwise.
+
+> Example Response
 
 ```json
 [
-    {
-        "id": "AU1",
-        "name": "Augment csv",
-        "type": "file",
-        "service": "engine"
-    },
-    {
-        "description": "Sample description",
-        "id": "AU5",
-        "name": "Augment csv",
-        "type": "file",
-        "service": "engine"
+  {
+    "id": "AU1",
+    "service": "engine",
+    "name": "My Augment",
+    "description": "REST API",
+    "augment-service": "engine",
+    "type": "api",
+    "options": {
+      "url": "hostname",
+      "attributes": [
+        "customerSegment"
+      ]
     }
+  },
+  {
+    "id": "AU2",
+    "name": "File Augment",
+    "description": "CSV File",
+    "type": "file",
+    "service": "engine"
+  }
 ]
 ```
 
-curl Example
+### Retrieve an Augment File
 
-```bash
-curl -X GET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/augments \
-     -H 'Authorization: Bearer {{token}}'
-```
+Retrieves an existing augment file for a specified tenant. Your current authenticated user must have access to the specified tenant.
 
-**Create an Augment for a tenant**
-
-**Mandatory Parameters**
-
-name
-```
-Name of Augment
-```
-
-type
-```
-file or api based augment
-```
-service
-```
-engine or notification
-```
-
-**Optional Parameters**
-
-options
-```
-Map of optional attributes shown below
-```
-url
-```
-url of the augment api
-```
-attributes
-```
-Attributes that would get augmented
-```
-
-Request
-
-```
-POST /1.0/tenants/{{tenant-name}}/augments HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-```
-
-```json
-{
-    "service": "engine",
-    "name": "rest augment api",
-    "description": "description",
-    "augment-service": "engine",
-    "type": "api",
-    "options": {
-        "url": "hostname",
-        "attributes": [
-            "customerSegment"
-        ]
-    }
-}
-```
-
-Response
-
-```json
-{
-    "service": "engine",
-    "id": "AU2",
-    "name": "rest augment api",
-    "description": "description",
-    "augment-service": "engine",
-    "type": "api",
-    "options": {
-        "url": "hostname",
-        "attributes": [
-            "customerSegment"
-        ]
-    }
-}
-```
-
-curl Example
-
-```bash
-curl -X POST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/augment \
- -H 'Authorization: Bearer {{token}}' \
- -H 'Content-Type: application/json; charset=utf-8' \
- -d '{"service": "engine", "id": "AU2", "name": "rest augment api",
-      "description": "describe", "augment-service": "engine", "type": "api",
-      "options": { "url": "hostname", "attributes": ["customerSegment"]}}'
-```
-
-**File based augment**
-
-Request
-
-```
-POST /1.0/tenants/{{tenant-name}}/augments HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-```
-
-```json
-{
-    "service": "engine",
-    "name": "rest augment api",
-    "description": "description",
-    "augment-service": "engine",
-    "type": "file",
-    "options": {
-        "attributes": [
-            "customerSegment", "twitter"
-        ]
-    }
-}
-```
-
-Response
-
-```json
-{
-    "service": "engine",
-    "id": "AU2",
-    "name": "rest augment api",
-    "description": "description",
-    "augment-service": "engine",
-    "type": "file",
-    "options": {
-        "url": "hostname",
-        "attributes": [
-            "customerSegment"
-        ]
-    }
-}
-```
-
-curl Example
-
-```bash
-curl -X POST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/augment \
- -H 'Authorization: Bearer {{token}}' \
- -H 'Content-Type: application/json; charset=utf-8' \
- -d '{"service": "engine","id": "AU2","name": "rest augment api",
-      "description": "","augment-service": "engine","type":
-      "file","options": {"attributes": ["customerSegment", "twitter"]}}'
-```
-
-**Upload CSV for Augment**
-
-**Upload File**
-
-Request
-
-```
-POST /1.0/tenants/{{tenant-name}}/augments/AU1/file HTTP/1.1
-Host: api.cxengage.net
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-
-----WebKitFormBoundaryE19zNvXGzXaLvS5C
-Content-Disposition: form-data; name="file"; filename="1.csv"
-Content-Type: text/csv
-
-----WebKitFormBoundaryE19zNvXGzXaLvS5C
-```
-
-curl Example
-
-```bash
-curl -iX POST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/augments/AU14/file \
--H 'Authorization: Bearer Mc6NLc7ukAE3AR59XDqRbOxvVW1RTaoYHeLQm9P2WhlX' \
--F file=@1.csv
-```
-
-**Retrieves augment for the given tenant**
-
-Request
+> Definition
 
 ```http
-GET /1.0/tenants/{{tenant-name}}/augments/{{augment-id}} HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/augments/{{id}}/file
 ```
 
-Response
-
-```json
-{
-    "id": "AU1",
-    "name": "API based",
-    "service": "engine",
-    "type": "api",
-    "options": {
-        "url": "http://cxengage-augment",
-        "attributes": [
-            "phoneNumber",
-            "customerSegment"
-        ]
-    }
-}
-```
+#### Arguments
 
-curl Example
+Name | Description
+--- | ---
+**id** | File Augment ID
+
+> Example Request
 
 ```bash
-curl -X GET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/augments/AU1 \
-     -H 'Authorization: Bearer {{token}}'
-
+curl -XGET https://api.cxengage.net/tenants/test123/augments/AU2/file \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
 
-**Retrieve augment CSV**
+#### Returns
 
-Request
+Returns a `text/csv` file if specified tenant and augment exist. Returns [an error]() otherwise.
 
-```http
-GET /1.0/tenants/{{tenant-name}}/augments/AU1/file HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json
-Authorization: Bearer {{token}}
-```
-
-Response
+> Example Response
 
 ```
 custId,first-name
@@ -1596,9 +1663,58 @@ custId,first-name
 123,Bob
 ```
 
-curl Example
+### Upload an Augment File
+
+Upserts a CSV file for an existing File augment of the specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/augments/{{id}}/file
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | File Augment ID
+**file** | CSV File to upload (as `form-data`)
+
+> Example Request
 
 ```bash
-curl -X GET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/augments/AU1/file \
-     -H 'Authorization: Bearer {{token}}'
+curl -iX POST https://api.cxengage.net/1.0/tenants/tenant1/augments/AU2/file \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -F file=@users.csv
 ```
+
+#### Returns
+
+Returns an **HTTP 201** if successful. Otherwise, returns [an error]().
+
+### Delete an Augment File
+
+Permanantly deletes an augment file. It cannot be undone. Immediately stops augmenting new events. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+DELETE /1.0/tenants/{{tid}}/augments/{{id}}/file
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Augment ID
+
+> Example Request
+
+```bash
+curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/augments/AU2/file \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an **HTTP 204** if successful. Otherwise, returns [an error]().
