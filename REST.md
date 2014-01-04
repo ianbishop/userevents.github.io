@@ -185,7 +185,7 @@ A pattern describes a series of events that make up a customer's journey as they
 Name | Type | Description
 --- | --- | ---
 **id** | **string** | Unique identifier
-**name** | **string** | Human-friendly of the pattern
+**name** | **string** | Human-friendly name of the pattern
 **description** | **string** | A people friendly description of what this pattern should do
 **status** | **boolean** | Whether or not this pattern is being matched against
 **when** | **string** | CxEngage DSL of what pattern to look for
@@ -339,6 +339,33 @@ Returns the pattern object if the update succeeded, returns [an error]() otherwi
 }
 ```
 
+### Delete a Pattern
+
+Permanently deletes a pattern. It cannot be undone. Immediately stops matching events against the deleted pattern. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+DELETE /1.0/tenants/{{tid}}/patterns/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Pattern ID
+
+> Example Request
+
+```bash
+curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/patterns/PT1 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an **HTTP 201** if successful. Otherwise, returns [an error]().
+
 ### List All Patterns
 
 Returns a list of all patterns for a specified tenant. Your current authenticated user must have access to the specified tenant.
@@ -388,522 +415,547 @@ error]() otherwise.
 
 ## Templates
 
-**Retrieves templates for the given tenant**
+A template is used for creating messages that will be used in a notification. These templates allow you to insert variables from the event, responses from other notifications, or augmented values to create a personalized notification for your customers.
 
-**Mandatory Parameters**
+#### Attributes
 
-name
+Name | Type | Description
+--- | --- | ---
+**id** | **string** | Unique identifier
+**name** | **string** | Human-friendly name of the template
+**description** | **string** | A people friendly description of what this template should do
+**template** | **string** | Template message which supports Mustache
 
-```
-Name of Template
-```
-
-**Optional Parameters**
-
-template
-
-```
-Template to create
-```
-
-description
-
-```
-Description of template
-```
-
-Request
-
-```http
-GET /1.0/tenants/{{tenant-name}}/templates/TM1 HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-```
-
-Response
+> Example Object
 
 ```json
-
-    {
-        "id": "TM1",
-        "template": "Hi {{FirstName}}, sorry we missed your call. Call Joe at
-+14153159430 re: 401K needs.",
-        "description": "Default SMS message with click-to-call",
-        "name": "SMS"
-    }
+{
+  "id": "TM1",
+  "template": "Hi {{FirstName}}, sorry we missed your call. Call Joe at +14153159430 re: 401K needs.",
+  "description": "Default SMS message with click-to-call",
+  "name": "SMS"
+}
 ```
 
-curl Example
+[More About Templates >](http://docs.cxengage.com/docs/templates/)
+
+### Create a Template
+
+Creates a template object for specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/templates
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**name** | Human-friendly name of the template
+description | Description of the template
+template | Template message which supports Mustache
+
+> Example Request
 
 ```bash
-curl -XGET https://api.cxengage.net/tenants/{{tenant-name}}/templates/TM1 \
-     -H 'Authorization: Bearer {{token}}'
+curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/templates \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"name": "My Template", "template": "Hello {{FirstName}}!"'
 ```
 
-**Update chosen template**
+#### Returns
 
-Request
+Returns a template object if successful, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "PT2",
+  "name": "My Template",
+  "when": "Hello {{FirstName}}!"
+}
+```
+
+#### Retrieve a Template
+
+Retrieves the details of an existing template for a specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
 
 ```http
-POST /1.0/tenants/{{tenant-name}}/templates HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/templates/{{id}}
 ```
 
-```json
-{
-    "template": "Hi {{first-name}} We apologize for the inconvenience. Please contact us at {{email-address}}",
-    "description": "SMS apologizing to customer",
-    "name": "SMS"
-}
-```
+#### Arguments
 
-Response
+Name | Description
+--- | ---
+**id** | Template ID
 
-```json
-{
-    "id": "TM1",
-    "template": "Hi {{first-name}} We apologize for the inconvenience. Please contact us at {{email-address}}",
-    "description": "SMS apologizing to customer",
-    "name": "SMS"
-}
-```
-
-curl Example
+> Example Request
 
 ```bash
-
-curl -X POST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/templates \
- -H 'Authorization: Bearer {{token}}' \
- -H 'Content-Type: application/json; charset=utf-8' \
- -d '{"template": "Welcome to CxEngage 4.0", "description" : "sample description", "name" : "Welcome"}'
-
+curl -XGET https://api.cxengage.net/tenants/test123/templates/TM2 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
 
-**Retrieve chosen template**
+#### Returns
 
-Request
+Returns a template object if specified tenant and template exist. Returns [an
+error]() otherwise.
 
-```http
-GET /1.0/tenants/{{tenant-name}}/templates/TM1 HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-```
-
-Response
+> Example Response
 
 ```json
-
 {
-    "id": "TM1",
-    "template": "Hi {{FirstName}}, sorry we missed your call. Call Joe at
-+14153159430 re: 401K needs.",
-    "description": "Default SMS message with click-to-call",
-    "name": "SMS"
+  "id": "TM2",
+  "template": "Hi {{FirstName}}, sorry we missed your call. Call Joe at +14153159430 re: 401K needs.",
+  "description": "Default SMS message with click-to-call",
+  "name": "SMS"
 }
 ```
 
-curl Example
+### Update a Template
+
+Updates an existing template of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+PUT https://api.cxengage.net/1.0/tenants/{{tid}}/templates/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+name | Human-friendly name of the template
+description | Description of the template
+template | Template message which supports Mustache
+
+> Example Request
 
 ```bash
-curl -XGET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/templates/TM1 \
-     -H 'Authorization: Bearer {{token}}'
+curl -X PUT https://api.cxengage.net/1.0/tenants/test144/templates/TM1 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"name":"Test Template"}'
 ```
 
-**Update chosen template**
+#### Returns
 
-Request
+Returns the template object if the update succeeded, returns [an error]() otherwise.
 
-```http
-PUT /1.0/tenants/{{tenant-name}}/templates/TM1 HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-```
+> Example Response
 
 ```json
 {
-
-    "name": "Test Template"
-}
-```
-
-Response
-
-```json
-{
-    "id": "TM1",
+    "id": "TM5",
     "template": "Hi {{first-name}}. We apologize for the inconvenience. Please contact us at {{email-address}}",
     "description": "SMS apologizing to customer",
     "name": "Test Template"
 }
 ```
 
-curl Example
+### Delete a Template
 
-```bash
-curl -XPUT https://api.cxengage.net/1.0/tenants/{{tenant-name}}/templates/TM1 \
-     -H 'Authorization: Bearer {{token}}' \
-     -H 'Content-Type: application/json; charset=utf-8' \
-     -d '{"name":"Test Template"}'
-```
+Permanently deletes a template. It cannot be undone. Your current authenticated user must have access to the specified tenant.
 
-**Delete chosen template**
-
-Request
+> Definition
 
 ```http
-DELETE /1.0/tenants/{{tenant-name}}/templates/TM1 HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
+DELETE /1.0/tenants/{{tid}}/templates/{{id}}
 ```
 
-Response
+#### Arguments
 
-```json
-{
+Name | Description
+--- | ---
+**id** | Template ID
 
-  "TM1"
-}
-```
-
-curl Example
+> Example Request
 
 ```bash
-curl -IX DELETE https://api.cxengage.net/1.0/tenants/{{tenant-name}}/templates/TM1 \
- -H 'Authorization: Bearer {{token}}' \
+curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/templates/TM1 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an **HTTP 201** if successful. Otherwise, returns [an error]().
+
+### List All Templates
+
+Returns a list of all templates for a specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/templates
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**tid** | Tenant ID
+
+> Example Request
+
+```bash
+curl -XGET https://api.cxengage.net/tenants/tenant1/templates \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an array containing all templates if the specified tenant exists. Returns [an
+error]() otherwise.
+
+> Example Response
+
+```json
+[
+  {
+    "id": "TM1",
+    "template": "Hi {{FirstName}}, sorry we missed your call. Call Joe at +14153159430 re: 401K needs.",
+    "description": "Default SMS message with click-to-call",
+    "name": "SMS"
+  }
+]
 ```
 
 ## Listeners
 
-**Retrieve listeners**
+A listener allows you to integrate with a third-party service to receive events. For example, if you have a DataSift stream that monitors tweets for your company, you can connect this stream to CxEngage by creating a DataSift listener.
 
-Request
+#### Attributes
 
-```http
-GET /1.0/tenants/{{tenant-name}}/listeners HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-```
+Name | Type | Description
+--- | --- | ---
+**id** | **string** | Unique identifier
+**name** | **string** | Human-friendly name of the listener
+**description** | **string** | A people friendly description of what this listener should do
+**status** | **boolean** | Whether or not it is currently listening for events
+**type** | **enum** | The type of integration ('salesforce', 'datasift' or 'pusher')
+**options** | **object** | An object containing all type specific details
+**mapping** | **object** | An object re-mapping fields in the event to fields in the third-party event
 
-Response
+> Example Object
 
 ```json
+{
+  "id": "LI1",
+  "name": "Demo Datasift",
+  "type": "datasift",
+  "status": true,
+  "options": {
+    "hash": "xxxxxxxxxxxxxx"
+  },
+  "mapping": {
+    "username": "interaction.author.username",
+    "sentiment": "salience.content.sentiment",
+    "id": "twitter.user.screen_name"
+  }
+}
+```
 
+[More About Listeners >](http://docs.cxengage.com/docs/using-listeners/)
+
+### Create a Listener
+
+Creates a listener object for specified tenant. The tenant must have access to the `type` of listener selected. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/listeners
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**name** | Human-friendly name of the listener
+description | Description of the listener
+status | Boolean for enabled/disabled state
+**type** | The type of integration ('salesforce', 'datasift' or 'pusher')
+**options** | An object containing all type specific details
+**mapping** | An object re-mapping fields in the event to fields in the third-party event
+
+> Example Request
+
+```bash
+curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/listeners \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"name": "Demo Datasift",
+          "type": "datasift",
+          "status": true,
+          "options": { "hash": "xxxxxxxxxxxxxx" },
+          "mapping": { "username": "interaction.author.username",
+                       "sentiment": "salience.content.sentiment",
+                       "id": "twitter.user.screen_name" }}'
+```
+
+#### Returns
+
+Returns a listener object if successful, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "LI2",
+  "name": "Demo Datasift",
+  "type": "datasift",
+  "status": true
+  "options": {
+    "hash": "xxxxxxxxxxxxxx",
+  },
+  "mapping": {
+    "username": "interaction.author.username",
+    "sentiment": "salience.content.sentiment",
+    "id": "twitter.user.screen_name"
+  }
+}
+```
+
+#### Retrieve a Listener
+
+Retrieves the details of an existing listener for a specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/listeners/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Listener ID
+
+> Example Request
+
+```bash
+curl -XGET https://api.cxengage.net/tenants/test123/listeners/LI2 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns a listener object if specified tenant and listener exist. Returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "LI2",
+  "name": "My Salesforce Listener",
+  "status": true,
+  "type": "salesforce",
+  "options": {
+    "version": "26.0",
+    "topic": "CxDemo_0720v2"
+  },
+  "mapping": {
+    "user": "user__c",
+    "type": "Type",
+    "stage": "StageName",
+    "amount": "Amount",
+    "daystoclose": "daysToClose__c",
+    "product": "Product__c"
+  }
+}
+```
+
+### Update a Listener
+
+Updates an existing listener of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+PUT https://api.cxengage.net/1.0/tenants/{{tid}}/listeners/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+name | Human-friendly name of the listener
+description | Description of the listener
+status | Boolean for enabled/disabled state
+type | The type of integration ('salesforce', 'datasift' or 'pusher')
+options | An object containing all type specific details
+mapping | An object re-mapping fields in the event to fields in the third-party event
+
+> Example Request
+
+```bash
+curl -X PUT https://api.cxengage.net/1.0/tenants/test144/listeners/LI1 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"options": {"hash": "yyyyyyyyyy"}}'
+```
+
+#### Returns
+
+Returns the listener object if the update succeeded, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "LI1",
+  "name": "Demo Datasift",
+  "type": "datasift",
+  "status": true
+  "options": {
+    "hash": "yyyyyyyyyy"
+  },
+  "mapping": {
+    "username": "interaction.author.username",
+    "sentiment": "salience.content.sentiment",
+    "id": "twitter.user.screen_name"
+  }
+}
+```
+
+### Delete a Listener
+
+Permanantly deletes a listener. It cannot be undone. Immediately stops listening for new events. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+DELETE /1.0/tenants/{{tid}}/listeners/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Listener ID
+
+> Example Request
+
+```bash
+curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/listeners/LI1 \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an **HTTP 201** if successful. Otherwise, returns [an error]().
+
+### List All Listeners
+
+Returns a list of all listeners for a specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/listeners
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**tid** | Tenant ID
+
+> Example Request
+
+```bash
+curl -XGET https://api.cxengage.net/tenants/tenant1/listeners \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an array containing all listeners if the specified tenant exists. Returns [an
+error]() otherwise.
+
+> Example Response
+
+```json
 [
-    {
-        "status": true,
-        "topic": "CxDemo_0720v2",
-        "name": "My Salesforce Listener",
-        "version": "26.0",
-        "type": "salesforce",
-        "mapping": {
-            "user": "user__c",
-            "type": "Type",
-            "stage": "StageName",
-            "amount": "Amount",
-            "daystoclose": "daysToClose__c",
-            "product": "Product__c"
-        },
-        "id": "LI2"
-
+  {
+    "id": "LI1",
+    "name": "Demo Datasift",
+    "type": "datasift",
+    "status": true
+    "options": {
+      "hash": "yyyyyyyyyy"
     },
-    {
-        "id": "LI1",
-        "name": "Demo Datasift",
-        "type": "datasift",
-        "mapping": {
-            "username": "interaction.author.username",
-            "sentiment": "salience.content.sentiment",
-            "id": "twitter.user.screen_name"
-        },
-        "hash": "xxxxxxxxxxxxxx",
-        "status": true
+    "mapping": {
+      "username": "interaction.author.username",
+      "sentiment": "salience.content.sentiment",
+      "id": "twitter.user.screen_name"
     }
+  },
+  {
+    "id": "LI2",
+    "name": "My Salesforce Listener",
+    "status": true,
+    "type": "salesforce",
+    "options": {
+      "version": "26.0",
+      "topic": "CxDemo_0720v2"
+    },
+    "mapping": {
+      "user": "user__c",
+      "type": "Type",
+      "stage": "StageName",
+      "amount": "Amount",
+      "daystoclose": "daysToClose__c",
+      "product": "Product__c"
+    }
+  }
 ]
 ```
 
-curl Example
-```bash
-curl -XGET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners \
-     -H 'Authorization: Bearer {{token}}'
-```
+### Monitor a Listener
 
-**Create listener**
+Retrieves the current status of an existing listener for a specified tenant. Your current authenticated user must have access to the specified tenant.
 
-Request
+> Definition
 
 ```http
-POST /1.0/tenants/{{tenant-name}}/listeners HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/listeners/{{id}}/status HTTP/1.1
 ```
 
-Salesforce Listener Example
+#### Arguments
 
-Request
+Name | Description
+--- | ---
+**id** | Listener ID
 
-```
-  POST /1.0/tenants/tenant-name/listeners
-```
-
-```json
-
-{
-    "status": true,
-    "topic": "CxDemo_0720v2",
-    "name": "My Salesforce Listener",
-    "version": "26.0",
-    "type": "salesforce",
-    "mapping": {
-        "user": "user__c",
-        "type": "Type",
-        "stage": "StageName",
-        "amount": "Amount",
-        "daystoclose": "daysToClose__c",
-        "product": "Product__c"
-    }
-}
-```
-Response
-
-```json
-{
-    "id": "LI3",
-    "status": true,
-    "topic": "CxDemo_0720v2",
-    "name": "My Salesforce Listener",
-    "version": "26.0",
-    "type": "salesforce",
-    "mapping": {
-        "user": "user__c",
-        "type": "Type",
-        "stage": "StageName",
-        "amount": "Amount",
-        "daystoclose": "daysToClose__c",
-        "product": "Product__c"
-    }
-}
-```
-
-curl Example
+> Example Request
 
 ```bash
-curl -XPOST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners \
-     -H 'Authorization: Bearer {{token}}' \
--H 'Content-Type: application/json; charset=utf-8' \
--d '{"name":"My Salesforce Listener","type":"salesforce","mapping":{"user":"user__c","type":"Type",
-    "stage":"StageName","amount":"Amount","daystoclose":"daysToClose__c","product": "Product__c"},"status":true}'
+curl -XGET https://api.cxengage.net/1.0/tenants/tenant1/listeners/LI1/status \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
 
-**Datasift Listener Example**
+#### Returns
 
-Request
+Returns a JSON object with attributes `status` and `message` when specified tenant and listener exist. Otherwise, returns [an error]().
 
-```http
-POST /1.0/tenants/{{tenant-name}}/listeners HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-```
-
-```json
-
-{
-    "name": "sentiment listener",
-    "type": "datasift",
-    "mapping": {
-        "username": "interaction.author.username",
-        "retweet_count": "twitter.retweet.count",
-        "network": "interaction.type",
-        "sentiment": "salience.content.sentiment",
-        "followers": "twitter.user.followers_count",
-        "user_url": "interaction.author.link",
-        "profile_image": "twitter.user.profile_image_url"
-    },
-    "hash": "datasifthash",
-    "status": true
-}
-```
-Response
+> Example Response
 
 ```json
 {
-    "id": "LI1",
-    "name": "sentiment listener",
-    "type": "datasift",
-    "mapping": {
-        "username": "interaction.author.username",
-        "retweet_count": "twitter.retweet.count",
-        "network": "interaction.type",
-        "sentiment": "salience.content.sentiment",
-        "followers": "twitter.user.followers_count",
-        "user_url": "interaction.author.link",
-        "profile_image": "twitter.user.profile_image_url"
-    },
-    "hash": "datasifthash",
-    "status": true
-}
-```
-
-curl Example
-
-```bash
-curl -XPOST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners \
-     -H 'Authorization: Bearer {{token}}' \
--H 'Content-Type: application/json; charset=utf-8' \
--d '{"name":"Demo Datasift","type":"datasift",
-    "mapping":{"username":"interaction.author.username","sentiment":"salience.content.sentiment",
-    "id":"twitter.user.screen_name"},"hash":{{{datasift-hash}},"status":true}'
-```
-
-**Retrieve chosen listener**
-
-Request
-
-```http
-GET /1.0/tenants/{{tenant-name}}/listeners/LI4 HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-```
-
-Response
-
-```json
-
-{
-        "status": true,
-        "topic": "CxDemo_0720v2",
-        "name": "My Salesforce Listener",
-        "version": "26.0",
-        "type": "salesforce",
-        "mapping": {
-            "user": "user__c",
-            "type": "Type",
-            "stage": "StageName",
-            "amount": "Amount",
-            "daystoclose": "daysToClose__c",
-            "product": "Product__c"
-        },
-        "id": "LI4"
-
-}
-```
-
-curl Example
-
-```bash
-curl -XGET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners/LI4 \
-     -H 'Authorization: Bearer {{token}}'
-```
-
-**Update chosen listener**
-
-Request
-
-```http
-PUT /1.0/tenants/{{tenant-name}}/listeners/LI4 HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-```
-
-```json
-
-  {"name" : "Updated Name for listener"}
-
-```
-
-Response
-
-```json
-
-{
-    "id": "LI4",
-    "status": false,
-    "topic": "CxDemo_0720v2",
-    "name": "Updated Name for listener",
-    "version": "26.0",
-    "type": "salesforce",
-    "mapping": {
-        "user": "user__c",
-        "type": "Type",
-        "stage": "StageName",
-        "amount": "Amount",
-        "daystoclose": "daysToClose__c",
-        "product": "Product__c"
-    }
-}
-
-```
-
-curl Example
-
-```bash
-curl -XPUT https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners/LI4 \
-     -H 'Authorization: Bearer {{token}}' \
--H 'Content-Type: application/json; charset=utf-8' \
--d '{"name":"Updated Name for listener"}'
-```
-
-**Retrieve listener status**
-
-Request
-```http
-GET /1.0/tenants/{{tenant-name}}/listeners/LI1/status HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json
-Authorization: Bearer {{token}}
-```
-
-```json
-{
-    "id": "status",
     "status": "started",
     "message": "Connected to stream: hash"
 }
-```
-
-curl Example
-
-```bash
-curl -XGET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners/LI1/status \
-     -H 'Authorization: Bearer {{token}}'
-```
-
-**Delete chosen listener**
-
-Request
-
-```http
-DELETE /1.0/tenants/{{tenant-name}}/listeners/LI54 HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-
-```
-
-curl Example
-
-```bash
-curl -I -XDELETE https://api.cxengage.net/1.0/tenants/{{tenant-name}}/listeners/LI54 \
-     -H 'Authorization: Bearer {{token}}'
 ```
 
 ## Integrations
