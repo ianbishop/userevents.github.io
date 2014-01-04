@@ -72,7 +72,7 @@ curl -X GET https://api.cxengage.net/1.0/tenants/tenant1 \
 
 #### Returns
 
-Returns a tenant object if a valid tenant is provided, returns [an error]() otherwise.
+Returns a tenant object if a valid tenant is provided, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -166,7 +166,7 @@ curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/key-attribute \
 #### Returns
 
 Returns a JSON object containing the key attribute if update succeeded. Returns
-[an error]() if update parameters are invalid.
+[an error](#errors) if update parameters are invalid.
 
 > Example Response
 
@@ -237,7 +237,7 @@ curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/patterns \
 
 #### Returns
 
-Returns a pattern object if successful, returns [an error]() otherwise. If `status` is set to true, the `when` and `then` fields must be provided and must be valid CxEngage DSL. If not, [an error]() will occur.
+Returns a pattern object if successful, returns [an error](#errors) otherwise. If `status` is set to true, the `when` and `then` fields must be provided and must be valid CxEngage DSL. If not, [an error](#errors) will occur.
 
 > Example Response
 
@@ -325,7 +325,7 @@ curl -X PUT https://api.cxengage.net/1.0/tenants/test144/patterns/PT5 \
 
 #### Returns
 
-Returns the pattern object if the update succeeded, returns [an error]() otherwise.
+Returns the pattern object if the update succeeded, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -364,7 +364,7 @@ curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/patterns/PT1 \
 
 #### Returns
 
-Returns an **HTTP 204** if successful. Otherwise, returns [an error]().
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
 
 ### List All Patterns
 
@@ -468,7 +468,7 @@ curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/templates \
 
 #### Returns
 
-Returns a template object if successful, returns [an error]() otherwise.
+Returns a template object if successful, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -548,7 +548,7 @@ curl -X PUT https://api.cxengage.net/1.0/tenants/test144/templates/TM1 \
 
 #### Returns
 
-Returns the template object if the update succeeded, returns [an error]() otherwise.
+Returns the template object if the update succeeded, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -586,7 +586,7 @@ curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/templates/TM1 \
 
 #### Returns
 
-Returns an **HTTP 204** if successful. Otherwise, returns [an error]().
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
 
 ### List All Templates
 
@@ -704,7 +704,7 @@ curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/listeners \
 
 #### Returns
 
-Returns a listener object if successful, returns [an error]() otherwise.
+Returns a listener object if successful, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -750,7 +750,7 @@ curl -XGET https://api.cxengage.net/tenants/test123/listeners/LI2 \
 
 #### Returns
 
-Returns a listener object if specified tenant and listener exist. Returns [an error]() otherwise.
+Returns a listener object if specified tenant and listener exist. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -807,7 +807,7 @@ curl -X PUT https://api.cxengage.net/1.0/tenants/test144/listeners/LI1 \
 
 #### Returns
 
-Returns the listener object if the update succeeded, returns [an error]() otherwise.
+Returns the listener object if the update succeeded, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -853,7 +853,7 @@ curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/listeners/LI1 \
 
 #### Returns
 
-Returns an **HTTP 204** if successful. Otherwise, returns [an error]().
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
 
 ### List All Listeners
 
@@ -947,7 +947,7 @@ curl -XGET https://api.cxengage.net/1.0/tenants/tenant1/listeners/LI1/status \
 
 #### Returns
 
-Returns a JSON object with attributes `status` and `message` when specified tenant and listener exist. Otherwise, returns [an error]().
+Returns a JSON object with attributes `status` and `message` when specified tenant and listener exist. Otherwise, returns [an error](#errors).
 
 > Example Response
 
@@ -1014,7 +1014,7 @@ curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/salesforce
 
 #### Returns
 
-Returns the integration object if the update succeeded, returns [an error]() otherwise.
+Returns the integration object if the update succeeded, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1060,7 +1060,7 @@ curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/twilio \
 
 #### Returns
 
-Returns the integration object if the update succeeded, returns [an error]() otherwise.
+Returns the integration object if the update succeeded, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1102,7 +1102,7 @@ curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/sendgrid \
 
 #### Returns
 
-Returns the integration object if the update succeeded, returns [an error]() otherwise.
+Returns the integration object if the update succeeded, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1145,7 +1145,7 @@ curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/urban-airs
 
 #### Returns
 
-Returns the integration object if the update succeeded, returns [an error]() otherwise.
+Returns the integration object if the update succeeded, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1187,7 +1187,7 @@ curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/datasift \
 
 #### Returns
 
-Returns the integration object if the update succeeded, returns [an error]() otherwise.
+Returns the integration object if the update succeeded, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1229,7 +1229,7 @@ curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/pusher \
 
 #### Returns
 
-Returns the integration object if the update succeeded, returns [an error]() otherwise.
+Returns the integration object if the update succeeded, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1268,7 +1268,7 @@ curl -XGET https://api.cxengage.net/tenants/test123/integrations/salesforce \
 
 #### Returns
 
-Returns a integration object if specified tenant and integration exist. Returns [an error]() otherwise.
+Returns a integration object if specified tenant and integration exist. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1387,7 +1387,7 @@ curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/augment \
 
 #### Returns
 
-Returns an augment object if successful, returns [an error]() otherwise.
+Returns an augment object if successful, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1439,7 +1439,7 @@ curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/augment \
 
 #### Returns
 
-Returns an augment object if successful, returns [an error]() otherwise.
+Returns an augment object if successful, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1478,7 +1478,7 @@ curl -XGET https://api.cxengage.net/tenants/tenant1/augments/AU2 \
 
 #### Returns
 
-Returns a augment object if specified tenant and augment exist. Returns [an error]() otherwise.
+Returns a augment object if specified tenant and augment exist. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1523,7 +1523,7 @@ curl -X PUT https://api.cxengage.net/1.0/tenants/tenant1/augments/AU1 \
 
 #### Returns
 
-Returns the augment object if the update succeeded, returns [an error]() otherwise.
+Returns the augment object if the update succeeded, returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1569,7 +1569,7 @@ curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/augments/AU1 \
 
 #### Returns
 
-Returns an **HTTP 204** if successful. Otherwise, returns [an error]().
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
 
 ### List All Augments
 
@@ -1596,8 +1596,7 @@ curl -XGET https://api.cxengage.net/tenants/tenant1/augments \
 
 #### Returns
 
-Returns an array containing all augments if the specified tenant exists. Returns [an
-error]() otherwise.
+Returns an array containing all augments if the specified tenant exists. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1652,7 +1651,7 @@ curl -XGET https://api.cxengage.net/tenants/test123/augments/AU2/file \
 
 #### Returns
 
-Returns a `text/csv` file if specified tenant and augment exist. Returns [an error]() otherwise.
+Returns a `text/csv` file if specified tenant and augment exist. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -1690,7 +1689,7 @@ curl -iX POST https://api.cxengage.net/1.0/tenants/tenant1/augments/AU2/file \
 
 #### Returns
 
-Returns an **HTTP 201** if successful. Otherwise, returns [an error]().
+Returns an **HTTP 201** if successful. Otherwise, returns [an error](#errors).
 
 ### Delete an Augment File
 
@@ -1717,4 +1716,4 @@ curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/augments/AU2/file \
 
 #### Returns
 
-Returns an **HTTP 204** if successful. Otherwise, returns [an error]().
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
