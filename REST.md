@@ -53,7 +53,7 @@ Retrieve the details of a tenant which your authenticated user has access to.
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}
 ```
 
@@ -65,7 +65,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -X GET https://api.cxengage.net/1.0/tenants/tenant1 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -109,7 +109,7 @@ Retrieve the key attribute of the specified tenant. Your current authenticated u
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/key-attribute
 ```
 
@@ -120,7 +120,7 @@ Name | Description
 **tid** | Tenant ID
 
 > Example Request
-```bash
+```
 curl -X GET https://api.cxengage.net/1.0/tenants/tenant1/key-attribute \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -144,7 +144,7 @@ Updates the key attribute of the specified tenant. Your current authenticated us
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/key-attribute
 ```
 
@@ -156,7 +156,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/key-attribute \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -211,7 +211,7 @@ Creates a pattern object for specified tenant. Your current authenticated user m
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/patterns
 ```
 
@@ -227,7 +227,7 @@ then | CxEngage DSL of how to react when matched
 
 > Example Request
 
-```bash
+```
 curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/patterns \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -259,7 +259,7 @@ Retrieves the details of an existing pattern for a specified tenant. Your curren
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/patterns/{{id}}
 ```
 
@@ -271,7 +271,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/tenants/test123/patterns/PT2 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -300,7 +300,7 @@ Updates an existing pattern of the specified tenant by settings the values of th
 
 > Definition
 
-```http
+```
 PUT https://api.cxengage.net/1.0/tenants/{{tid}}/patterns/{{id}}
 ```
 
@@ -316,7 +316,7 @@ then | CxEngage DSL of how to react when matched
 
 > Example Request
 
-```bash
+```
 curl -X PUT https://api.cxengage.net/1.0/tenants/test144/patterns/PT5 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -345,7 +345,7 @@ Permanently deletes a pattern. It cannot be undone. Immediately stops matching e
 
 > Definition
 
-```http
+```
 DELETE /1.0/tenants/{{tid}}/patterns/{{id}}
 ```
 
@@ -357,7 +357,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/patterns/PT1 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -372,7 +372,7 @@ Returns a list of all patterns for a specified tenant. Your current authenticate
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/patterns
 ```
 
@@ -385,7 +385,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/tenants/tenant1/patterns \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -445,7 +445,7 @@ Creates a template object for specified tenant. Your current authenticated user 
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/templates
 ```
 
@@ -459,7 +459,7 @@ template | Template message which supports Mustache
 
 > Example Request
 
-```bash
+```
 curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/templates \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -486,7 +486,7 @@ Retrieves the details of an existing template for a specified tenant. Your curre
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/templates/{{id}}
 ```
 
@@ -498,7 +498,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/tenants/test123/templates/TM2 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -525,7 +525,7 @@ Updates an existing template of the specified tenant by settings the values of t
 
 > Definition
 
-```http
+```
 PUT https://api.cxengage.net/1.0/tenants/{{tid}}/templates/{{id}}
 ```
 
@@ -539,7 +539,7 @@ template | Template message which supports Mustache
 
 > Example Request
 
-```bash
+```
 curl -X PUT https://api.cxengage.net/1.0/tenants/test144/templates/TM1 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -567,7 +567,7 @@ Permanently deletes a template. It cannot be undone. Your current authenticated 
 
 > Definition
 
-```http
+```
 DELETE /1.0/tenants/{{tid}}/templates/{{id}}
 ```
 
@@ -579,7 +579,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/templates/TM1 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -594,7 +594,7 @@ Returns a list of all templates for a specified tenant. Your current authenticat
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/templates
 ```
 
@@ -606,7 +606,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/tenants/tenant1/templates \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -672,7 +672,7 @@ Creates a listener object for specified tenant. The tenant must have access to t
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/listeners
 ```
 
@@ -689,7 +689,7 @@ status | Boolean for enabled/disabled state
 
 > Example Request
 
-```bash
+```
 curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/listeners \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -731,7 +731,7 @@ Retrieves the details of an existing listener for a specified tenant. Your curre
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/listeners/{{id}}
 ```
 
@@ -743,7 +743,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/tenants/test123/listeners/LI2 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -781,7 +781,7 @@ Updates an existing listener of the specified tenant by settings the values of t
 
 > Definition
 
-```http
+```
 PUT https://api.cxengage.net/1.0/tenants/{{tid}}/listeners/{{id}}
 ```
 
@@ -798,7 +798,7 @@ mapping | An object re-mapping fields in the event to fields in the third-party 
 
 > Example Request
 
-```bash
+```
 curl -X PUT https://api.cxengage.net/1.0/tenants/test144/listeners/LI1 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -834,7 +834,7 @@ Permanantly deletes a listener. It cannot be undone. Immediately stops listening
 
 > Definition
 
-```http
+```
 DELETE /1.0/tenants/{{tid}}/listeners/{{id}}
 ```
 
@@ -846,7 +846,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/listeners/LI1 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -861,7 +861,7 @@ Returns a list of all listeners for a specified tenant. Your current authenticat
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/listeners
 ```
 
@@ -873,7 +873,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/tenants/tenant1/listeners \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -928,7 +928,7 @@ Retrieves the current status of an existing listener for a specified tenant. You
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/listeners/{{id}}/status HTTP/1.1
 ```
 
@@ -940,7 +940,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/1.0/tenants/tenant1/listeners/LI1/status \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -987,7 +987,7 @@ Updates the Salesforce integration for specified tenant. The tenant must have ac
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/salesforce
 ```
 
@@ -1003,7 +1003,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/salesforce \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -1038,7 +1038,7 @@ Updates the Twilio integration for specified tenant. The tenant must have access
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/twilio
 ```
 
@@ -1051,7 +1051,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/twilio \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -1080,7 +1080,7 @@ Updates the Sendgrid integration for specified tenant. The tenant must have acce
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/sendgrid
 ```
 
@@ -1093,7 +1093,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/sendgrid \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -1122,7 +1122,7 @@ Updates the Urban Airship integration for specified tenant. The tenant must have
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/urban-airship
 ```
 
@@ -1135,7 +1135,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/urban-airship \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -1165,7 +1165,7 @@ Updates the Datasift integration for specified tenant. The tenant must have acce
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/datasift
 ```
 
@@ -1178,7 +1178,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/datasift \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -1207,7 +1207,7 @@ Updates the Pusher integration for specified tenant. The tenant must have access
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/pusher
 ```
 
@@ -1220,7 +1220,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/pusher \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -1249,7 +1249,7 @@ Retrieves the details of an existing integration for a specified tenant. Your cu
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/{{id}}
 ```
 
@@ -1261,7 +1261,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/tenants/test123/integrations/salesforce \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -1290,7 +1290,7 @@ Returns a list of all integrations for a specified tenant. Your current authenti
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/integrations
 ```
 
@@ -1302,7 +1302,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/tenants/tenant1/integrations \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -1358,7 +1358,7 @@ Creates an API augment object for specified tenant. Your current authenticated u
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/augments
 ```
 
@@ -1376,7 +1376,7 @@ description | Description of the augment
 
 > Example Request
 
-```bash
+```
 curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/augment \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -1414,7 +1414,7 @@ Creates an File (CSV) augment object for specified tenant. Your current authenti
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/augments
 ```
 
@@ -1429,7 +1429,7 @@ description | Description of the augment
 
 > Example Request
 
-```bash
+```
 curl -X POST https://api.cxengage.net/1.0/tenants/tenant1/augment \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -1459,7 +1459,7 @@ Retrieves the details of an existing augment for a specified tenant. Your curren
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/augments/{{id}}
 ```
 
@@ -1471,7 +1471,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/tenants/tenant1/augments/AU2 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -1498,7 +1498,7 @@ Updates an existing augment of the specified tenant by settings the values of th
 
 > Definition
 
-```http
+```
 PUT https://api.cxengage.net/1.0/tenants/{{tid}}/augments/{{id}}
 ```
 
@@ -1514,7 +1514,7 @@ options | **API ONLY** JSON Object with mandatory fields `'url'` and `'attribute
 
 > Example Request
 
-```bash
+```
 curl -X PUT https://api.cxengage.net/1.0/tenants/tenant1/augments/AU1 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -H 'Content-Type: application/json; charset=utf-8' \
@@ -1550,7 +1550,7 @@ Permanantly deletes an augment. It cannot be undone. Immediately stops augmentin
 
 > Definition
 
-```http
+```
 DELETE /1.0/tenants/{{tid}}/augments/{{id}}
 ```
 
@@ -1562,7 +1562,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/augments/AU1 \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -1577,7 +1577,7 @@ Returns a list of all augments for a specified tenant. Your current authenticate
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/augments
 ```
 
@@ -1589,7 +1589,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/tenants/tenant1/augments \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -1632,7 +1632,7 @@ Retrieves an existing augment file for a specified tenant. Your current authenti
 
 > Definition
 
-```http
+```
 GET https://api.cxengage.net/1.0/tenants/{{tid}}/augments/{{id}}/file
 ```
 
@@ -1644,7 +1644,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -XGET https://api.cxengage.net/tenants/test123/augments/AU2/file \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
@@ -1668,7 +1668,7 @@ Upserts a CSV file for an existing File augment of the specified tenant. Your cu
 
 > Definition
 
-```http
+```
 POST https://api.cxengage.net/1.0/tenants/{{tid}}/augments/{{id}}/file
 ```
 
@@ -1681,7 +1681,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -iX POST https://api.cxengage.net/1.0/tenants/tenant1/augments/AU2/file \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
      -F file=@users.csv
@@ -1697,7 +1697,7 @@ Permanantly deletes an augment file. It cannot be undone. Immediately stops augm
 
 > Definition
 
-```http
+```
 DELETE /1.0/tenants/{{tid}}/augments/{{id}}/file
 ```
 
@@ -1709,7 +1709,7 @@ Name | Description
 
 > Example Request
 
-```bash
+```
 curl -IX DELETE https://api.cxengage.net/1.0/tenants/tenant1/augments/AU2/file \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
 ```
