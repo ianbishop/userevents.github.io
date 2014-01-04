@@ -101,7 +101,7 @@ Name | Type | Description
 }
 ```
 
-[More About Key Attribute >](http://docs.cxengage.com/docs/key-attribute/)
+[More on Key Attribute >](http://docs.cxengage.com/docs/key-attribute/)
 
 ### Retrieve the Key Attribute
 
@@ -203,7 +203,7 @@ Name | Type | Description
 }
 ```
 
-[More About Patterns >]()
+[More on Patterns >]()
 
 ### Create a Pattern
 
@@ -437,7 +437,7 @@ Name | Type | Description
 }
 ```
 
-[More About Templates >](http://docs.cxengage.com/docs/templates/)
+[More on Templates >](http://docs.cxengage.com/docs/templates/)
 
 ### Create a Template
 
@@ -664,7 +664,7 @@ Name | Type | Description
 }
 ```
 
-[More About Listeners >](http://docs.cxengage.com/docs/using-listeners/)
+[More on Listeners >](http://docs.cxengage.com/docs/using-listeners/)
 
 ### Create a Listener
 
@@ -960,19 +960,359 @@ Returns a JSON object with attributes `status` and `message` when specified tena
 
 ## Integrations
 
-**Retrieve integrations from tenant**
+Integrations are a convenient place to manage all of your third-party integrations credentials in one place. In order to be able to communicate with your services, we often require authentication keys. These integrations will apply for both the notifications and integrations, if that third-party system has both available.
 
-Request
+#### Attributes
 
-```http
-GET /1.0/tenants/{{tenant-name}}/integrations HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
+Name | Type | Description
+--- | --- | ---
+**id** | **string** | Unique identifier
+**{{field}}** | **string** | Fields specific to each integration type
+
+> Example Object
+
+```json
+{
+  "id": "datasift",
+  "api-key": "xxxxx",
+  "username": "myuser"
+}
 ```
 
-Response
+[More About Integrations >](http://docs.cxengage.com/docs/integrations/)
+
+### Setup Salesforce
+
+Updates the Salesforce integration for specified tenant. The tenant must have access to the Salesforce integration. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/salesforce
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**secret-token** | Salesforce Secret Token
+**username** | Salesforce Username
+**password** | Salesforce Password
+**consumer-key** | Salesforce Consumer Key
+**consumer-secret** | Salesforce Consumer Secret
+
+> Example Request
+
+```bash
+curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/salesforce \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"id": "salesforce", "type": "salesforce", "consumer-key": "consumerkey",
+          "consumer-secret":"consumersecret","username":"email@userevents.com",
+          "secret-token":"secret-token","password":"password"}'
+```
+
+#### Returns
+
+Returns the integration object if the update succeeded, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "salesforce",
+  "type": "salesforce",
+  "consumer-key": "consumerkey",
+  "consumer-secret": "consumersecret",
+  "username": "email@userevents.com",
+  "secret-token": "secret-token",
+  "password": "password"
+}
+```
+
+[More on Salesforce >](https://cxengage.zendesk.com/hc/en-us/articles/200788406-How-do-I-set-up-my-Salesforce-integration-)
+
+### Setup Twilio
+
+Updates the Twilio integration for specified tenant. The tenant must have access to the Twilio integration. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/twilio
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**account** | Twilio Account SID
+**password** | Twilio Auth Token
+
+> Example Request
+
+```bash
+curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/twilio \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"id": "twilio", "type": "twilio", "account": "SID", "password":"Token"}'
+```
+
+#### Returns
+
+Returns the integration object if the update succeeded, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "twilio",
+  "account": "SID",
+  "password": "Token"
+}
+```
+
+[More on Twilio >](https://cxengage.zendesk.com/hc/en-us/articles/200788416-How-do-I-set-up-my-Twilio-integration-)
+
+### Setup Sendgrid
+
+Updates the Sendgrid integration for specified tenant. The tenant must have access to the Sendgrid integration. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/sendgrid
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**account** | Sendgrid Account
+**password** | Sendgrid Password
+
+> Example Request
+
+```bash
+curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/sendgrid \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"id": "sendgrid", "type": "sendgrid", "account": "username", "password":"password"}'
+```
+
+#### Returns
+
+Returns the integration object if the update succeeded, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "sendgrid",
+  "account": "username",
+  "password": "password"
+}
+```
+
+[More on Sendgrid >](https://cxengage.zendesk.com/hc/en-us/articles/200788436-How-do-I-set-up-my-SendGrid-integration-)
+
+### Setup Urban Airship
+
+Updates the Urban Airship integration for specified tenant. The tenant must have access to the Urban Airship integration. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/urban-airship
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**username** | Urban Airship App Key
+**password** | Urban Airship App Master Key
+
+> Example Request
+
+```bash
+curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/urban-airship \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"id": "urban-airship", "type": "urban-airship",
+          "username": "app key", "password":"app master key"}'
+```
+
+#### Returns
+
+Returns the integration object if the update succeeded, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "urban-airship",
+  "username": "app key",
+  "password": "app master key"
+}
+```
+
+[More on Urban Airship >]()
+
+### Setup Datasift
+
+Updates the Datasift integration for specified tenant. The tenant must have access to the Datasift integration. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/datasift
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**username** | Datasift Username
+**api-key** | Datasift API Key
+
+> Example Request
+
+```bash
+curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/datasift \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"id": "datasift", "type": "datasift", "api-key": "api-key", "username":"username"}'
+```
+
+#### Returns
+
+Returns the integration object if the update succeeded, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "datasift",
+  "api-key": "api-key",
+  "username": "username"
+}
+```
+
+[More on Datasift >](https://cxengage.zendesk.com/hc/en-us/articles/200730157-How-do-I-set-up-my-DataSift-integration-)
+
+### Setup Pusher
+
+Updates the Pusher integration for specified tenant. The tenant must have access to the Pusher integration. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+POST https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/pusher
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**key** | Pusher Consumer Key
+**secret** | Pusher Consumer Secret
+
+> Example Request
+
+```bash
+curl -XPOST https://api.cxengage.net/1.0/tenants/tenant1/integrations/pusher \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"id": "pusher", "type": "pusher", "key": "key", "secret":"password"}'
+```
+
+#### Returns
+
+Returns the integration object if the update succeeded, returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "pusher",
+  "key": "key",
+  "secret": "secret"
+}
+```
+
+[More on Pusher >](https://cxengage.zendesk.com/hc/en-us/articles/200678188-How-do-I-set-up-my-Pusher-integration-)
+
+#### Retrieve a Integration
+
+Retrieves the details of an existing integration for a specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/integrations/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Integration ID (salesforce, datasift, etc.)
+
+> Example Request
+
+```bash
+curl -XGET https://api.cxengage.net/tenants/test123/integrations/salesforce \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns a integration object if specified tenant and integration exist. Returns [an error]() otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "salesforce",
+  "type": "salesforce",
+  "consumer-key": "consumerkey",
+  "consumer-secret": "consumersecret",
+  "username": "dev@userevents.com",
+  "secret-token": "secret-token",
+  "password": "password"
+}
+```
+
+### List All Integrations
+
+Returns a list of all integrations for a specified tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```http
+GET https://api.cxengage.net/1.0/tenants/{{tid}}/integrations
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**tid** | Tenant ID
+
+> Example Request
+
+```bash
+curl -XGET https://api.cxengage.net/tenants/tenant1/integrations \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an array containing all integrations if the specified tenant exists. Returns [an
+error]() otherwise.
+
+> Example Response
 
 ```json
 [
@@ -980,408 +1320,11 @@ Response
     "id": "datasift",
     "api-key": "keyvalue",
     "username": "usernamevalue"
-}
-
-    {
-        "id": "echo"
-    }
+  },
+  {
+    "id": "echo"
+  }
 ]
-```
-
-curl Example
-
-```bash
-curl -XGET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/integrations \
-     -H 'Authorization: Bearer {{token}}'
-```
-
-**Create specific integrations**
-
-__Salesforce Example__
-
-Salesforce Parameters
-
-secret-token
-```
-Salesforce secret token
-```
-username
-```
-Salesforce username
-```
-password
-```
-Salesforce password
-```
-consumer-key
-```
-Salesforce Consumer key/secret
-```
-consumer-secret
-```
-Salesforce Consumer key/secret
-```
-
-Request
-
-```http
-POST /1.0/tenants/{{tenant-name}}/integrations/salesforce HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-```
-
-```json
-{
-    "id": "salesforce",
-    "type": "salesforce",
-    "consumer-key": "consumerkey",
-    "consumer-secret": "consumersecret",
-    "username": "dev@userevents.com",
-    "secret-token": "secret-token",
-    "password": "password"
-}
-```
-
-Response
-
-```json
-
-{
-    "id": "salesforce",
-    "type": "salesforce",
-    "consumer-key": "consumerkey",
-    "consumer-secret": "consumersecret",
-    "username": "email@userevents.com",
-    "secret-token": "secret-token",
-    "password": "password",
-
-}
-```
-
-curl Example
-
-```bash
-curl -XPOST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/integrations/salesforce \
-     -H 'Authorization: Bearer {{token}}' \
--H 'Content-Type: application/json; charset=utf-8' \
--d '{"id": "salesforce", "type": "salesforce", "consumer-key": "consumerkey",
-     "consumer-secret":"consumersecret","username":"email@userevents.com"
-     "secret-token":"secret-token","password":"password"}'
-
-```
-
-__Twilio Example__
-
-Request
-
-```http
-POST /1.0/tenants/{{tenant-name}}/integrations/twilio HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-```
-
-Twilio Parameters
-
-account
-```
-Twilio SID
-```
-password
-```
-Twilio Token
-```
-
-```json
-{
-    "id": "twilio",
-    "account": "SID",
-    "password": "Token"
-}
-
-```
-
-Response
-
-```json
-
-{
-    "id": "twilio",
-    "account": "SID",
-    "password": "Token"
-}
-
-```
-
-curl Example
-
-```bash
-curl -XPOST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/integrations/twilio \
-     -H 'Authorization: Bearer {{token}}' \
--H 'Content-Type: application/json; charset=utf-8' \
--d '{"id": "twilio", "type": "twilio", "account": "SID", "password":"Token"}'
-```
-
-__Sendgrid Example__
-
-Sendgrid Parameters
-
-account
-```
-SendGrid account
-```
-password
-```
-Sendgrid password
-```
-
-Request
-
-```http
-POST /1.0/tenants/{{tenant-name}}/integrations/sendgrid HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-```
-
-```json
-{
-    "id": "sendgrid",
-    "account": "username",
-    "password": "password"
-}
-
-```
-
-Response
-
-```json
-
-{
-    "id": "sendgrid",
-    "account": "username",
-    "password": "password"
-}
-
-```
-
-curl Example
-
-```bash
-curl -XPOST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/integrations/sendgrid \
-     -H 'Authorization: Bearer {{token}}' \
--H 'Content-Type: application/json; charset=utf-8' \
--d '{"id": "sendgrid", "type": "sendgrid", "account": "username", "password":"password"}'
-
-```
-
-__Urban Airship Example__
-
-Urban Airship Parameters
-
-App Key
-```
-Urban Airship App Key
-```
-App Master Key
-```
-Urban Airship App Master Key
-```
-
-Request
-
-```http
-POST /1.0/tenants/{{tenant-name}}/integrations/urban-airship HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-```
-
-```json
-{
-    "id": "urban-airship",
-    "username": "app key",
-    "password": "app master key"
-}
-
-```
-
-Response
-
-```json
-
-{
-    "id": "urban-airship",
-    "username": "app key",
-    "password": "app master key"
-}
-
-```
-
-curl Example
-
-```bash
-curl -XPOST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/integrations/urban-airship \
-     -H 'Authorization: Bearer {{token}}' \
--H 'Content-Type: application/json; charset=utf-8' \
--d '{"id": "urban-airship", "type": "urban-airship", "username": "app key", "password":"app master key"}'
-
-```
-
-__Datasift Example__
-
-Datasift Parameters
-
-username
-```
-DataSift username
-```
-api-key
-
-```
-DataSift api key
-```
-
-Request
-
-```http
-POST /1.0/tenants/{{tenant-name}}/datasift HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-```
-
-```json
-{
-    "id": "datasift",
-    "api-key": "api-key",
-    "username": "username"
-}
-
-```
-
-Response
-
-```json
-
-{
-    "id": "datasift",
-    "api-key": "api-key",
-    "username": "username"
-}
-
-```
-
-curl Example
-
-```bash
-curl -XPOST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/integrations/datasift \
-     -H 'Authorization: Bearer {{token}}' \
--H 'Content-Type: application/json; charset=utf-8' \
--d '{"id": "datasift", "type": "datasift", "api-key": "api-key", "username":"username"}'
-
-```
-
-__Pusher Example__
-
-Pusher Parameters
-key
-```
-Pusher key
-```
-secret
-```
-Pusher secret
-```
-
-Request
-
-```http
-POST /1.0/tenants/{{tenant-name}}/pusher HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json; charset=utf-8
-Authorization: Bearer {{token}}
-```
-
-```json
-{
-    "id": "pusher",
-    "key": "key",
-    "secret": "secret"
-}
-
-```
-
-Response
-
-```json
-
-{
-    "id": "pusher",
-    "key": "key",
-    "secret": "secret"
-}
-
-```
-
-curl Example
-
-```bash
-curl -XPOST https://api.cxengage.net/1.0/tenants/{{tenant-name}}/integrations/pusher \
-     -H 'Authorization: Bearer {{token}}' \
--H 'Content-Type: application/json; charset=utf-8' \
--d '{"id": "pusher", "type": "pusher", "key": "key", "secret":"password"}'
-
-```
-
-**Retrieves specific integration from the given tenant**
-
-Request
-
-```http
-GET /1.0/tenants/{{tenant-name}}/integrations/{{integration}} HTTP/1.1
-Host: api.cxengage.net
-Content-Type: application/json
-Authorization: Bearer {{token}}
-Cache-Control: no-cache
-```
-
-Response
-
-```json
-{
-    "id": "salesforce",
-    "type": "salesforce",
-    "consumer-key": "consumerkey",
-    "consumer-secret": "consumersecret",
-    "username": "dev@userevents.com",
-    "secret-token": "secret-token",
-    "password": "password"
-}
-```
-
-curl Example
-
-```bash
-curl -XGET https://api.cxengage.net/1.0/tenants/{{tenant-name}}/integrations/twilio \
-     -H 'Authorization: Bearer {{token}}'
-```
-
-__Generic Streaming Endpoint__
-
-Request a stream ticket
-
-```
-POST /1.0/tenants/<tenantid>/ticket HTTP/1.1
-Host: stream.cxengage.net
-Authorization: Bearer <token>
-```
-
-Open websocket connection with ticket
-
-```
-wss://stream.cxengage.net/1.0/stream/<ticket>
 ```
 
 ## Augments
