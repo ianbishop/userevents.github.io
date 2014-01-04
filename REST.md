@@ -47,7 +47,7 @@ It is often helpful to test your changes by sending in custom events.
 
 ## Tenants
 
-### Retrieving a Tenant
+### Retrieve a Tenant
 
 Retrieve the details of a tenant which your authenticated user has access to.
 
@@ -103,7 +103,7 @@ Name | Type | Description
 
 [More About Key Attribute >](http://docs.cxengage.com/docs/key-attribute/)
 
-### Retrieving the Key Attribute
+### Retrieve the Key Attribute
 
 Retrieve the key attribute of the specified tenant. Your current authenticated user must have access to the specified tenant.
 
@@ -253,7 +253,7 @@ Returns a pattern object if successful, returns [an error]() otherwise. If `stat
 ```
 
 
-#### Retrieve a Pattern
+### Retrieve a Pattern
 
 Retrieves the details of an existing pattern for a specified tenant. Your current authenticated user must have access to the specified tenant.
 
@@ -480,7 +480,7 @@ Returns a template object if successful, returns [an error]() otherwise.
 }
 ```
 
-#### Retrieve a Template
+### Retrieve a Template
 
 Retrieves the details of an existing template for a specified tenant. Your current authenticated user must have access to the specified tenant.
 
@@ -725,7 +725,7 @@ Returns a listener object if successful, returns [an error]() otherwise.
 }
 ```
 
-#### Retrieve a Listener
+### Retrieve a Listener
 
 Retrieves the details of an existing listener for a specified tenant. Your current authenticated user must have access to the specified tenant.
 
