@@ -7,7 +7,7 @@
 CxEngage uses OAuth 2.0 to provide authentication for all API resources
 including the REST API and event submission.
 
-[More on Authenticating>](http://docs.cxengage.com/docs/authentication/)
+[More on Authenticating >](http://docs.cxengage.com/docs/authentication/)
 
 ## Errors
 
@@ -38,7 +38,7 @@ Version | Endpoint
 
 It is often helpful to test your changes by sending in custom events.
 
-[More About Custom Events>](http://docs.cxengage.com/docs/custom-events/)
+[More on Custom Events >](http://docs.cxengage.com/docs/custom-events/)
 
 # Methods
 
