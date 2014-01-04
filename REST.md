@@ -128,7 +128,7 @@ curl -X GET https://api.cxengage.net/1.0/tenants/tenant1/key-attribute \
 #### Returns
 
 Returns a JSON object containing the key attribute of provided tenant if valid
-tenant is provided. Returns [an error]() otherwise.
+tenant is provided. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -203,7 +203,7 @@ Name | Type | Description
 }
 ```
 
-[More on Patterns >]()
+[More on Patterns >](http://docs.cxengage.com/docs/patterns/)
 
 ### Create a Pattern
 
@@ -641,7 +641,7 @@ Name | Type | Description
 **name** | **string** | Human-friendly name of the listener
 **description** | **string** | A people friendly description of what this listener should do
 **status** | **boolean** | Whether or not it is currently listening for events
-**type** | **enum** | The type of integration ('salesforce', 'datasift' or 'pusher')
+**type** | **enum** | The type of integration (`'salesforce'`, `'datasift'` or `'pusher'`)
 **options** | **object** | An object containing all type specific details
 **mapping** | **object** | An object re-mapping fields in the event to fields in the third-party event
 
@@ -683,7 +683,7 @@ Name | Description
 **name** | Human-friendly name of the listener
 description | Description of the listener
 status | Boolean for enabled/disabled state
-**type** | The type of integration ('salesforce', 'datasift' or 'pusher')
+**type** | The type of integration (`'salesforce'`, `'datasift'` or `'pusher'`)
 **options** | An object containing all type specific details
 **mapping** | An object re-mapping fields in the event to fields in the third-party event
 
