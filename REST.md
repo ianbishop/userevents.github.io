@@ -1,6 +1,9 @@
 # API
 
-## Introduction
+The CxEngage REST API enables you to manage your user and its tenants.
+
+If you are building an application which will manage patterns, templates or
+other core CxEngage objects then this API is built for you.
 
 ## Authentication
 
@@ -84,9 +87,7 @@ Returns a tenant object if a valid tenant is provided, returns [an error]() othe
 
 The key attribute is an attribute of your events to segment on. Often, it will be something like a unique customer identifier such as a customer number or a username.
 
-[More About Key Attribute >](http://docs.cxengage.com/docs/key-attribute/)
-
-#### Arguments
+#### Attributes
 
 Name | Type | Description
 --- | --- | ---
@@ -99,6 +100,8 @@ Name | Type | Description
   "key": "username"
 }
 ```
+
+[More About Key Attribute >](http://docs.cxengage.com/docs/key-attribute/)
 
 ### Retrieving the Key Attribute
 
@@ -177,10 +180,6 @@ Returns a JSON object containing the key attribute if update succeeded. Returns
 
 A pattern describes a series of events that make up a customer's journey as they interact with your company across channels. As a user of CxEngage, you write patterns that match journeys which are important to your organization.
 
-[More About Patterns >]()
-
-### Pattern Object
-
 #### Attributes
 
 Name | Type | Description
@@ -203,6 +202,8 @@ Name | Type | Description
   "then": "(seq (send echo message {:message \"Hello world\"}))"
 }
 ```
+
+[More About Patterns >]()
 
 ### Create a Pattern
 
@@ -338,7 +339,7 @@ Returns the pattern object if the update succeeded, returns [an error]() otherwi
 }
 ```
 
-## List All Patterns
+### List All Patterns
 
 Returns a list of all patterns for a specified tenant. Your current authenticated user must have access to the specified tenant.
 
