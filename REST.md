@@ -120,6 +120,7 @@ Name | Description
 **tid** | Tenant ID
 
 > Example Request
+
 ```
 curl -X GET https://api.cxengage.net/1.0/tenants/tenant1/key-attribute \
      -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
@@ -134,7 +135,7 @@ tenant is provided. Returns [an error](#errors) otherwise.
 
 ```json
 {
-    "key": "id"
+  "key": "id"
 }
 ```
 
