@@ -1,27 +1,46 @@
-# CxEngage REST API
+# API
+
+## Introduction
 
 ## Authentication
 
-How to authenticate with CxEngage API - [http://docs.cxengage.com/docs/authentication](http://docs.cxengage.com/docs/authentication/)
+CxEngage uses OAuth 2.0 to provide authentication for all API resources
+including the REST API and event submission.
 
-## Sending in Events
+[More on Authenticating>](http://docs.cxengage.com/docs/authentication/)
 
-To send in custom events - [http://docs.cxengage.com/docs/custom-events/](http://docs.cxengage.com/docs/custom-events/)
-
-## CxEngage API 1.0
-url - https://api.cxengage.net/
-version - 1.0
-
-## Error Codes
+## Errors
 
 CxEngage REST API uses standard HTTP response codes for errors.
 
 Code | Description
 -- | --
-**400** | Required fields are missing
-**401** | Incorrect credentials
-**403** | User does not have access to the provided tenant
-**404** | The provided tenant or item does not exist
+**200 OK** | Everything worked as expected
+**201 Created** | Your item was successfully created
+**204 No Content** | Your item was successfully deleted
+**400 Bad Request** | Missing a required parameters
+**401 Unauthorized** | Incorrect credentials
+**403 Forbidden** | User does not have access to the requested tenant
+**404 Not Found** | The requested tenant or item does not exist
+**500 Server Error** | Something bad happened on our end, please contact support
+
+All responses are accommodated with a human-readable `error` field in a JSON object to ease debugging.
+
+## Versioning
+
+We version our API to protect you from backwards-incompatible changes.
+
+Version | Endpoint
+-- | --
+**1.0** | **https://api.cxengage.net/1.0/**
+
+## Sending in Events
+
+It is often helpful to test your changes by sending in custom events.
+
+[More About Custom Events>](http://docs.cxengage.com/docs/custom-events/)
+
+# Methods
 
 ## Tenants
 
