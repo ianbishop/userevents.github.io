@@ -55,7 +55,7 @@ Name | Type | Description
 **auth** | **string** | URL of the Authentication Service
 **api** | **string** | URL of the CxEngage REST API
 **events** | **string** | URL of the REST Receiver
-**zk** | **string** | URL of Zookeeper Cluster (*comma seperated*)
+**zk** | **string** | URL of Zookeeper Cluster *(comma separated)*
 **redis** | **string** | URL of Redis
 **stats** | **object** | JSON Object with stats configuration
 
@@ -95,7 +95,7 @@ POST /1.0/instances
 Name | Description
 -- | --
 **name** | Human-friendly name of the instance
-**zk** | URL of Zookeeper Cluster (*comma seperated*)
+**zk** | URL of Zookeeper Cluster *(comma separated)*
 **redis** | URL of Redis
 auth | URL of the Authentication Service
 api | URL of the CxEngage REST API
@@ -330,6 +330,7 @@ Name | Type | Description
 --- | --- | ---
 **id** | **string** | Unique identifier
 **name** | **string** | Human-friendly name of the pattern
+**rate-limit** | **number** | Rate Limit of Events per second
 
 > Example Object
 
@@ -357,6 +358,7 @@ Name | Description
 -- | --
 **id** | Unique identifier
 **name** | Human-friendly name of the instance
+rate-limit | Rate Limit of Events per second
 
 > Example Request
 
@@ -381,19 +383,277 @@ Returns a tenant object if successful, returns [an error](#errors) otherwise.
 
 ### Retrieve a Tenant
 
+Retrieves the details of an existing tenant.
+
+> Definition
+
+```
+GET /1.0/tenants/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Tenant ID
+
+> Example Request
+
+```
+curl -XGET /1.0/tenant/tenant1
+```
+
+#### Returns
+
+Returns a tenant object if specified tenant exists. Returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "tenant1",
+  "name": "My Tenant"
+}
+```
+
 ### Update a Tenant
+
+Updates an existing tenant by setting the values of the provided parameters passed. Any parameters not provided will be unchanged.
+
+> Definition
+
+```
+PUT /1.0/tenants/tenant1
+```
+
+#### Arguments
+
+Name | Description
+-- | --
+name | Human-friendly name of the instance
+rate-limit | Rate Limit of Events per second
+
+> Example Request
+
+```
+curl -X PUT /1.0/tenants/tenant1 \
+     -H 'Content-Type: application/json' \
+     -d '{"name": "Test Tenant"}'
+```
+
+#### Returns
+
+Returns the tenant object if the update succeeded, returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "tenant1",
+  "name": "Test Tenant"
+}
+```
 
 ### Delete a Tenant
 
+Permanently deletes a tenant. It cannot be undone. Immediately stops processing events for this tenant. Your current authenticated user must have access to the specified tenant.
+
+> Definition
+
+```
+DELETE /1.0/tenants/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Tenant ID
+
+> Example Request
+
+```
+curl -IX DELETE /1.0/tenants/tenant1
+```
+
+#### Returns
+
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
+
 ### List All Tenants
+
+Returns a list of all tenants.
+
+> Definition
+
+```
+GET /1.0/tenants
+```
+
+#### Arguments
+
+None.
+
+> Example Request
+
+```
+curl -XGET /1.0/tenants
+```
+
+#### Returns
+
+Returns an array containing all tenants.
+
+```json
+[
+  {
+    "id": "tenant1",
+    "name": "Test Tenant",
+  },
+  {
+    "id": "system",
+    "name": "Main Tenant",
+  }
+]
+```
 
 ### List Users of a Tenant
 
+Returns a list of all users for a specified tenant.
+
+> Definition
+
+```
+GET /1.0/tenants/{{id}}/users
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Tenant ID
+
+> Example Request
+
+```
+curl -XGET /1.0/tenants/tenant1/users
+```
+
+#### Returns
+
+Returns an array containing all users if the specified tenant exists.
+Returns [an error](#errors) otherwise.
+
+```json
+[
+  "ian@userevents.com",
+  "admin@userevents.com"
+]
+```
+
 ### Retrieve Instance of a Tenant
+
+Retrieves the details of the current instance of an existing tenant.
+
+> Definition
+
+```
+GET /1.0/tenants/{{id}}/instance
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Tenant ID
+
+> Example Request
+
+```
+curl -XGET /1.0/tenant/tenant1/instance
+```
+
+#### Returns
+
+Retrieves the instance object if specified tenant exists and has a current
+instance. Returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "IN2",
+  "name": "My Instance",
+  "zk": "localhost:2181",
+  "redis": "redis://localhost:6379"
+}
+```
 
 ### Add Tenant to Instance
 
+Adds a tenant to an instance. This will upsert any existing instance. Any
+existing state related to this tenant on the original instance will be lost.
+
+> Definition
+
+```
+POST /1.0/tenants/{{tid}}/instance
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Instance ID
+
+> Example Request
+
+```
+curl -X POST /1.0/tenants/tenant1/instance \
+     -H 'Content-Type: application/json' \
+     -d '{"id": "IN2"}'
+```
+
+#### Returns
+
+Returns a JSON Object with keys `instance` and `tenant` if successful, returns
+[an error](#error) otherwise.
+
+> Example Response
+
+```json
+{
+  "tenant": "tenant1",
+  "instance": "IN2"
+}
+```
+
 ### Remove Tenant from Instance
+
+Removes a tenant from an instance. This will remove any existing state on the
+instance for this tenant.
+
+> Definition
+
+```
+DELETE /1.0/tenants/{{id}}/instance
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Tenant ID
+
+> Example Request
+
+```
+curl -IX DELETE /1.0/tenants/tenant1/instance
+```
+
+#### Returns
+
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
 
 ## Users
 
