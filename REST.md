@@ -47,6 +47,28 @@ It is often helpful to test your changes by sending in custom events.
 
 ## Tenants
 
+A tenant describes a virtual partition of a CxEngage instance. A tenant is
+provided for each client-organization. As a user of CxEngage, you may have
+access to multiple tenants in the system across many instances.
+
+#### Attributes
+
+Name | Type | Description
+--- | --- | ---
+**id** | **string** | Unique identifier
+**name** | **string** | Human-friendly name of the pattern
+
+> Example Object
+
+```json
+{
+  "id": "tenant1",
+  "name": "My Tenant"
+}
+```
+
+[More on Tenants >](http://docs.cxengage.com/docs/platform/tenants/)
+
 ### Retrieve a Tenant
 
 Retrieve the details of a tenant which your authenticated user has access to.
@@ -279,8 +301,7 @@ curl -XGET https://api.cxengage.net/tenants/test123/patterns/PT2 \
 
 #### Returns
 
-Returns a pattern object if specified tenant and pattern exist. Returns [an
-error]() otherwise.
+Returns a pattern object if specified tenant and pattern exist. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -297,7 +318,7 @@ error]() otherwise.
 
 ### Update a Pattern
 
-Updates an existing pattern of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
+Updates an existing pattern of the specified tenant by setting the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
 
 > Definition
 
@@ -347,7 +368,7 @@ Permanently deletes a pattern. It cannot be undone. Immediately stops matching e
 > Definition
 
 ```
-DELETE /1.0/tenants/{{tid}}/patterns/{{id}}
+DELETE https://api.cxengage.net/1.0/tenants/{{tid}}/patterns/{{id}}
 ```
 
 #### Arguments
@@ -393,8 +414,7 @@ curl -XGET https://api.cxengage.net/tenants/tenant1/patterns \
 
 #### Returns
 
-Returns an array containing all patterns if the specified tenant exists. Returns [an
-error]() otherwise.
+Returns an array containing all patterns if the specified tenant exists. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -522,7 +542,7 @@ error]() otherwise.
 
 ### Update a Template
 
-Updates an existing template of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
+Updates an existing template of the specified tenant by setting the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
 
 > Definition
 
@@ -778,7 +798,7 @@ Returns a listener object if specified tenant and listener exist. Returns [an er
 
 ### Update a Listener
 
-Updates an existing listener of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
+Updates an existing listener of the specified tenant by setting the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
 
 > Definition
 
@@ -1495,7 +1515,7 @@ Returns a augment object if specified tenant and augment exist. Returns [an erro
 
 ### Update an Augment
 
-Updates an existing augment of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
+Updates an existing augment of the specified tenant by setting the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
 
 > Definition
 
