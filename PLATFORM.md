@@ -693,6 +693,8 @@ related listeners and possibly break patterns of that tenant.
 DELETE /1.0/tenants/{{tid}}/integrations/{{id}}
 ```
 
+#### Arguments
+
 Name | Description
 --- | ---
 **id** | Integration ID
