@@ -177,8 +177,8 @@ PUT /1.0/instances/IN2
 
 Name | Description
 -- | --
-name Human-friendly name of the instance
-zk | URL of Zookeeper Cluster (*comma seperated*)
+name | Human-friendly name of the instance
+zk | URL of Zookeeper Cluster *(comma separated)*
 redis | URL of Redis
 auth | URL of the Authentication Service
 api | URL of the CxEngage REST API

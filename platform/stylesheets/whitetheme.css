@@ -839,7 +839,7 @@ code .keyword {
   font-weight: bold;
 }
 code .comment {
-  color: #adadcc;
+  color: #3ac;
 }
 .large-brief .content > h1:first-child + p,
 .content > p.brief {
