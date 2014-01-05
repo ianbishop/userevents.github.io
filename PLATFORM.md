@@ -655,6 +655,93 @@ curl -IX DELETE /1.0/tenants/tenant1/instance
 
 Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
 
+### Add Integration to Tenant
+
+Gives a tenant access to the specified integration. This enables the tenant to
+use a related endpoint or listener of this integration.
+
+> Definition
+
+```
+POST /1.0/tenants/{{tid}}/integrations/{{id}}
+```
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Integration ID
+
+> Example Request
+
+```
+curl -X POST /1.0/tenants/tenant1/integrations/datasift
+```
+
+#### Returns
+
+Returns an **HTTP 201** if tenant and integration exist. Otherwise, returns [an
+error](#errors).
+
+### Remove Integration from Tenant
+
+Removes access of a tenant to the specified integration. This will disable any
+related listeners and possibly break patterns of that tenant.
+
+> Definition
+
+```
+DELETE /1.0/tenants/{{tid}}/integrations/{{id}}
+```
+
+Name | Description
+--- | ---
+**id** | Integration ID
+
+> Example Request
+
+```
+curl -IX DELETE /1.0/tenants/tenant1/integrations/datasift
+```
+
+#### Returns
+
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
+
+### List All Integrations of a Tenant
+
+Returns a list of all active integrations for a specified tenant.
+
+> Definition
+
+```
+GET /1.0/tenants/{{id}}/integrations
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Tenant ID
+
+> Example Request
+
+```
+curl -XGET /1.0/tenants/tenant1/integrations
+```
+
+#### Returns
+
+Returns an array containing all active integrations if the specified tenant exists.
+Returns [an error](#errors) otherwise.
+
+```json
+[
+  "salesforce",
+  "datasift",
+  "echo"
+]
+```
+
 ## Users
 
 ### Create a User
