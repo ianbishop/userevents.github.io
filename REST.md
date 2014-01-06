@@ -59,6 +59,20 @@ Name | Type | Description
 **ttl** | **number** | Remaining session time *(seconds)*
 **tenants** | **array** | List of accessible tenants
 
+> Example Object
+
+```json
+{
+    "ttl": 2592000000,
+    "client-id": "Dk5w6yi5mOfN+HRcwDmxEN...",
+    "tenants": [
+        "userevents"
+    ],
+    "name": "Ian Bishop",
+    "email": "ian.bishop@userevents.com"
+}
+```
+
 [More on Users >](http://docs.cxengage.com/docs/platform/users/)
 
 ### Retrieve Account
@@ -685,8 +699,7 @@ curl -XGET https://api.cxengage.net/tenants/test123/templates/TM2 \
 
 #### Returns
 
-Returns a template object if specified tenant and template exist. Returns [an
-error]() otherwise.
+Returns a template object if specified tenant and template exist. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -794,7 +807,7 @@ curl -XGET https://api.cxengage.net/tenants/tenant1/templates \
 #### Returns
 
 Returns an array containing all templates if the specified tenant exists. Returns [an
-error]() otherwise.
+error](#errors) otherwise.
 
 > Example Response
 
@@ -1061,7 +1074,7 @@ curl -XGET https://api.cxengage.net/tenants/tenant1/listeners \
 #### Returns
 
 Returns an array containing all listeners if the specified tenant exists. Returns [an
-error]() otherwise.
+error](#errors) otherwise.
 
 > Example Response
 
@@ -1490,7 +1503,7 @@ curl -XGET https://api.cxengage.net/tenants/tenant1/integrations \
 #### Returns
 
 Returns an array containing all integrations if the specified tenant exists. Returns [an
-error]() otherwise.
+error](#errors) otherwise.
 
 > Example Response
 

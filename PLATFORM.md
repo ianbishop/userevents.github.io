@@ -748,7 +748,29 @@ Returns [an error](#errors) otherwise.
 
 A user in CxEngage may be associated with many tenants. A user may submit events or modify any tenant they have been access to.
 
+#### Attributes
 
+Name | Type | Description
+--- | --- | ---
+**email** | **string** | Email of the user
+**name** | **string** | Full name of the user
+**client-id** | **string** | Client ID Credential
+**tenants** | **array** | List of accessible tenants
+
+> Example Object
+
+```json
+{
+    "email": "ian.bishop@userevents.com",
+    "name": "Ian Bishop",
+    "client-id": "Dk5w6yi5mOfN+HRcwDmxEN...",
+    "tenants": [
+        "userevents"
+    ]
+}
+```
+
+[More on Users >](http://docs.cxengage.com/docs/platform/users/)
 
 ### Create a User
 
