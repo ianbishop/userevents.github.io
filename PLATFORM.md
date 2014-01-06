@@ -746,7 +746,13 @@ Returns [an error](#errors) otherwise.
 
 ## Users
 
+A user in CxEngage may be associated with many tenants. A user may submit events or modify any tenant they have been access to.
+
+
+
 ### Create a User
+
+
 
 ### Retrieve a User
 

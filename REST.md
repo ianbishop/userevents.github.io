@@ -45,6 +45,165 @@ It is often helpful to test your changes by sending in custom events.
 
 # Methods
 
+## Account
+
+A user in CxEngage may be associated with many tenants. A user may submit events or modify any tenant they have been access to. These methods all pertain to your **current** user.
+
+#### Attributes
+
+Name | Type | Description
+--- | --- | ---
+**email** | **string** | Email of the account
+**name** | **string** | Name of the account owner
+**client-id** | **string** | Client ID Credential
+**ttl** | **number** | Remaining session time *(seconds)*
+**tenants** | **array** | List of accessible tenants
+
+[More on Users >](http://docs.cxengage.com/docs/platform/users/)
+
+### Retrieve Account
+
+Retrieve the details of the current authenticated user.
+
+> Definition
+
+```
+GET https://api.cxengage.net/1.0/account
+```
+
+#### Arguments
+
+None.
+
+> Example Request
+
+```
+curl -X GET https://api.cxengage.net/1.0/account \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns the user object if valid credentials are provided. Otherwise, returns
+[an error](#errors).
+
+> Example Response
+
+```json
+{
+    "ttl": 2592000000,
+    "client-id": "Dk5w6yi5mOfN+HRcwDmxEN...",
+    "tenants": [
+        "userevents"
+    ],
+    "name": "Ian Bishop",
+    "email": "ian.bishop@userevents.com"
+}
+```
+
+### Change Password
+
+Change the password of the current authenticated user.
+
+> Definition
+
+```
+POST https://api.cxengage.net/1.0/account/change_password
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**password** | New Password
+
+> Example Request
+
+```
+curl -X POST https://api.cxengage.net/1.0/account/change_password \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"password" : "butter"}'
+```
+
+#### Returns
+
+Returns an **HTTP 200** if successful. Otherwise, returns [an error](#errors).
+
+### Retrieve Credentials
+
+Retrieve the credentials of the current authenticated user.
+
+> Definition
+
+```
+GET https://api.cxengage.net/1.0/account/auth
+```
+
+#### Arguments
+
+None.
+
+> Example Request
+
+```
+curl -X GET https://api.cxengage.net/1.0/account/auth \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns a JSON Object with keys `client-id` and `client-secret` if successful.
+Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+{
+  "client-id": "yyyy",
+  "client-secret": "xxxx"
+}
+```
+
+### Retrieve Accessible Tenants
+
+Retrieves the list of tenant accessible by the current authenticated user.
+
+> Definition
+
+```
+GET https://api.cxengage.net/1.0/account/tenants
+```
+
+#### Arguments
+
+None.
+
+> Example Request
+
+```
+curl -X GET https://api.cxengage.net/1.0/account/tenants \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an array of all accessible tenants if successful. Otherwise, returns [an
+error](#errors).
+
+> Example Response
+
+```json
+{
+  "tenants": [
+    {
+      "id": "userevents",
+      "name": "UserEvents"
+    }
+  ]
+}
+```
+
 ## Tenants
 
 A tenant describes a virtual partition of a CxEngage instance. A tenant is
