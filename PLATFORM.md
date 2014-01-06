@@ -10,9 +10,6 @@ API is built for you.
 CxEngage Platform API has no authentication. It should be placed in a network
 configuration that allows only privileged local network users to access it.
 
-The Platform API does not need to be running for CxEngage to run. It is
-suggested to shutdown the API when it is not in use.
-
 ## Errors
 
 CxEngage Platform API uses standard HTTP response codes for errors.
@@ -352,6 +349,7 @@ Creates a tenant object.
 ```
 POST /1.0/tenants
 ```
+
 #### Arguments
 
 Name | Description
@@ -423,7 +421,7 @@ Updates an existing tenant by setting the values of the provided parameters pass
 > Definition
 
 ```
-PUT /1.0/tenants/tenant1
+PUT /1.0/tenants/{{id}}
 ```
 
 #### Arguments
@@ -684,8 +682,7 @@ error](#errors).
 
 ### Remove Integration from Tenant
 
-Removes access of a tenant to the specified integration. This will disable any
-related listeners and possibly break patterns of that tenant.
+Removes access of a tenant to the specified integration. This will disable any related listeners and possibly break patterns of that tenant.
 
 > Definition
 
@@ -736,6 +733,8 @@ curl -XGET /1.0/tenants/tenant1/integrations
 Returns an array containing all active integrations if the specified tenant exists.
 Returns [an error](#errors) otherwise.
 
+> Example Response
+
 ```json
 [
   "salesforce",
@@ -753,7 +752,7 @@ A user in CxEngage may be associated with many tenants. A user may submit events
 Name | Type | Description
 --- | --- | ---
 **email** | **string** | Email of the user
-**name** | **string** | Full name of the user
+**name** | **string** | Name of the user
 **client-id** | **string** | Client ID Credential
 **tenants** | **array** | List of accessible tenants
 
@@ -774,19 +773,253 @@ Name | Type | Description
 
 ### Create a User
 
+Creates a user object.
 
+> Definition
+
+```
+POST /1.0/users
+```
+
+#### Arguments
+
+Name | Type | Description
+--- | --- | ---
+**email** | Email of the user
+**name** | Name of the user
+**password** | Password for user
+tenants | Array of accessible tenants
+
+> Example Request
+
+```
+curl -X POST /1.0/users \
+     -H 'Content-Type: application/json' \
+     -d '{"email": "ian@userevents.com", "name": "Ian Bishop",
+          "password": "butter", "tenants": ["userevents"]}'
+```
+
+#### Returns
+
+Returns a user object if successful, returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+    "email": "ian@userevents.com",
+    "name": "Ian Bishop",
+    "client-id": "xxxxxx",
+    "tenants": [
+        "userevents"
+    ]
+}
+```
 
 ### Retrieve a User
 
+Retrieves the details of an existing user.
+
+> Definition
+
+```
+GET /1.0/users/{{email}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**email** | User Email
+
+> Example Request
+
+```
+curl -XGET /1.0/users/ian@userevents.com
+```
+
+#### Returns
+
+Returns a user object if specified user exists. Returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+    "email": "ian@userevents.com",
+    "name": "Ian Bishop",
+    "client-id": "xxxxxx",
+    "tenants": [
+        "userevents"
+    ]
+}
+```
+
 ### Update a User
+
+Updates an existing user by setting the values of the provided parameters
+passed. Any parameters not provided will be unchanged.
+
+> Example Request
+
+```
+PUT /1.0/users/{{email}}
+```
+
+#### Arguments
+
+Name | Type | Description
+--- | --- | ---
+name | Name of the user
+tenants | Array of accessible tenants
+
+> Example Request
+
+```
+curl -X PUT /1.0/users/ian@userevents.com \
+     -H 'Content-Type: application/json' \
+     -d '{"name": "John Smith"}'
+```
+
+#### Returns
+
+Returns the user object if the update succeeded, returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+    "email": "ian@userevents.com",
+    "name": "John Smith",
+    "client-id": "xxxxxx",
+    "tenants": [
+        "userevents"
+    ]
+}
+```
 
 ### Delete a User
 
+Permanently deletes a user. It cannot be undone. Immediately stops user from being able to access any authenticated resources with its credentials.
+
+> Definition
+
+```
+DELETE /1.0/users/{{email}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**email** | User Email
+
+> Example Request
+
+```
+curl -IX DELETE /1.0/users/ian@userevents.com
+```
+
+#### Returns
+
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
+
 ### List All Users
+
+Returns a list of all users.
+
+> Definition
+
+```
+GET /1.0/users
+```
+
+#### Arguments
+
+None.
+
+> Example Request
+
+```
+curl -XGET /1.0/users
+```
+
+#### Returns
+
+Returns an array containing all users.
+
+```json
+[
+  {
+    "email": "ian@userevents.com",
+    "name": "Ian Bishop",
+    "client-id": "xxxxxx",
+    "tenants": [
+        "userevents"
+    ]
+  },
+  {
+    "email": "josh@userevents.com",
+    "name": "Josh Comer",
+    "client-id": "yyyyyy",
+    "tenants": [
+        "userevents"
+    ]
+  }
+]
+```
 
 ### Add User to Tenant
 
+Adds a user to a tenant. This gives the user permission to submit events and modify the tenant.
+
+> Definition
+
+```
+POST /1.0/users/{{email}}/tenants/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Tenant ID
+
+> Example Request
+
+```
+curl -X POST /1.0/users/ian@userevents.com/tenants/userevents
+```
+
+#### Returns
+
+Returns an **HTTP 201** if user and tenant exist. Otherwise, returns [an error](#errors).
+
 ### Remove User from Tenant
+
+Removes access of a user to the specified tenant. Immediately stops user from being able to access the tenant with its credentials.
+
+> Definition
+
+```
+DELETE /1.0/users/{{email}}/tenants/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Tenant ID
+
+> Example Request
+
+```
+curl -IX DELETE /1.0/users/ian@userevents.com/tenants/userevents
+```
+
+#### Returns
+
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
 
 ## Integrations
 
