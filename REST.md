@@ -45,7 +45,202 @@ It is often helpful to test your changes by sending in custom events.
 
 # Methods
 
+## Account
+
+A user in CxEngage may be associated with many tenants. A user may submit events or modify any tenant they have been access to. These methods all pertain to your **current** user.
+
+#### Attributes
+
+Name | Type | Description
+--- | --- | ---
+**email** | **string** | Email of the account
+**name** | **string** | Name of the account owner
+**client-id** | **string** | Client ID Credential
+**ttl** | **number** | Remaining session time *(seconds)*
+**tenants** | **array** | List of accessible tenants
+
+> Example Object
+
+```json
+{
+    "ttl": 2592000000,
+    "client-id": "Dk5w6yi5mOfN+HRcwDmxEN...",
+    "tenants": [
+        "userevents"
+    ],
+    "name": "Ian Bishop",
+    "email": "ian.bishop@userevents.com"
+}
+```
+
+[More on Users >](http://docs.cxengage.com/docs/platform/users/)
+
+### Retrieve Account
+
+Retrieve the details of the current authenticated user.
+
+> Definition
+
+```
+GET https://api.cxengage.net/1.0/account
+```
+
+#### Arguments
+
+None.
+
+> Example Request
+
+```
+curl -X GET https://api.cxengage.net/1.0/account \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns the user object if valid credentials are provided. Otherwise, returns
+[an error](#errors).
+
+> Example Response
+
+```json
+{
+    "ttl": 2592000000,
+    "client-id": "Dk5w6yi5mOfN+HRcwDmxEN...",
+    "tenants": [
+        "userevents"
+    ],
+    "name": "Ian Bishop",
+    "email": "ian.bishop@userevents.com"
+}
+```
+
+### Change Password
+
+Change the password of the current authenticated user.
+
+> Definition
+
+```
+POST https://api.cxengage.net/1.0/account/change_password
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**password** | New Password
+
+> Example Request
+
+```
+curl -X POST https://api.cxengage.net/1.0/account/change_password \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d '{"password" : "butter"}'
+```
+
+#### Returns
+
+Returns an **HTTP 200** if successful. Otherwise, returns [an error](#errors).
+
+### Retrieve Credentials
+
+Retrieve the credentials of the current authenticated user.
+
+> Definition
+
+```
+GET https://api.cxengage.net/1.0/account/auth
+```
+
+#### Arguments
+
+None.
+
+> Example Request
+
+```
+curl -X GET https://api.cxengage.net/1.0/account/auth \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns a JSON Object with keys `client-id` and `client-secret` if successful.
+Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+{
+  "client-id": "yyyy",
+  "client-secret": "xxxx"
+}
+```
+
+### Retrieve Accessible Tenants
+
+Retrieves the list of tenant accessible by the current authenticated user.
+
+> Definition
+
+```
+GET https://api.cxengage.net/1.0/account/tenants
+```
+
+#### Arguments
+
+None.
+
+> Example Request
+
+```
+curl -X GET https://api.cxengage.net/1.0/account/tenants \
+     -H 'Authorization: Bearer BQokikJOvBiI2HlWgH4olfQ2...'
+```
+
+#### Returns
+
+Returns an array of all accessible tenants if successful. Otherwise, returns [an
+error](#errors).
+
+> Example Response
+
+```json
+{
+  "tenants": [
+    {
+      "id": "userevents",
+      "name": "UserEvents"
+    }
+  ]
+}
+```
+
 ## Tenants
+
+A tenant describes a virtual partition of a CxEngage instance. A tenant is
+provided for each client-organization. As a user of CxEngage, you may have
+access to multiple tenants in the system across many instances.
+
+#### Attributes
+
+Name | Type | Description
+--- | --- | ---
+**id** | **string** | Unique identifier
+**name** | **string** | Human-friendly name of the pattern
+
+> Example Object
+
+```json
+{
+  "id": "tenant1",
+  "name": "My Tenant"
+}
+```
+
+[More on Tenants >](http://docs.cxengage.com/docs/platform/tenants/)
 
 ### Retrieve a Tenant
 
@@ -279,8 +474,7 @@ curl -XGET https://api.cxengage.net/tenants/test123/patterns/PT2 \
 
 #### Returns
 
-Returns a pattern object if specified tenant and pattern exist. Returns [an
-error]() otherwise.
+Returns a pattern object if specified tenant and pattern exist. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -297,7 +491,7 @@ error]() otherwise.
 
 ### Update a Pattern
 
-Updates an existing pattern of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
+Updates an existing pattern of the specified tenant by setting the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
 
 > Definition
 
@@ -347,7 +541,7 @@ Permanently deletes a pattern. It cannot be undone. Immediately stops matching e
 > Definition
 
 ```
-DELETE /1.0/tenants/{{tid}}/patterns/{{id}}
+DELETE https://api.cxengage.net/1.0/tenants/{{tid}}/patterns/{{id}}
 ```
 
 #### Arguments
@@ -393,8 +587,7 @@ curl -XGET https://api.cxengage.net/tenants/tenant1/patterns \
 
 #### Returns
 
-Returns an array containing all patterns if the specified tenant exists. Returns [an
-error]() otherwise.
+Returns an array containing all patterns if the specified tenant exists. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -506,8 +699,7 @@ curl -XGET https://api.cxengage.net/tenants/test123/templates/TM2 \
 
 #### Returns
 
-Returns a template object if specified tenant and template exist. Returns [an
-error]() otherwise.
+Returns a template object if specified tenant and template exist. Returns [an error](#errors) otherwise.
 
 > Example Response
 
@@ -522,7 +714,7 @@ error]() otherwise.
 
 ### Update a Template
 
-Updates an existing template of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
+Updates an existing template of the specified tenant by setting the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
 
 > Definition
 
@@ -615,7 +807,7 @@ curl -XGET https://api.cxengage.net/tenants/tenant1/templates \
 #### Returns
 
 Returns an array containing all templates if the specified tenant exists. Returns [an
-error]() otherwise.
+error](#errors) otherwise.
 
 > Example Response
 
@@ -778,7 +970,7 @@ Returns a listener object if specified tenant and listener exist. Returns [an er
 
 ### Update a Listener
 
-Updates an existing listener of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
+Updates an existing listener of the specified tenant by setting the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
 
 > Definition
 
@@ -882,7 +1074,7 @@ curl -XGET https://api.cxengage.net/tenants/tenant1/listeners \
 #### Returns
 
 Returns an array containing all listeners if the specified tenant exists. Returns [an
-error]() otherwise.
+error](#errors) otherwise.
 
 > Example Response
 
@@ -1311,7 +1503,7 @@ curl -XGET https://api.cxengage.net/tenants/tenant1/integrations \
 #### Returns
 
 Returns an array containing all integrations if the specified tenant exists. Returns [an
-error]() otherwise.
+error](#errors) otherwise.
 
 > Example Response
 
@@ -1495,7 +1687,7 @@ Returns a augment object if specified tenant and augment exist. Returns [an erro
 
 ### Update an Augment
 
-Updates an existing augment of the specified tenant by settings the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
+Updates an existing augment of the specified tenant by setting the values of the provided parameters passed. Any parameters not provided will be unchanged. Your current authenticated user must have access to the specified tenant.
 
 > Definition
 
