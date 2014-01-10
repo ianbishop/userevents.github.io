@@ -1023,7 +1023,106 @@ Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
 
 ## Integrations
 
+Integrations are dynamic definitions of how the endpoint and listener of a
+third-party service can be used. Once they have been installed, these
+third-party services become first-class members of the CxEngage ecosystem,
+including the CxEngage DSL.
+
+#### Attributes
+
+Name | Type | Description
+-- | -- | --
+**id** | **string** | Unique identifier
+**type** | **string** | Same as id
+**display** | **string** | Human-friendly name of the integration
+**schema** | **array** | Integration UI definition *(see below)*
+**endpoint** | **object** | Endpoint definition *(see below)*
+**listener** | **object** | Listener definition *(see below)*
+
+### Schema Definition
+
+Schema defines how to dynamically render the Integration UI. It is represented
+by an array of JSON Objects.
+
+#### Attributes
+
+Name | Type | Description
+-- | -- | --
+**label** | **string** | Human-friendly label for field
+**param** | **string** | Parameter name
+**type** | **enum** | Defaults to `text` (`text` or `password`)
+
+> Example Object
+
+```json
+[
+  {
+    "label": "Pusher API Key",
+    "param": "key"
+  },
+  {
+    "label": "Pusher API Secret",
+    "param": "secret",
+    "type": "password"
+  }
+]
+```
+
+### Endpoint Definition
+
+The endpoint definition describes what functions the endpoint is capable of and
+its required parameters.
+
+#### Attributes
+
+Name | Type | Description
+-- | -- | --
+**name** | **string** | Unique identifier
+**type** | **string** | Same as name
+**display** | **string** | Human-friendly name of the endpoint
+**params** | **array** | List of parameters
+**static-params** | **array** | List of parameters supplied by the integration
+**redact** | *array** | List of parameters to be redacted from logs
+**sends** | **object** | Endpoint command definition *(see below)*
+
+> Example Object
+
+```json
+{
+  "name": "pusher",
+    "type": "pusher",
+    "display": "Pusher Endpoint",
+    "params": [
+      "key",
+      "secret"
+    ],
+    "sends": {
+      "event": {
+        "channel": {
+          "type": "mandatory"
+        },
+        "event": {
+          "type": "mandatory"
+        },
+        "message": {
+          "type": "optional"
+        }
+      }
+    },
+    "static-params": [
+      "key",
+      "secret"
+    ],
+    "redact": [ "secret" ]
+}
+```
+
+### Endpoint Command Definition
+
+
 ### Create an Integration
+
+
 
 ### Retrieve an Integration
 
