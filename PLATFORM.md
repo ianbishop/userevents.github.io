@@ -454,7 +454,7 @@ Returns the tenant object if the update succeeded, returns [an error](#errors) o
 
 ### Delete a Tenant
 
-Permanently deletes a tenant. It cannot be undone. Immediately stops processing events for this tenant. Your current authenticated user must have access to the specified tenant.
+Permanently deletes a tenant. It cannot be undone. Immediately stops processing events for this tenant.
 
 > Definition
 
@@ -501,6 +501,8 @@ curl -XGET /1.0/tenants
 #### Returns
 
 Returns an array containing all tenants.
+
+> Example Response
 
 ```json
 [
@@ -860,7 +862,7 @@ Returns a user object if specified user exists. Returns [an error](#errors) othe
 Updates an existing user by setting the values of the provided parameters
 passed. Any parameters not provided will be unchanged.
 
-> Example Request
+> Definition
 
 ```
 PUT /1.0/users/{{email}}
@@ -1020,3 +1022,318 @@ curl -IX DELETE /1.0/users/ian@userevents.com/tenants/userevents
 #### Returns
 
 Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
+
+# Service Management
+
+## Nodes
+
+A node represents a physical machine on which CxEngage services are deployed.
+
+#### Attributes
+
+Name | Type | Description
+--- | --- | ---
+**id** | **string** | Unique identifier
+**name** | **string** | Human-friendly name of the node
+**description** | **string** | A people friendly description of what this node should do
+**status** | **boolean** | Whether or not this node can be deployed against
+**ip-address** | **string** | IP Address of the machine
+**username** | **string** | Name of the CxEngage user
+**password** | **string** | Password for the CxEngage user
+
+> Example Object
+
+```json
+{
+  "id": "ND1",
+  "name": "Dev CxEngage API",
+  "ip-address": "127.0.0.1",
+  "username": "cxengage",
+  "password": "password",
+  "status": true
+}
+```
+
+[More on Nodes >](http://docs.cxengage.com/docs/platform/nodes/)
+
+### Create a Node
+
+Creates a node object for the specified instance.
+
+> Definition
+
+```
+POST /1.0/instances/{{iid}}/nodes
+```
+
+#### Arguments
+
+Name |  Description
+--- | ---
+**name** | Human-friendly name of the node
+**ip-address** | IP Address of the machine
+**username** | Name of the CxEngage user
+**password** | Password for the CxEngage user
+description | A people friendly description of what this node should do
+status | Whether or not this node can be deployed against
+
+> Example Request
+
+```
+curl -X POST /1.0/instances/IN1/nodes \
+     -H 'Content-Type: application/json' \
+     -d '{"name": "local box", "ip-address": "127.0.0.1",
+          "username": "cxengage", "password": "butter"}'
+```
+
+#### Returns
+
+Returns a node object if successful, returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "ND2",
+  "name": "local box",
+  "ip-address": "127.0.0.1",
+  "username": "cxengage",
+  "password": "butter"
+}
+```
+
+### Retrieve a Node
+
+Retrieves the details of an existing node for specified instance.
+
+> Definition
+
+```
+GET /1.0/instances/{{iid}}/nodes/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Node ID
+
+> Example Request
+
+```
+curl -XGET /1.0/instances/IN1/nodes/ND1
+```
+
+#### Returns
+
+Returns a node object if specified instance and node exists. Returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "ND1",
+  "name": "Dev CxEngage API",
+  "ip-address": "127.0.0.1",
+  "username": "cxengage",
+  "password": "password",
+  "status": true
+}
+```
+
+### Update a Node
+
+Updates an existing node for specified instance by setting the values of the provided parameters passed. Any parameters not provided will be unchanged.
+
+> Definition
+
+```
+PUT /1.0/instances/{{iid}}/nodes/{{id}}
+```
+
+#### Arguments
+
+Name |  Description
+--- | ---
+name | Human-friendly name of the node
+description | A people friendly description of what this node should do
+status | Whether or not this node can be deployed against
+ip-address | IP Address of the machine
+username | Name of the CxEngage user
+password | Password for the CxEngage user
+
+> Example Request
+
+```
+curl -X PUT /1.0/instances/IN1/nodes/ND2 \
+     -H 'Content-Type: application/json' \
+     -d '{"name": "local box 2"}'
+```
+
+#### Returns
+
+Returns the node object if the update succeeded, returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "ND2",
+  "name": "local box 2",
+  "ip-address": "127.0.0.1",
+  "username": "cxengage",
+  "password": "butter"
+}
+```
+
+### Delete a Node
+
+Permanently deletes a node for specified instance. It cannot be undone. Immediately stops services from being deployed to this node.
+
+> Definition
+
+```
+DELETE /1.0/instances/{{iid}}/nodes/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Node ID
+
+> Example Request
+
+```
+curl -IX DELETE /1.0/instances/IN1/nodes/ND1
+```
+
+#### Returns
+
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
+
+### List All Nodes
+
+Returns a list of all nodes for specified instance.
+
+> Definition
+
+```
+GET /1.0/instances/{{id}}/nodes
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Instance ID
+
+> Example Request
+
+```
+curl -XGET /1.0/instances/IN1/nodes
+```
+
+#### Returns
+
+Returns an array containing all nodes if specified instance exists. Otherwise,
+returns [an error](#errors).
+
+> Example Response
+
+```json
+[
+  {
+    "id": "ND1",
+    "name": "Dev CxEngage API",
+    "ip-address": "127.0.0.1",
+    "username": "cxengage",
+    "password": "password",
+    "status": true
+  },
+  {
+    "id": "ND2",
+    "name": "local box",
+    "ip-address": "127.0.0.1",
+    "username": "cxengage",
+    "password": "butter"
+  }
+]
+```
+
+### Ping a Node
+
+Verifies that the credentials of a node for a specified instance can be successfully connected to by SSH.
+
+> Definition
+
+```
+POST /1.0/instances/{{iid}}/nodes/{{id}}/ping
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Node ID
+
+> Example Request
+
+```
+curl -X POST /1.0/instances/IN1/nodes/ND2/ping
+```
+
+#### Returns
+
+Returns a JSON object with key `result` indicating its availability if specified
+node and instance exist. Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+{
+  "result": true
+}
+```
+
+## Services
+
+### Create a Service
+
+### Retrieve a Service
+
+### Update a Service
+
+### Delete a Service
+
+### List All Services
+
+### Start a Service
+
+### Stop a Service
+
+### Monitor a Service
+
+### List All Processes
+
+### Start All Services
+
+### Stop All Services
+
+### Monitor All Services
+
+## Processes
+
+### Create a Process
+
+### Retrieve a Process
+
+### Delete a Process
+
+### List All Processes
+
+### Start a Process
+
+### Stop a Process
+
+### Monitor a Process
