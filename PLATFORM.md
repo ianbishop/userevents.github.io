@@ -29,6 +29,7 @@ object to ease debugging.
 ## Versioning
 
 We version our API to protect you from backward-incompatible changes.
+-
 Version | Endpoint
 -- | --
 **1.0** |
