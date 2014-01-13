@@ -1873,16 +1873,280 @@ Returns an array of JSON objects with key `running` indicating if the service is
 
 ## Processes
 
+A process represents the actual component of software of a service running on a node for a specified instance. Processes are immutable, they cannot be updated. To change a process, it must be first deleted and then re-created.
+
+#### Attributes
+
+Name | Type | Description
+--- | --- | ---
+**id** | **string** | Unique identifier
+**instance** | **string** | ID of instance it belongs to
+**service** | **string** | ID of service it is
+**node** | **string** | ID of node it is running on
+
+> Example Object
+
+```json
+{
+  "id": "77f19fc7-e10a-4732-8789-38613a95185e",
+  "instance": "IN1",
+  "service": "SV1",
+  "node": "ND1"
+}
+```
+
+[More on Processes >](http://docs.cxengage.com/docs/platform/processes/)
+
 ### Create a Process
+
+Creates a process object.
+
+> Definition
+
+```
+POST /1.0/processes
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**instance** | ID of instance it belongs to
+**service** | ID of service it is
+**node** | ID of node it is running on
+
+> Example Request
+
+```
+curl -X POST /1.0/processes \
+     -H 'Content-Type: application/json' \
+     -d '{"instance": "IN2", "service": "SV1", "node": "ND1"}'
+```
+
+#### Returns
+
+Returns a process object if successful, returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "bc975bd6-70a5-4d67-af00-1d6dffdfdba0",
+  "instance": "IN2",
+  "service": "SV1",
+  "node": "ND1"
+}
+```
 
 ### Retrieve a Process
 
+Retrieves the details of an existing process.
+
+> Definition
+
+```
+GET /1.0/processes/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Process ID
+
+> Example Request
+
+```
+curl -XGET /1.0/processes/bc975bd6-70a5-4d67-af00-1d6dffdfdba0
+```
+#### Returns
+
+Returns a process object if specified instance exists. Returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "bc975bd6-70a5-4d67-af00-1d6dffdfdba0",
+  "instance": "IN2",
+  "service": "SV1",
+  "node": "ND1"
+}
+```
+
 ### Delete a Process
+
+Permanently deletes a process. It cannot be undone.
+
+> Definition
+
+```
+DELETE /1.0/processes/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Process ID
+
+> Example Request
+
+```
+curl -IX DELETE /1.0/processes/bc975bd6-70a5-4d67-af00-1d6dffdfdba0
+```
+
+#### Returns
+
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
 
 ### List All Processes
 
+Returns a list of all processes.
+
+> Definition
+
+```
+GET /1.0/processes
+```
+
+#### Arguments
+
+None.
+
+> Example Request
+
+```
+curl -XGET /1.0/processes
+```
+
+#### Returns
+
+Returns an array containing all processes.
+
+> Example Response
+
+```json
+[
+  {
+    "id": "1fac7791-736f-41f5-8ce8-af68e566bb1d",
+    "instance": "IN2",
+    "node": "ND1",
+    "service": "SV4"
+  },
+  {
+    "id": "2cfd71c2-e756-47be-8a71-92b706285d02",
+    "instance": "IN2",
+    "node": "ND1",
+    "service": "SV8"
+  }
+]
+```
+
 ### Start a Process
+
+Starts a process.
+
+> Definition
+
+```
+POST /1.0/processes/{{id}}/start
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Process ID
+
+> Example Request
+
+```
+curl -X POST /1.0/processes/c220e9a8-3ce5-4981-8b28-44e30a25d52e/start
+```
+
+#### Returns
+
+Returns a JSON object with key `running` indicating the current status of the
+process. Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+{
+  "id": "c220e9a8-3ce5-4981-8b28-44e30a25d52e",
+  "running": true
+}
+```
 
 ### Stop a Process
 
+Stops a process.
+
+> Definition
+
+```
+POST /1.0/processes/{{id}}/stop
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Process ID
+
+> Example Request
+
+```
+curl -X POST /1.0/processes/c220e9a8-3ce5-4981-8b28-44e30a25d52e/stop
+```
+
+#### Returns
+
+Returns a JSON object with key `running` indicating the current status of the
+process. Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+{
+  "id": "c220e9a8-3ce5-4981-8b28-44e30a25d52e",
+  "running": false
+}
+```
+
 ### Monitor a Process
+
+Retrieve the running status of a process.
+
+> Definition
+
+```
+GET /1.0/processes/{{id}}/status
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Process ID
+
+> Example Request
+
+```
+curl -X GET /1.0/processes/c220e9a8-3ce5-4981-8b28-44e30a25d52e/status
+```
+
+#### Returns
+
+Returns a JSON object with key `running` indicating if the process is currently
+running. Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+{
+  "id": "c220e9a8-3ce5-4981-8b28-44e30a25d52e",
+  "running": true
+}
+```
