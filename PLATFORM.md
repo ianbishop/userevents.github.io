@@ -1434,8 +1434,7 @@ Name | Description
 name | Human-friendly name of the node
 type | Type of service
 description | A people friendly description of what this node should do
-log-level | Log-level of service (`trace`, `info`, `debug`,
-`warning` or `error`)
+log-level | Log-level of service (`trace`, `info`, `debug`,`warning` or `error`)
 options | Service type specific configuration options
 
 > Example Request
