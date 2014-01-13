@@ -30,9 +30,7 @@ object to ease debugging.
 
 We version our API to protect you from backward-incompatible changes.
 
-Version
--- | --
-**1.0** 
+Version **1.0** 
 
 # Platform Management
 
