@@ -19,7 +19,7 @@ Code | Description
 **200 OK** | Everything worked as expected
 **201 Created** | Your item was successfully created
 **204 No Content** | Your item was successfully deleted
-**400 Bad Request** | Missing a required parameters
+**400 Bad Request** | Missing required parameters
 **404 Not Found** | The requested tenant or item does not exist
 **500 Server Error** | Something bad happened on our end, please contact support
 
