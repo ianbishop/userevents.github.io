@@ -7,7 +7,7 @@ permalink: /docs/platform/tenants/
 categories: ['platform']
 ---
 
-*Tenants* represent an partitioning of data within the CxEngage Platform. Using tenants allows
+*Tenants* represent a partitioning of data within the CxEngage Platform. Using tenants allows
 collections of key attribute, patterns, templates, listeners, and custom endpoint settings to be isolated to
 a certain group of users. Tenant ids are defined by the CxEngage admin when creating the tenant and
 must be universally unique.
