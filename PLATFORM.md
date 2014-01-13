@@ -1547,17 +1547,329 @@ Returns an array containing all services if specified instance exists. Otherwise
 
 ### Start a Service
 
+Starts all processes of a service for a specified instance.
+
+> Definition
+
+```
+POST /1.0/instances/{{iid}}/services/{{id}}/start
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Service ID
+
+> Example Request
+
+```
+curl -X POST /1.0/instances/IN1/services/SV1/start
+```
+
+#### Returns
+
+Returns a JSON object with keys `running` indicating the current status of the service and  `processes` an array of the current status for each process. Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+{
+  "id": "SV1",
+  "running": true,
+  "processes": [
+    {
+        "id": "bc975bd6-70a5-4d67-af00-1d6dffdfdba0",
+        "running": true
+    }
+  ]
+}
+```
+
 ### Stop a Service
+
+Stops all processes of a service for a specified instance.
+
+> Definition
+
+```
+POST /1.0/instances/{{iid}}/services/{{id}}/stop
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Service ID
+
+> Example Request
+
+```
+curl -X POST /1.0/instances/IN1/services/SV1/stop
+```
+
+#### Returns
+
+Returns a JSON object with keys `running` indicating the current status of the service and  `processes` an array of the current status for each process. Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+{
+  "id": "SV1",
+  "running": false,
+  "processes": [
+    {
+      "id": "bc975bd6-70a5-4d67-af00-1d6dffdfdba0",
+      "running": false
+    }
+  ]
+}
+```
 
 ### Monitor a Service
 
+Retrieve the running status of a service for a specified instance.
+
+> Definition
+
+```
+GET /1.0/instances/{{iid}}/services/{{id}}/status
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Service ID
+
+> Example Request
+
+```
+curl -X GET /1.0/instances/IN1/services/SV1/status
+```
+
+#### Returns
+
+Returns a JSON object with key `running` indicating if the service is currently
+running. Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+{
+  "running": true
+}
+```
+
 ### List All Processes
+
+Returns a list of all processes for a service of a specified instance.
+
+> Definition
+
+```
+GET /1.0/instances/{{iid}}/services/{{id}}/processes
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Service ID
+
+> Example Request
+
+```
+curl -XGET /1.0/instances/IN1/services/SV1/processes
+```
+
+#### Returns
+
+Returns an array containing all processes if service and specified instance exist. Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+[
+  {
+    "id": "bc975bd6-70a5-4d67-af00-1d6dffdfdba0",
+    "instance": "IN1",
+    "node": "ND1",
+    "service": "SV1"
+  }
+]
+```
 
 ### Start All Services
 
+Starts all services of a specified instance.
+
+> Definition
+
+```
+POST /1.0/instances/{{id}}/services/start
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Instance ID
+
+> Example Request
+
+```
+curl -X POST /1.0/instances/IN1/services/start
+```
+
+#### Returns
+
+Returns an array with JSON objects containing the result of each service. Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+[
+  {
+    "id": "SV3",
+    "running": true,
+    "processes": [
+      {
+        "id": "77f19fc7-e10a-4732-8789-38613a95185e",
+        "running": true
+      }
+    ]
+  },
+  {
+    "id": "SV2",
+    "running": true,
+    "processes": [
+      {
+        "id": "bc975bd6-70a5-4d67-af00-1d6dffdfdba0",
+        "running": true
+      }
+    ]
+  },
+  {
+    "id": "SV1",
+    "running": true,
+    "processes": [
+      {
+        "id": "c220e9a8-3ce5-4981-8b28-44e30a25d52e",
+        "running": true
+      }
+    ]
+  }
+]
+```
+
 ### Stop All Services
 
+Stops all services of a specified instance.
+
+> Definition
+
+```
+POST /1.0/instances/{{id}}/services/stop
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Instance ID
+
+> Example Request
+
+```
+curl -X POST /1.0/instances/IN1/services/stop
+```
+
+#### Returns
+
+Returns an array with JSON objects containing the result of each service. Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+[
+  {
+    "id": "SV3",
+    "running": false,
+    "processes": [
+      {
+        "id": "77f19fc7-e10a-4732-8789-38613a95185e",
+        "running": false
+      }
+    ]
+  },
+  {
+    "id": "SV2",
+    "running": false,
+    "processes": [
+      {
+        "id": "bc975bd6-70a5-4d67-af00-1d6dffdfdba0",
+        "running": false
+      }
+    ]
+  },
+  {
+    "id": "SV1",
+    "running": false,
+    "processes": [
+      {
+        "id": "c220e9a8-3ce5-4981-8b28-44e30a25d52e",
+        "running": false
+      }
+    ]
+  }
+]
+
+```
+
 ### Monitor All Services
+
+Retrieves the running status of all services of a specified instance.
+
+> Definition
+
+```
+GET /1.0/instances/{{id}}/services/status
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Instance ID
+
+> Example Request
+
+```
+curl -X GET /1.0/instances/IN1/services/status
+```
+
+#### Returns
+
+Returns an array of JSON objects with key `running` indicating if the service is currently running. Otherwise, returns [an error](#errors).
+
+```json
+[
+  {
+    "id": "SV3",
+    "running": true
+  },
+  {
+    "id": "SV2",
+    "running": true
+  },
+  {
+    "id": "SV1",
+    "running": true
+  }
+]
+```
 
 ## Processes
 
