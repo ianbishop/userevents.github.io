@@ -6,40 +6,11 @@ permalink: /docs/platform/instances/
 categories: ['platform']
 ---
 
-An *instance* is a collection of CxEngage services which support a set of
-tenants. Each instance is uniquely identifiable by its ID and must be given a
-user-friendly name.
+An *instance* is the mechanism by which CxEngage services are grouped.
+Each instance is automatically assigned an ID (eg *IN2*) which is used when
+referencing the instance. Instances are exclusively exposed through the Platform API.
+Non-admin users of CxEngage will never be exposed to the instance.
 
-An instance is comprised of four parts; *services*, *nodes*, *processes* and *tenants*.
-
-## Services
-
-Services provide a high-level description of how a CxEngage service should be deployed. These descriptions include attributes such as the type of services, its
-log level and other essential information.
-
-Please visit the [Services]({{ site.url }}/docs/platform/services) article for more information.
-
-## Nodes
-
-Nodes provide a description of a particular box for CxEngage services to be
-deployed onto. These descriptions include attributes such as the box's ip
-address and credentials.
-
-Please visit the [Nodes]({{ site.url }}/docs/platform/nodes) article for more
-information.
-
-## Processes
-
-Processes are uniquely identifiable deployments of a given *service* onto a given
-*node*. Some services in the CxEngage ecosystem are clusterable; the overall
-descriptor of how the services are configured would be a *Service*.
-
-Please visit the [Processes]({{ site.url }}/docs/platform/processes) article for
-more information.
-
-## Tenants
-
-Tenants are ..
-
-Please visit the [Tenants]({{ site.url }}/docs/platform/tenants) article for
-more information.
+An instance is comprised of four parts: [Services]({{ site.url }}/docs/platform/services), [Nodes]({{ site.url }}/docs/platform/nodes), [Processes]({{ site.url }}/docs/platform/processes), and [Tenants]({{ site.url }}/docs/platform/tenants).
+Service and node definitions are contained within a specific instance, whilst process
+and tenant definitions only refer to specific instances and are not contained within the instance definition.
