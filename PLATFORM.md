@@ -29,7 +29,6 @@ object to ease debugging.
 ## Versioning
 
 We version our API to protect you from backward-incompatible changes.
-
 Version | Endpoint
 -- | --
 **1.0** |
@@ -1310,8 +1309,7 @@ Name | Type | Description
 **name** | **string** | Human-friendly name of the node
 **description** | **string** | A people friendly description of what this node should do
 **type** | **string** | Type of service
-**log-level** | **enum** | Log-level of service (`trace`, `info`, `debug`,
-`warning` or `error`)
+**log-level** | **enum** | Log-level of service (`trace`, `info`, `debug`,`warning` or `error`)
 **options** | **object** | Service type specific configuration options
 
 > Example Object
