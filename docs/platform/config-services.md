@@ -31,6 +31,7 @@ The following is a listing of CxEngage Services and any service specific setting
 Type: **cxengage-api**
 
 The CxEngage Rest API is the public facing API which users use to manage their associated tenants.
+
 Additional options to specify in the service options map are:
 
 **port**<br>
@@ -54,6 +55,7 @@ This key is optional. The value should be the number of seconds a token will be 
 Type: **webapp**
 
 The UI is a consumer of the CxEngage Rest API, and is a convenient and familiar way for users to manage their instance.
+
 Additional options to specify in the service options map are:
 
 **port**<br>
@@ -65,6 +67,7 @@ Type: **rest**
 
 The Rest Receiver is the main entry point for events into the CxEngage Platform. Users submit events using
 either a REST interface or, if enabled for the tenant, a streaming WebSocket interface.
+
 Additional options to specify in the service options map are:
 
 **port**<br>
@@ -91,6 +94,7 @@ Type: **augment**
 The augment service is responsible for augmenting data into events and reactions as they pass through the service.
 A single augments service both an event stream and a reaction stream. The downstream keys will define how these events
 will be routed. The augments to perform are defined within each tenant.
+
 Additional options to specify in the service options map are:
 
 **event-downstream**<br>
@@ -113,6 +117,7 @@ Type: **broker**
 
 The broker service will manage a cluster of services and both provide persistence for high availability and load balancing
 for the cluster. The broker is only supported for the Engine and Notification services.
+
 Additional options to specify in the service options map are:
 
 **downstream**<br>
@@ -123,3 +128,83 @@ The port on which to bind the incoming message pipeline. If the key is not speci
 
 **command-port**<br>
 The port on which to bind the outgoing command pipeline. If the key is not specified a random port will be chosen.
+
+### Engine
+
+Type: **engine**
+
+The engine service is responsible for evaluating and executing the when portion of patterns. The engine keeps all
+of its state in memory, and as such can be susceptible to faults. Use of the broker service in front of the engine
+removes this limitation.
+
+Additional options to specify in the service options map are:
+
+**downstream**<br>
+The service to which the engine will send any resulting reactions. This value can be changed at runtime. Typically the downstream service will be either
+the augment, notification, or broker service.
+
+**pipeline-port**<br>
+The port on which to bind the incoming message pipeline. If the key is not specified a random port will be chosen.
+
+**command-port**<br>
+The port on which to bind the outgoing command pipeline. If the key is not specified a random port will be chosen.
+
+**shelves**<br>
+The shelves key controls the number of worker threads the engine should use when processing incoming events.
+The default is 1. Depending on the hardware (# of cores) on which the engine is run, increasing this number
+may increase the event throughput of the engine.
+
+**event-size**<br>
+This key is optional and should only be defined if suggested by support. The event-size controls the max
+size of events. The default value is 16384 bytes.
+
+**reaction-size**<br>
+This key is optional and should only be defined if suggested by support. The reaction-size controls the max
+size of reactions. The default value is 131072 bytes.
+
+### Notification Service
+
+Type: **notification**
+
+The notification service is responsible for evaluating and executing the then portion of patterns. Like the engine,
+the notification service keeps all of its state in memory and requires a managing broker to achieve fault tolerance.
+At start up, the notification service will attempt to identify all services which correspond to an integration. As such
+adding a new integration to the platform will require a restart of the notification service. To remove downtime, this restart
+can be done as a rolling restart of the notification cluster.
+
+Additional options to specify in the service options map are:
+
+**downstream**<br>
+The service to which the notification service will send any resulting journal entries. This value can be changed at runtime. Typically the downstream service will be one of the journaling services.
+
+**updates**<br>
+The service to which the notification service will publish reaction updates. Typically the updates service will be the broker service managing the notification service.
+
+**pipeline-port**<br>
+The port on which to bind the incoming message pipeline. If the key is not specified a random port will be chosen.
+
+**command-port**<br>
+The port on which to bind the outgoing command pipeline. If the key is not specified a random port will be chosen.
+
+**shelves**<br>
+The shelves key controls the number of worker threads the notification service should use when processing incoming reactions.
+The default is 1. Depending on the hardware (# of cores) on which the notification service is run, increasing this number
+may increase the reaction throughput of the notification service.
+
+**notification-size**<br>
+This key is optional and should only be defined if suggested by support. The notification-size controls the max
+size of notifications. The default value is 2048 bytes.
+
+**reaction-size**<br>
+This key is optional and should only be defined if suggested by support. The reaction-size controls the max
+size of reactions. The default value is 131072 bytes.
+
+**journal-size**<br>
+This key is optional and should only be defined if suggested by support. The journal-size controls the max
+size of journal entries. The default value is 262144 bytes.
+
+### Elastic Search Journaler
+
+Type: **es-journal**
+
+The Elastic Search Journaler will commit journal entries to the configured elastic search cluster.
