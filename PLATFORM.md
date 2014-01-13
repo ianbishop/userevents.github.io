@@ -1298,15 +1298,252 @@ node and instance exist. Otherwise, returns [an error](#errors).
 
 ## Services
 
+A service represents a single component in the CxEngage architecture. It
+describes not the actual running software but the configurations of all
+processes of that type.
+
+#### Attributes
+
+Name | Type | Description
+--- | --- | ---
+**id** | **string** | Unique identifier
+**name** | **string** | Human-friendly name of the node
+**description** | **string** | A people friendly description of what this node should do
+**type** | **string** | Type of service
+**log-level** | **enum** | Log-level of service (`trace`, `info`, `debug`,
+`warning` or `error`)
+**options** | **object** | Service type specific configuration options
+
+> Example Object
+
+```json
+{
+  "id": "SV1",
+  "type": "auth",
+  "name": "Auth",
+  "log-level": "trace",
+  "options": {
+    "port": 8082,
+    "token-ttl": 2592000
+  }
+}
+```
+
+[More on Services >](http://docs.cxengage.com/docs/platform/services/)
+
 ### Create a Service
+
+Creates a service object for the specified instance.
+
+> Definition
+
+```
+POST /1.0/instances/{{id}}/services
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**name** | Human-friendly name of the node
+**type** | Type of service
+description | A people friendly description of what this node should do
+log-level | Log-level of service (`trace`, `info`, `debug`,
+`warning` or `error`)
+options | Service type specific configuration options
+
+> Example Request
+
+```
+curl -X POST /1.0/instances/IN1/services \
+     -H 'Content-Type: application/json' \
+     -d '{"name": "WebApp", "type": "webapp", "log-level": "error",
+          "options": { "port": 8888 }}'
+```
+
+#### Returns
+
+Returns a service object if successful, returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "SV2",
+  "type": "webapp",
+  "name": "WebApp",
+  "log-level": "error",
+  "options": {
+    "port": 8888,
+  }
+}
+```
 
 ### Retrieve a Service
 
+Retrieves the details of an existing service for specified instance.
+
+> Definition
+
+```
+GET /1.0/instances/{{iid}}/services/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Service ID
+
+> Example Request
+
+```
+curl -XGET /1.0/instances/IN1/services/SV1
+```
+
+#### Returns
+
+Returns a service object if specified instance and service exists. Returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "SV1",
+  "type": "auth",
+  "name": "Auth",
+  "log-level": "trace",
+  "options": {
+    "port": 8082,
+    "token-ttl": 2592000
+  }
+}
+```
+
 ### Update a Service
+
+Updates an existing service for specified instance by setting the values of the provided parameters passed. Any parameters not provided will be unchanged.
+
+> Definition
+
+```
+PUT /1.0/instances/{{iid}}/services/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+name | Human-friendly name of the node
+type | Type of service
+description | A people friendly description of what this node should do
+log-level | Log-level of service (`trace`, `info`, `debug`,
+`warning` or `error`)
+options | Service type specific configuration options
+
+> Example Request
+
+```
+curl -X PUT /1.0/instances/IN1/services/SV2 \
+     -H 'Content-Type: application/json' \
+     -d '{"name": "WebApp Dev"}'
+```
+
+#### Returns
+
+Returns the service object if the update succeeded, returns [an error](#errors) otherwise.
+
+> Example Response
+
+```json
+{
+  "id": "SV2",
+  "type": "webapp",
+  "name": "WebApp Dev",
+  "log-level": "error",
+  "options": {
+    "port": 8888,
+  }
+}
+```
 
 ### Delete a Service
 
+Permanently deletes a service for specified instance. It cannot be undone. Immediately removes any processes of this service.
+
+> Definition
+
+```
+DELETE /1.0/instances/{{iid}}/services/{{id}}
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Service ID
+
+> Example Request
+
+```
+curl -IX DELETE /1.0/instances/IN1/services/ND1
+```
+
+#### Returns
+
+Returns an **HTTP 204** if successful. Otherwise, returns [an error](#errors).
+
 ### List All Services
+
+Returns a list of all services for specified instance.
+
+> Definition
+
+```
+GET /1.0/instances/{{id}}/services
+```
+
+#### Arguments
+
+Name | Description
+--- | ---
+**id** | Instance ID
+
+> Example Request
+
+```
+curl -XGET /1.0/instances/IN1/services
+```
+
+#### Returns
+
+Returns an array containing all services if specified instance exists. Otherwise, returns [an error](#errors).
+
+> Example Response
+
+```json
+[
+  {
+    "id": "SV1",
+    "type": "auth",
+    "name": "Auth",
+    "log-level": "trace",
+    "options": {
+      "port": 8082,
+      "token-ttl": 2592000
+    }
+  },
+  {
+    "id": "SV2",
+    "type": "webapp",
+    "name": "WebApp",
+    "log-level": "error",
+    "options": {
+      "port": 8888,
+    }
+  }
+]
+```
 
 ### Start a Service
 
