@@ -1,7 +1,7 @@
 ---
 layout: platform
 title: Instances
-next_section: config-tenants
+next_section: config-nodes
 permalink: /docs/platform/config-instances/
 categories: ['platform']
 ---

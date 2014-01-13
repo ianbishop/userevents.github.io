@@ -208,3 +208,105 @@ size of journal entries. The default value is 262144 bytes.
 Type: **es-journal**
 
 The Elastic Search Journaler will commit journal entries to the configured elastic search cluster.
+
+Additional options to specify in the service options map are:
+
+**cluster-name**<br>
+The name of the elastic search cluster
+
+**endpoints**<br>
+The elastic search endpoints to write to. This parameter should be defined as a list of lists consisting of the ip and port of each endpoint. Like so:
+
+```json
+[["192.168.0.17", 9300]
+ ["192.168.0.16", 9300]]
+```
+
+**journal-path**<br>
+The path where the persistent queue of journal entries should be stored. The default is "journal.jnl".
+
+**pool-size**<br>
+The size of the worker pool writing into the elastic search cluster. Default is 3.
+
+**pipeline-port**<br>
+The port on which to bind the incoming message pipeline. If the key is not specified a random port will be chosen.
+
+**command-port**<br>
+The port on which to bind the outgoing command pipeline. If the key is not specified a random port will be chosen.
+
+**reaction-size**<br>
+This key is optional and should only be defined if suggested by support. The reaction-size controls the max
+size of journal entries. The default value is 262144 bytes.
+
+## Listeners
+
+None of the provided listeners support additional options. Available listener types are:
+
+* **datasift** A DataSift Listener
+* **pusher-listener** A Pusher Listener
+* **salesforce-listener** A Salesforce Listener
+
+## Endpoints
+
+All endpoints support the following additional options parameters:
+
+**downstream**<br>
+The service to which the endpoint will send any resulting notifications. This value can be changed at runtime. Typically the downstream service will be either the notification or broker service.
+
+**pool-size**<br>
+The number of concurrent worker the endpoint should use when processing incoming notifications. Default is 3
+
+**pipeline-port**<br>
+The port on which to bind the incoming message pipeline. If the key is not specified a random port will be chosen.
+
+**command-port**<br>
+The port on which to bind the outgoing command pipeline. If the key is not specified a random port will be chosen.
+
+**notification-size**<br>
+This key is optional and should only be defined if suggested by support. The notification-size controls the max
+size of notifications. The default value is 2048 bytes.
+
+Below is a listing of all bundled endpoints and any additional parameters they accept.
+
+### Echo
+
+Type: **echo**
+
+This is a testing endpoint. All it does is echo back the parameters sent.
+
+### Generic
+
+Type: **generic**
+
+The generic endpoint allows for generic communication using WebSockets to stream outgoing notifications.
+Bi-directional communication is also supported.
+
+Additional options to specify in the service options map are:
+
+**port**<br>
+The port to bind the REST and WS server to.
+
+### Timer
+
+Type: **timer**
+
+The timer endpoint allows for the scheduling of persistent timers which execute arbitrary *then* code
+upon execution.
+
+### Pusher
+
+Type: **pusher**
+
+The pusher endpoint allows for the creation of pusher events.
+
+### Sendgrid
+
+Type: **sendgrid**
+
+The sendgrid endpoint allows for the sending of emails through sendgrid.
+
+### Salesforce
+
+Type: **salesforce**
+
+The salesforce endpoint allows for the creation of items in salesforce.

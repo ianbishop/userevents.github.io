@@ -1,8 +1,7 @@
 ---
 layout: platform
 title: Tenants
-next_section: config-nodes
-prev_section: config-instances
+prev_section: config-integrations
 permalink: /docs/platform/config-tenants/
 categories: ['platform']
 ---
