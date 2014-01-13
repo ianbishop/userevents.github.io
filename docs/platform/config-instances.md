@@ -6,10 +6,11 @@ permalink: /docs/platform/config-instances/
 categories: ['platform']
 ---
 
-Instances are created and managed through the CxEngage Platform API.
+Instances are created and managed through the CxEngage Platform API. The ID for the instance will be automatically generated
+upon creation.
 
 ## Parameters
-###Mandatory
+### Mandatory
 
 **name**<br>
 A human-friendly name of the instance. This value is never exposed to users.

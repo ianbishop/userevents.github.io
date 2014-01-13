@@ -6,3 +6,5 @@ prev_section: config-instances
 permalink: /docs/platform/config-tenants/
 categories: ['platform']
 ---
+
+Tenants can be created using the
