@@ -21,6 +21,7 @@ Currently, the following **endpoints** are available:
 * Pusher
 * Urban Airship
 * Generic
+* Timer
 
 If you need help using an endpoint, please visit the [Knowledge
 Base](https://cxengage.zendesk.com/hc/en-us/sections/200181297-Endpoints) for in-depth guides for each endpoint.
