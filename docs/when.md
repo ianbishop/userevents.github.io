@@ -47,7 +47,7 @@ The following keywords are available to describe the __when__ of a pattern:
 ## Simple Whens
 
 Let's start with trying to write a simple expression. A very simple test pattern
-were use a lot is one where `customerSegment` is "platinum".
+we use a lot is one where `customerSegment` is "platinum".
 
 {% highlight clojure %}
 (event (= customerSegment "platinum"))
