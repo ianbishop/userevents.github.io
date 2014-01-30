@@ -38,7 +38,7 @@ The following keywords are available to describe the __when__ of a pattern:
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
+      <td>contains</td>
       <td>days</td>
     </tr>
   </tbody>
