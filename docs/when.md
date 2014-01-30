@@ -60,7 +60,7 @@ Let's go through the expression above.
 3. `customerSegment` is the name of the attribute we're checking
 4. "platinum" is the value we're looking to check for equivalence
 
-Now, let's say we wanted to the pattern to match for anyone with Customer Segment
+Now, let's say we wanted the pattern to match for anyone with Customer Segment
 Platinum and a failed check-in.
 
 We can write this pattern much like the previous one, simply adding one more
