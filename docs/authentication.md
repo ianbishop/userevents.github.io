@@ -69,3 +69,7 @@ Cache-Control: no-cache
 
 <no body>
 {% endhighlight %}
+
+curl -X POST -H Content-Type:application/x-www-form-urlencoded -H Authorization:Basic VFA2WE5EWUo3bUJmSHR6UGw2bnJuRHVlSllZeE1QSmNvU0JjemdibkRFS1k6Y0h6OEJlZFNibnA5NEhUZ2ZlSlZvU1ppaHhza0MzYjFjcDAwWjg1VmQ3NTY= -d 'grant_type=client_credentials&Cache-Control=no-cache' http://auth/1.0/token
+
+
