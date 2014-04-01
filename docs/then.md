@@ -218,26 +218,6 @@ The `delay` command will delay further evaluation of a reaction. This delay resp
 (delay 30 seconds)
 {% endhighlight %}
 
-### expect
-
-{% highlight clojure %}
-(expect <predicate>
-  (success <then>)
-  (failure <then>)
-  <options>)
-{% endhighlight %}
-
-The `expect` command will pause execution of the reaction until an event enters the notification service which matches the provided predicate. It is recommended to use a `within` when using `expect`, otherwise the reaction may never finish.
-
-####  Wait 5 minutes for an event with type "b" and the current id
-{% highlight clojure %}
-(expect (and (= $id *id*)
-             (= $type "b"))
-  (within 5 minutes)
-  (success (set got-event true))
-  (failure (set got-event false)))
-{% endhighlight %}
-
 ### await
 
 The `await` command is used to perform asynchronous communication with an endpoint. In truth, `await` is syntactic sugar to perform a poll against a command in an endpoint. The body of the `await` must consist of an `if` statement, whose predicate represents what you are waiting for. The `success` and `failure` within the `if` will be executed based on the final outcome of the await. A `within` option must also be present to denote the total time the poll should last. The poll cycle will wait one second between polls.
