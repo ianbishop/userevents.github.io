@@ -365,7 +365,7 @@ Parameters defined using the `template` option will be sent to the endpoint as t
 {% highlight clojure %}
 (send twilio sms {:to-phone-number *phone-number*
                   :from-phone-number "1-506-555-1234"}
-  (template {:message "Hello {{ "{{first-name" }}}}"}}))
+  (template {:message "Hello {{ "{{first-name" }}}}"}))
 
 (send twilio sms {:to-phone-number *phone-number*
                   :from-phone-number "1-506-555-1234"}
