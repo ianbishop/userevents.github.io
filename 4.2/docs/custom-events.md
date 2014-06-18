@@ -3,8 +3,8 @@ layout: docs
 title: Submitting Custom Events
 prev_section: authentication
 next_section: using-augments
-permalink: /4.1/docs/custom-events/
-version: 4.1
+version: 4.2
+permalink: /4.2/docs/custom-events/
 categories: ['docs']
 ---
 
@@ -16,13 +16,13 @@ and make engagements instantly.
 
 The current version of the REST Receiver is `1.0`.
 
-`https://events.cxengage.net/version`
+`https://events.cxengage.net/1.0`
 
 ## Submitting an Event
 
-Events are submitted as `JSON` and must contain the <a href="{{site.url}}/docs/key-attribute">key attribute</a> of your tenant.
+Events are submitted as `JSON` and must contain the <a href="{{site.url}}/{{page.version}}/docs/key-attribute">key attribute</a> of your tenant.
 
-In order to submit events, you must also be authenticated. Please read the <a href="{{site.url}}/docs/authentication">Authentication documentation</a> for more details.
+In order to submit events, you must also be authenticated. Please read the <a href="{{site.url}}/{{page.version}}/docs/authentication">Authentication documentation</a> for more details.
 
 {% highlight bash %}
 curl -iX POST https://events.cxengage.net/1.0/tenants/TENANT-NAME/event \

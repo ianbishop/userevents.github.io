@@ -7,7 +7,7 @@ version: 4.1
 categories: ['docs']
 ---
 
-CxEngage's customer Domain-Specific Language (DSL) offers incredible
+CxEngage's custom Domain-Specific Language (DSL) offers incredible
 flexibility, providing the ability to setup almost any type of pattern of events
 to match.
 
