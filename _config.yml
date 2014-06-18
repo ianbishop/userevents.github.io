@@ -2,6 +2,6 @@ name: CxEngage
 markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
-pygments: true
+highlighter: 'pygments'
 google_analytics_id: 40658438
 relative_permalinks: false
