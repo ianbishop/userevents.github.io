@@ -1,7 +1,7 @@
 {% assign items = include.items | split: ' ' %}
 
 {% for item in items %}
-  {% assign item_url = item | prepend:'/docs/platform/' | append:'/' %}
+  {% assign item_url = item | prepend:'/docs/platform/' | prepend:page.version | prepend:'/' | append:'/' %}
 
   {% if item_url == page.url %}
     {% assign c = 'active' %}
