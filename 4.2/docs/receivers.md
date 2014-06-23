@@ -10,7 +10,7 @@ categories: ['docs']
 *Receiver* is the name we've given to APIs you communicate with to send in
 custom events.
 
-There are currently three receivers:
+There are currently two receivers:
 
 * REST Receiver
 * WebSocket Receiver
