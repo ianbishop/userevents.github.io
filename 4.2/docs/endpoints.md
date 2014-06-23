@@ -12,14 +12,14 @@ categories: ['docs']
 services.
 
 When you write a pattern, you can create notifications with endpoints such as
-Twilio, Sendgrid, Pusher, Salesforce. There is also a generic endpoint that lets
-you integrate with CxEngage directly.
+Twilio, Sendgrid, Pusher, and Salesforce. There is also a generic endpoint that lets
+you send events to systems we don't have existing integrations with.
 
 Here are just a few samples of what you can do with CxEngage endpoints:
 
 * Call a customer with Twilio
-* Create opportunities with Salesforce
+* Create opportunities within Salesforce
 * Send email with SendGrid
 * Test with the Echo endpoint
-* Trigger notifications with Pusher
+* Trigger notifications to the browser with Pusher
 * Integrate your own app with the generic endpoint
