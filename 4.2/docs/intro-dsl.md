@@ -8,5 +8,4 @@ categories: ['docs']
 ---
 
 CxEngage's custom Domain-Specific Language (DSL) was built to offer incredible
-flexibility, providing the ability to easily express any customer journey to
-match.
+flexibility, providing the ability to easily express any customer journey you'd like to match.
