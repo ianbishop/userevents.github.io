@@ -17,35 +17,31 @@ result in a pattern match.
 ## Key Attribute
 
 First, we must setup our key attribute. The key attribute is the main attribute
-we will use to segment events in the system. For example, if you were tracking individual users over time, you would segment by a User ID. You can set a different key attribute for each pattern. In our example, we will be setting our key attribute to be `id`.
+we will use to segment events in the system. For example, if you were tracking individual users over time, you would segment by a User ID. You can set a different key attribute for each pattern.
 
 ## Creating your First Pattern
 
 Patterns are the building blocks of your CxEngage system. With them, you describe how the system should understand your data and what to do when it detects that a pattern match has occurred.
 
-Patterns are described using the CxEngage DSL, which typically starts with an event keyword. 
+Patterns are described using the CxEngage DSL, which typically starts with an "event" keyword. For this example, we will be matching an event where the value of `type` is equal to `test`. Then we will use the echo endpoint to echo out "Hello World!" to our logs.
 
-For this example, we will be matching an event where the value of `type` is equal to `test`. Then we will use the echo endpoint to echo out "Hello World!"
-
-Head over to the Patterns tab, click New and begin creating your new pattern. 
+Go to the Patterns tab, click New, and give it a name to begin creating your pattern. 
 
 
 * __Name__: The name for your pattern (e.g. My First Pattern)
-* __Description__ *(optional)*: A short description of your pattern (e.g. CxEngage
-Quickstart)
+* __Description__ *(optional)*: A short description of your pattern (e.g. "A pattern used to test CxEngage.")
 * __Key Attribute__ : As discussed above, set up a key attribute that you want for your pattern
 
-Now that our pattern has been created, we can begin flushing out how it should
-work.
+Now that our pattern has been created, we can begin flushing out how it should work. Give it a key attribute of "id" (without the quotes).
 
 ### Pattern
 
-**We want our pattern to match any time that `type` is equal to "hello", so we put this as the event. We would like our pattern to echo "Hello World" when this event is received by CxEngage. The pattern would be written in the following way.** 
+We want our pattern to match any time that `type` is equal to "hello", and then we would like to echo "Hello World" when this event is received by CxEngage. The pattern would be written in the following way:
 
-**{% highlight clojure %}**
-**(event {:type "hello"})**
-**(perform echo message {:message "Hello World!"})**
-**{% endhighlight %}**
+{% highlight clojure %}
+(event {:type "hello"})
+(perform echo message {:message "Hello World!"})
+{% endhighlight %}
 
 ![Configure your pattern]({{ site.url }}/img/quickstart/KeyAttributePattern.png)
 
