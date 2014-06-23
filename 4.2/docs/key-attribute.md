@@ -18,7 +18,7 @@ mapped to "1234" and both will identify the same person.
 ## Example
 
 Let's say we had a pattern that would match when a call gets abandoned from an
-IVR, and as a result, we trigger an outbound call using our integration with Twilio.
+IVR, and as a result, we trigger an outbound call using our integration with Twilio. If some of this code doesn't look familiar, that's ok - it will be explained shortly in the next sections. 
 
 {% highlight clojure %}
 (event {:type "CallAbandoned"})
