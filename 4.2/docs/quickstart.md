@@ -66,7 +66,7 @@ we've made a [simple event generator](https://demo.cxengage.net) you can use - s
 
 ### Matching Our Pattern
 
-For our pattern to match, we need to submit an event that meets two conditions: 1) it must have our key attribute -- `id`, and 2) we need it to match our event. In the pattern we created, we checked to see that the event `type` was equal to "hello", so let's send an event that has that by putting the following as the Event JSON in the event generator:
+For our pattern to match, we need to submit an event that meets two conditions: 1) it must have our key attribute -- `id`, and 2) we need it to match the event we specified in the pattern. In the pattern, we checked to see that the event `type` was equal to "hello", so let's send an event that has that by putting the following as the Event JSON in the event generator:x
 
 {% highlight javascript %}
 {
@@ -79,9 +79,7 @@ For our pattern to match, we need to submit an event that meets two conditions: 
 
 ### Sending the Event
 
-Hit the "Send Event" button! You should see that your event was successfully received.
-
-If you don't get a success message, one of the following may be the cause:
+Hit the "Send Event" button, and you should see that your event was successfully received. If you don't get a success message, one of the following may be the cause:
 
 * The key attribute value sent does not match any of the patterns
 * The message was incorrectly formatted (i.e. you submitted invalid JSON)
@@ -98,7 +96,7 @@ Try searching for the key attribute "1234" from above. You should see your event
 ## What's Next
 
 This example provided you with a chance to get a better understanding of
-CxEngage and see it work from end-to-end. Now you can begin creating more complex patterns, using the augment service to add additional attributes to events and connect CxEngage with your third-party systems like Salesforce.com, DataSift, Twilio or SendGrid.
+CxEngage and see it work from end-to-end. Now you can begin creating more complex patterns, using the augment service to add additional attributes to events and connect CxEngage with your third-party systems like Salesforce.com, DataSift, Twilio and SendGrid.
 
 Next we're going to cover some of the key concepts of CxEngage, giving you a
 better chance to see how you can be creative with the system.
