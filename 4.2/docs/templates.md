@@ -18,3 +18,9 @@ center but dropped from the queue, you could create a template with the email
 body and insert their name into the email before it's sent:
 
 ![Example Template]({{ site.url }}/img/template.png)
+
+You could then use it in a pattern, by referring to it as follows (in this case, it is Template one, or +TM1):
+
+```clojure
+(create sendgrid email {:body (template +TM1)})
+```
