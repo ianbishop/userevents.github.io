@@ -49,15 +49,15 @@ We want our pattern to match any time that `type` is equal to "hello", and then 
 
 Be sure to check the "Enabled?" checkbox. By default, all new patterns are disabled, meaning they won't be actively searching for pattern matches.
 
-Once you're done, hit the "Save" button.
+Once you've checked Enabled, hit the "Save" button.
 
 ## Submitting an Event
 
 ### Authenticating
 
-CxEngage uses OAuth 2.0 to ensure that you can securely send events to our APIs.
+CxEngage uses OAuth 2.0 to ensure that you can send events to our APIs securely.
 
-In order to be able to submit an event, you must first get your `client id` and `client secret`. You can find these by clicking on your Gravatar (the image on the left navigation menu). There you will also find your `tenant`, which is required to send events to the right place.
+In order to be able to submit an event, you must first get your `client id` and `client secret`. You can find these by clicking on the down arrow next to your username, and going to Profile. There you will also find the name of your `tenant`, which is required to send events to the right place.
 
 ### Using the Demo Event Submitter
 
