@@ -9,7 +9,7 @@ categories: ['docs']
 
 In this quickstart guide, we're going to go through a "Hello World" of the
 CxEngage system. By the end of this guide, you will have a better understanding
-of the basics of how CxEngage works.
+of the basics of how CxEngage works, and be prepared to take on more advanced use cases.
 
 In this example, we will configure a simple pattern and submit events which will
 result in a pattern match.
@@ -17,13 +17,7 @@ result in a pattern match.
 ## Key Attribute
 
 First, we must setup our key attribute. The key attribute is the main attribute
-we will use to segment events in the system. Key attributes are set per pattern.
-For instance, your key attribute may be something like a customer id for PT1 and username for PT2
-
-You can set your key attribute through our web application by visiting the Tenant
-configuration page.
-
-In our example, we will be setting our key attribute to be `id` for a pattern.
+we will use to segment events in the system. For example, if you were tracking individual users over time, you would segment by a User ID. You can set a different key attribute for each pattern. In our example, we will be setting our key attribute to be `id`.
 
 ## Creating your First Pattern
 
