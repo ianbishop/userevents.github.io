@@ -212,10 +212,15 @@ name provided and the *then* portion of the expression will be executed.
 The Iris DSL supports basic math and statistics functions on numeric values and lists of numeric values.
 
 Supported non list math functions are:
+
 * + -- plus
+
 * - -- minus
+
 * * -- multiply
+
 * / -- divide
+
 * mod -- modulo
 * quot -- integer division
 * rem -- remainder
@@ -231,6 +236,7 @@ Supported non list math functions are:
 * dec -- decrement by one
 
 List math functions are:
+
 * sum -- sum the list
 * min -- find min value in the list
 * max -- find max value in the list
