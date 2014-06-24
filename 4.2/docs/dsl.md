@@ -214,13 +214,9 @@ The Iris DSL supports basic math and statistics functions on numeric values and 
 Supported non list math functions are:
 
 * + -- plus
-
 * - -- minus
-
 * * -- multiply
-
 * / -- divide
-
 * mod -- modulo
 * quot -- integer division
 * rem -- remainder
