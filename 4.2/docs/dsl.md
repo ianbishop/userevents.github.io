@@ -48,6 +48,7 @@ Which will collect an event with an **amount** value between 50,000 and 100,000.
 
 Each event command will only proceed if all of its contained criteria are met by a single event.
 Multiple event commands can be combined using the commands:
+
 * times
 * sequence
 * and
@@ -85,6 +86,7 @@ in the execution path of your pattern, the engine will consume an equal number o
 Patterns are, at their core, are just event collections and endpoint interactions. Interactions are different
 based on the endpoint being communicated with, but all interactions follow the same form. The following verbs
 are available for endpoint interaction (but not all may be available for the endpoint):
+
 * fetch
 * perform
 * create
@@ -104,12 +106,14 @@ Each interaction type takes the same form:
 ```
 
 Values provided to a key in the parameter map of an interaction can take multiple forms:
+
 * Constants (booleans, strings, or numbers)
 * Collections (either maps or vectors)
 * Templated values (referencing either a template value or a string)
 * Expressions (which evaluate to a constant)
 
 Additional options can be provided to an endpoint interaction to alter its execution:
+
 * retries -- how many times this interaction will be attempted
 * timeout -- how long to wait for the interaction to complete
 * catch -- capture the interaction's failure and do the contained commands
@@ -178,6 +182,7 @@ Global variables can be defined using the *def* construct, and can be mutated us
 ```
 
 Local variables can be defined with one of three constructs:
+
 * let
 * if-let
 * when-let
@@ -251,6 +256,7 @@ predicates available for use. When using the binary numeric predicates, order of
 ```
 
 Unary Numeric Predicates
+
 * even? -- true if number is even
 * odd? -- true if number is odd
 * zero? -- true if number is zero
@@ -258,6 +264,7 @@ Unary Numeric Predicates
 * neg? -- true if number is < 0
 
 Binary Numeric Predicates
+
 * < -- less than
 * <= -- less than or equal to
 * > -- greater than
@@ -303,6 +310,7 @@ Branching constructs allow you to decide which portions of your pattern are exec
 of predicates.
 
 Available branching constructs are:
+
 * if
 * when
 * if-let
