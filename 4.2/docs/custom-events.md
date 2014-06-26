@@ -41,7 +41,7 @@ curl -iX POST https://events.cxengage.net/1.0/tenants/TENANT-NAME/event \
   },
   "key-attr": "1",
   "id": "EV11-30168",
-  "contributing?": true
+  "contributing": 1
 }
 {% endhighlight %}
 
