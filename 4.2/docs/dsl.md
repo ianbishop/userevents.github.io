@@ -111,7 +111,7 @@ Values provided to a key in the parameter map of an interaction can take multipl
 
 * Constants (booleans, strings, or numbers)
 * Collections (either maps or vectors)
-* Templated values (referencing either a template value or a string)
+* Templated values (referencing either a template value, as above, or a string with templated values as explained later)
 * Expressions (which evaluate to a constant)
 
 Additional options can be provided to an endpoint interaction to alter its execution:
@@ -134,7 +134,18 @@ To access a field in the context, prefix the field name with the $ symbol.
 (perform echo message {:message $amount})
 ```
 
-Access the value in the context will always return the last value seen for that event field.
+If you're looking to use these variables in an inline message template, you would use mustaches brackets "{{}}" instead of $, and it would look as follows:
+
+```clojure
+;; Events in this pattern have the fields: id, amount, and type
+
+(perform echo message {:message $id})
+(perform echo message {:message (template "The amount is {{amount}}.")})
+```
+
+Mustache templating can also be used with message templates that you have save separately and refer to in a pattern.
+
+Accessing the value in the context will always return the last value seen for that event field.
 If access to all consumed values is required, the *all* command will return a list of all values
 received under that field for this match.
 
