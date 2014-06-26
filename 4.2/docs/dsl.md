@@ -472,23 +472,24 @@ A customer who has had their car serviced more than 4 times in the last month
   (when (> total-maintenance 5000)
     (create twilio sms {:to manager})))
 ```
+
 ### Cell Phone Bill
-A customer who has had their monthly cell phone bill be over 500% of their regular bill
-for the last 3 months
+A customer who has had their monthly cell phone bill be over 150% of their regular bill:
 
 ```clojure
 (def count 0)
 (let [plan-amount (fetch telco plan-amount {:id $cust-id})]
-  (until (= count 3)
+  (until (= count 1)
          (event {:product "cell"
                  :type "monthly-bill"})
-         (if (> $bill-amount (* plan-amount 5))
+         (if (> $bill-amount (* plan-amount 1.5))
            (set count (inc count))
            (set count 0)))
   (if-let [case (create salesforce case)]
     (create sendgrid email {:body (template +TM1)})
     (create sendgrid email {:body (template +TM2)})))
 ```
+
 ### Callback and get the same agent
 A customer calls in, has their issue handled, but realizes they forgot something and calls
 back. Can they get the same agent?
@@ -538,7 +539,7 @@ back. Can they get the same agent?
 ```
 ### ISP Outage
 
-An ISP or media­delivering­company (online movie store, etc) has an outage for a
+An ISP or media streaming company (online movie store, etc) has an outage for a
 specific set of customers. We detect who has the outage, and if they try to contact the
 contact center through any channel, they’re delivered a pre­emptive message that
 nobody else hears or sees
@@ -586,16 +587,16 @@ to let the user be notified by e­mail when the chat queue time goe
 (create livechat send-scheduled-emails {:queue-id $queue-id})
 ```
 ### 1000th Customer Deal
-The 100th order of pizza containing a 2L of Pepsi gets 10% off their order
+The 1000th order of pizza containing a 2L of Pepsi gets 10% off their order
 
 ```clojure
 ;; key attribute: type
 
-(times 100
+(times 1000
   (event {:type "order"
           :status "new"
           :items (contains? "2L_PEPSI")}))
-(update pizzahut order {:id $id
+(update pizzacorp order {:id $id
                         :price (* $price 0.9)})
 ```
 ### SMS Pizza Delivery
