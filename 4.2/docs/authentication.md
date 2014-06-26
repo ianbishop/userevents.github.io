@@ -39,9 +39,9 @@ grant_type=client_credentials
 
 {% highlight javascript %}
 {
-    "access_token": "J+m9cxrDzKNhU3Me62yYT7PrnKVRnYkqZ3Yyq0t11gO4",
+    "access_token": "J+m9cxrDzKNhU3[EXAMPLE]YkqZ3Yyq0t11gO4",
     "token_type": "bearer",
-    "expires_in": 3600
+    "expires_in": 2404884
 }
 {% endhighlight %}
 
@@ -65,7 +65,7 @@ For instance,
 GET /1.0/tenants/test/event HTTP/1.1
 Host: events.cxengage.net
 Content-Type: application/json
-Authorization: Bearer 9Kz0asLXPYn7R7Ubfean1fMDkGrWluUZBWOHiGMimCem
+Authorization: Bearer 9Kz0asLXPYn7R7[EXAMPLE]luUZBWOHiGMimCem
 Cache-Control: no-cache
 
 <no body>
