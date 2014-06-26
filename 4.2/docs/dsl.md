@@ -169,7 +169,7 @@ The dot syntax can also be used within templates to reduce the number of binding
 
 ```clojure
 (when-let [result (create twilio call {...})]
-  (perform echo message {:message (template "Made a call to {{ "{{result.sid" }}}}"})))
+  (perform echo message {:message (template "Made a call to {{ "{{result.sid" }}}}")}))
 ```
 
 #### User Defined
