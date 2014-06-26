@@ -49,7 +49,7 @@ Which will collect an event with an **amount** value between 50,000 and 100,000.
 Each event command will only proceed if all of its contained criteria are met by a single event.
 Multiple event commands can be combined using the commands:
 
-* times - the number of times a particular event should be received
+* times - the code contained in a times will be repeated the number of times specified
 * sequence - the contained events should be received in sequence
 * and - all included events should be received, in any order, before proceeding
 * or - any of the included events should be received before proceeding
@@ -366,7 +366,7 @@ to the defined variable.
 ```clojure
 ;;Syntax
 ;; (if-let [var-name predicate] then else)
-;; (when-let [var-name predicate] then*)
+;; (when-let [var-name predicate] then)
 
 (event {:type 3
         :amount (> 300)})
