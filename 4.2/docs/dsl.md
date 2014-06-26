@@ -7,7 +7,7 @@ version: 4.2
 categories: ['docs']
 ---
 
-The new DSL being provided by CxEngage 4.0 will allow for far more robust and meaningful patterns.
+The new DSL being provided by CxEngage 4.2 will allow for far more robust and meaningful patterns.
 The Iris engine will allow for the interleaving of event collection and endpoint interaction.
 
 ## Core Concepts
@@ -49,14 +49,16 @@ Which will collect an event with an **amount** value between 50,000 and 100,000.
 Each event command will only proceed if all of its contained criteria are met by a single event.
 Multiple event commands can be combined using the commands:
 
-* times
-* sequence
-* and
-* or
-* within
+* times - the number of times a particular event should be received
+* sequence - the contained events should be received in sequence
+* and - all included events should be received, in any order, before proceeding
+* or - any of the included events should be received before proceeding
+* within - the included events should be received in a specific time window
+
+{{{What are the different options for within}}}
 
 Each event statement will be matched to a distinct event. This means that for each event command
-in the execution path of your pattern, the engine will consume an equal number of events.
+in the execution path of your pattern, the engine will consume an equal number of events. For example:
 
 ```clojure
 (and (event {:priority "high"
@@ -64,7 +66,7 @@ in the execution path of your pattern, the engine will consume an equal number o
      (event {:amount (> 50000)}))
 
 ; This statement can only be matched by two events
-; Assume :id is the key attr for the pattern
+; Assume :id is the key attribute for the pattern
 
 ; These two events (received in any order) would cause a match to occur
 {:id "john"
@@ -83,7 +85,7 @@ in the execution path of your pattern, the engine will consume an equal number o
 
 ### Endpoint interaction
 
-Patterns are, at their core, are just event collections and endpoint interactions. Interactions are different
+Patterns are, at their core, just a series of event collections and endpoint interactions. Interactions are different
 based on the endpoint being communicated with, but all interactions follow the same form. The following verbs
 are available for endpoint interaction (but not all may be available for the endpoint):
 
