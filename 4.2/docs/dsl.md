@@ -169,7 +169,7 @@ The dot syntax can also be used within templates to reduce the number of binding
 
 ```clojure
 (when-let [result (create twilio call {...})]
-  (perform echo message {:message (template "Made a call to {{ "{{result.sid}} "}}"})))
+  (perform echo message {:message (template "Made a call to {{ "{{result.sid" }}}}"})))
 ```
 
 #### User Defined
@@ -407,7 +407,7 @@ are executed in linear time. An optional default action can be provided at the e
   400 (set m "Four Hundered")
   (set m "Something else"))
 
-(perform echo message {:message (template "Your amount was {{ "{{m}}" }}")})
+(perform echo message {:message (template "Your amount was {{ "{{m" }}}}")})
 ```
 
 *unless* is different than the other branching constructs as it tests the predicate in-between each action, and if the
