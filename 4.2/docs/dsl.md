@@ -246,7 +246,7 @@ List math functions are:
 * stdev -- standard deviation of the list
 * count -- length of the list
 
-In addition to functions which produce numbers, there are also a number of numerical
+In addition to functions that produce numbers, there are also a number of numerical
 predicates available for use. When using the binary numeric predicates, order of the parameters matters.
 
 ```clojure
@@ -282,7 +282,7 @@ and operations that can be performed on them, basically you can only extract val
 Lists have numerous types of available operations. Both maps and lists are treated as immutable.
 
 Lists can be filtered based on a provided predicate using the *filter* and *remove* operations. These
-operators will return an new list which match (filter) or don't match (remove) a provided predicate.
+operators will return a new list that match (filter) or don't match (remove) a provided predicate.
 
 ```clojure
 ;Remove all amounts less than 10
@@ -321,8 +321,7 @@ Available branching constructs are:
 * unless
 
 The most common branching mechanism is the *If* statement. This allows you to run a predicate and then chose
-one of two branches (then or else) based on the result of the predicate. The then and else portions of the *If*
-are single s-expressions, therefore if there are multiple actions to perform in a branch a *do* block will be required.
+one of two branches (then or else) based on the result of the predicate.
 
 ```clojure
 ;;Syntax
@@ -335,6 +334,16 @@ are single s-expressions, therefore if there are multiple actions to perform in 
   (perform echo message {:message "That's a big amount"})
   (perform echo message {:message "That is a small amount"}))
 ```
+The then and else portions of the *If* are single [s-expressions](https://en.wikipedia.org/wiki/S-expression), therefore if there are multiple actions to perform in a branch a *do* block will be required:
+
+```clojure
+(if (> $amount 500)
+  (do
+      (perform echo message {:message "Hello World"})
+      (set counter (inc counter)))
+  (perform echo message {:message "Hello universe"}))
+
+````
 
 The *When* construct is similar to the *If* statement except the body is only executed if the predicate is true.
 As there is only one branch in a *when* statement, multiple actions can be nested withing the block.
