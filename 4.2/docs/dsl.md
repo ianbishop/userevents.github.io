@@ -140,7 +140,7 @@ If you're looking to use these variables in an inline message template, you woul
 ;; Events in this pattern have the fields: id, amount, and type
 
 (perform echo message {:message $id})
-(perform echo message {:message (template "The amount is \{\{amount\}\}.")})
+(perform echo message {:message (template "The amount is {{ "{{amount" }}}}.")})
 ```
 
 Mustache templating can also be used with message templates that you have save separately and refer to in a pattern.
