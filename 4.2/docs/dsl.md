@@ -87,13 +87,13 @@ in the execution path of your pattern, the engine will consume an equal number o
 
 Patterns are, at their core, just a series of event collections and endpoint interactions. Interactions are different
 based on the endpoint being communicated with, but all interactions follow the same form. The following verbs
-are available for endpoint interaction (but not all may be available for the endpoint):
+are available for endpoint interaction (but not all may be available for each endpoint):
 
-* fetch
-* perform
-* create
-* update
-* delete
+* fetch - pauses the pattern and passively awaits for specific data to be sent into CxEngage
+* perform - performs a given action for an endpoint
+* create - triggers the creation of something using a given endpoint
+* update - updates a record associated with an endpoint
+* delete - deletes a record associated with a given endpoint
 
 Each interaction type takes the same form:
 
@@ -116,21 +116,9 @@ Values provided to a key in the parameter map of an interaction can take multipl
 
 Additional options can be provided to an endpoint interaction to alter its execution:
 
-* retries -- how many times this interaction will be attempted
-* timeout -- how long to wait for the interaction to complete
-* catch -- capture the interaction's failure and do the contained commands
-
-Results of the interaction can be captured by binding the interaction to a variable.
-Interactions which are not bound will be executed in parallel. For Example:
-
-```clojure
-; Since the following interactions are being bound to variables, they will be executed sequentially
-(let [email-result (create sendgrid email {...})
-      ;; email-result is now available for use
-      call-result (create twilio call {...})
-      ;; call-result is available for use
-      sf-case (create salesforce case {...}])
-```
+* retries - how many times this interaction will be attempted
+* timeout - how long to wait for the interaction to complete
+* catch - capture the interaction's failure and do the contained commands
 
 ### Variables
 
