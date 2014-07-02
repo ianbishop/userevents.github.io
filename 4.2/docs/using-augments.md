@@ -12,11 +12,9 @@ The purpose of **augments** are to allow you to add additional data to events
 that may be necessary in the context of matching a pattern or sending a
 notification but was not available at the time the event was sent to CxEngage.
 
-## Augment Types
+## Augment
 
-### Engine Augment
-
-The purpose of an **engine augment** is to augment an event before it is
+The purpose of an **augment** is to augment an event before it is
 received by the pattern matching engine. In most cases, this means applying
 additional data to an event or modifying existing attributes that is necessary
 for a pattern match but was not included when the event was sent to CxEngage.
