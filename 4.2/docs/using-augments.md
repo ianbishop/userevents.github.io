@@ -25,17 +25,6 @@ For example, if you had a customer id and wanted the customer's segment as part
 of a pattern match, you could augment the customer's segment using an **engine
 augment** before it was to be processed.
 
-### ~~Notification Augment.~~
-
-~~The purpose of a **notification augment** is to augment a reaction context (a.~~
-~~merger of all events for a given reaction) once the pattern has been matched. In .~~
-~~most cases, this means applying additional data that is necessary for the.~~
-~~reaction to take place but was not necessary for the pattern match.~~
-
-~~For example, if you had a customer id and wanted to send a phone call, you could.~~
-~~augment the users phone number using a **notification augment** before it is to.~~
-~~be sent.~~
-
 ## Augment Methods
 
 ### File Upload
