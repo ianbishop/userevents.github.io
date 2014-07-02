@@ -9,8 +9,7 @@ categories: ['docs']
 ---
 
 The purpose of **augments** are to allow you to add additional data to events
-that may be necessary in the context of matching a pattern or sending a
-notification but was not available at the time the event was sent to CxEngage.
+that may be necessary in the context of matching a pattern but was not available at the time the event was sent to CxEngage.
 
 ## Augment
 
