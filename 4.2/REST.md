@@ -10,7 +10,7 @@ other core CxEngage objects then this API is built for you.
 CxEngage uses OAuth 2.0 to provide authentication for all API resources
 including the REST API and event submission.
 
-[More on Authenticating >](http://docs.cxengage.com/docs/authentication/)
+[More on Authenticating >](http://docs.cxengage.com/4.2/docs/authentication/)
 
 ## Errors
 
