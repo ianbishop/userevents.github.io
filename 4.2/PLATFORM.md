@@ -74,7 +74,7 @@ Name | Type | Description
 }
 ```
 
-[More on Instances >](http://docs.cxengage.com/docs/platform/instances/)
+[More on Instances >](http://docs.cxengage.com/4.2/platform/#instances)
 
 ### Create an Instance
 
