@@ -281,7 +281,7 @@ Returns a tenant object if a valid tenant is provided, returns [an error](#error
 
 ## Patterns
 
-A pattern describes a series of events that make up a customer's journey as they interact with your company across channels. As a user of CxEngage, you write patterns that match journeys which are important to your organization.
+A pattern allows you to detect events that make up a customer's journey and interact with them across many channels.
 
 #### Attributes
 
@@ -291,7 +291,8 @@ Name | Type | Description
 **name** | **string** | Human-friendly name of the pattern
 **description** | **string** | A people friendly description of what this pattern should do
 **status** | **boolean** | Whether or not this pattern is being matched against
-**code** | **string** | CxEngage DSL of what pattern to look for
+**key** | **string** | Key within events to segment by
+**code** | **string** | CxEngage DSL
 
 > Example Object
 
@@ -325,7 +326,8 @@ Name | Description
 **name** | Human-friendly name of the pattern
 **description** | Description of the pattern
 **status** |  Boolean for enabled/disabled state
-**code** | CxEngage DSL of what pattern to look for
+key | Key within events to segment by
+code | CxEngage DSL of what pattern to look for
 
 
 > Example Request
@@ -412,6 +414,7 @@ Name | Description
 name | Human-friendly name of the pattern
 description | Description of the pattern
 status |  Boolean for enabled/disabled state
+key | Key within events to segment by
 code | CxEngage DSL of what pattern to look for
 
 
