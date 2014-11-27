@@ -22,3 +22,5 @@ You can use endpoints to send notifications like:
 * Simply testing with the Echo endpoint
 
 And many more. We're adding new endpoints every month.
+
+And another sentence.
