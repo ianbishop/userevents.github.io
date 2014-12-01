@@ -27,11 +27,9 @@ On the next page, we must setup our *key attribute* in the field provided. The k
 
 Patterns are the building blocks of your CxEngage system. With them, you describe how the system should understand your data and what to do when it detects that a pattern match has occurred.
 
-Patterns are described using the CxEngage DSL, which typically starts with an "event" keyword. For this example, we will be matching an event where the value of `type` is equal to `test`. Then we will use the echo endpoint to echo out "Hello World!" to our logs.
-
 ### Pattern
 
-We want our pattern to match any time that `type` is equal to "hello", and then we would like to echo "Hello World" when this event is received by CxEngage. The pattern would be written in the following way:
+Patterns are described using the CxEngage DSL, which typically starts with an "event" keyword. We want our pattern to match any time that `type` is equal to "hello", and then we would like to echo "Hello World" when this event is received by CxEngage. The pattern would be written in the following way:
 
 {% highlight clojure %}
 (event {:type "hello"})
