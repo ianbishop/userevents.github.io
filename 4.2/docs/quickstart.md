@@ -16,8 +16,9 @@ result in a pattern match.
 
 ## Key Attribute
 
-First, we must setup our key attribute. The key attribute is the main attribute
-we will use to segment events in the system. For example, if you were tracking individual users over time, you would segment by a User ID. You can set a different key attribute for each pattern.
+Once you log in, go the the **Patterns** page and click *New* to create a new pattern. Give it a name and a short description.
+
+On the next page, we must setup our *key attribute* in the field provided. The key attribute is the main attribute we will use to segment events in the system. For example, if you were tracking individual users over time, you would segment by a User ID. You can set a different key attribute for each pattern. For this guide, we'll simply us *id* as the key attribute.
 
 ## Creating your First Pattern
 
