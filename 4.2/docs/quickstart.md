@@ -16,7 +16,10 @@ result in a pattern match.
 
 ## Key Attribute
 
-Once you log in, go the the **Patterns** page and click *New* to create a new pattern. Give it a name and a short description.
+Once you log in, go to the Patterns tab, click New, and give it a name to begin creating your pattern. 
+
+* __Name__: The name for your pattern (e.g. My First Pattern)
+* __Description__ *(optional)*: A short description of your pattern (e.g. "A pattern used to test CxEngage.")
 
 On the next page, we must setup our *key attribute* in the field provided. The key attribute is the main attribute we will use to segment events in the system. For example, if you were tracking individual users over time, you would segment by a User ID. You can set a different key attribute for each pattern. For this guide, we'll simply us *id* as the key attribute.
 
@@ -25,15 +28,6 @@ On the next page, we must setup our *key attribute* in the field provided. The k
 Patterns are the building blocks of your CxEngage system. With them, you describe how the system should understand your data and what to do when it detects that a pattern match has occurred.
 
 Patterns are described using the CxEngage DSL, which typically starts with an "event" keyword. For this example, we will be matching an event where the value of `type` is equal to `test`. Then we will use the echo endpoint to echo out "Hello World!" to our logs.
-
-Go to the Patterns tab, click New, and give it a name to begin creating your pattern. 
-
-
-* __Name__: The name for your pattern (e.g. My First Pattern)
-* __Description__ *(optional)*: A short description of your pattern (e.g. "A pattern used to test CxEngage.")
-* __Key Attribute__ : As discussed above, set up a key attribute that you want for your pattern
-
-Now that our pattern has been created, we can begin flushing out how it should work. Give it a key attribute of "id" (without the quotes).
 
 ### Pattern
 
